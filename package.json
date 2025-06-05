@@ -1,0 +1,16 @@
+{
+  "name": "blog-api",
+  "version": "1.0.0",
+  "description": "A blog api with frontends for creating and viewing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "srj-17",
+  "license": "ISC",
+  "workspaces": [
+    "packages/backend",
+    "packages/frontend-view",
+    "packages/frontend-edit"
+  ]
+}
