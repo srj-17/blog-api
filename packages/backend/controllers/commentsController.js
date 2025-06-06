@@ -19,9 +19,8 @@ async function postComments(req, res) {
     const authorId = +req.params.userId;
     const postId = +req.params.postId;
 
-    // dummy data
-    const title = "Some title";
-    const content = "Content of the commment";
+    const title = req.body.title;
+    const content = req.body.content;
 
     const comment = await prisma.comment.create({
         data: {
@@ -53,8 +52,8 @@ async function getComment(req, res) {
 async function putComment(req, res, next) {
     const commentId = +req.params.commentId;
 
-    const title = "New title";
-    const content = "New content of the commment";
+    const title = req.body.title;
+    const content = req.body.content;
 
     try {
         const comment = await prisma.comment.update({

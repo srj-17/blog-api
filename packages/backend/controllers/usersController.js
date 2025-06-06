@@ -11,13 +11,15 @@ async function getUsers(req, res) {
 
 // TODO: manage permissions
 async function postUsers(req, res) {
-    // dummy user
-    const name = "johndoee";
-    const email = "johndoee@gmail.com";
-    const password_hash = await bcrypt.hash("randompassword", SALT);
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const email = req.body.email;
+    const password_hash = await bcrypt.hash(req.body.password, SALT);
+
     const createdUser = await prisma.user.create({
         data: {
-            name,
+            firstName,
+            lastName,
             email,
             password_hash,
         },
@@ -44,10 +46,10 @@ async function getUser(req, res) {
 
 async function putUser(req, res, next) {
     const userId = +req.params.userId;
-    // dummy data
-    const name = "newname";
-    const email = "new@gmail.com";
-    const password_hash = await bcrypt.hash("newpassword", SALT);
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const email = req.body.email;
+    const password_hash = await bcrypt.hash(req.body.password, SALT);
 
     try {
         const user = await prisma.user.update({
@@ -55,7 +57,8 @@ async function putUser(req, res, next) {
                 id: userId,
             },
             data: {
-                name,
+                firstName,
+                lastName,
                 email,
                 password_hash,
             },

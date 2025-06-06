@@ -12,13 +12,15 @@ async function getPosts(req, res) {
 }
 
 async function postPosts(req, res) {
-    // dummy post
-    const title = "First Post";
-    const content = "Hello, world, this is my first post";
+    const title = req.body.title;
+    const content = req.body.content;
+
+    // req.body.published is "1" or "0"
+    const published = Boolean(+req.body.published);
+
+    const authorId = +req.params.userId;
     const createdAt = new Date();
     const publishedAt = new Date();
-    const published = false;
-    const authorId = +req.params.userId;
 
     const post = await prisma.post.create({
         data: {
@@ -54,8 +56,8 @@ async function putPost(req, res, next) {
     const postId = +req.params.postId;
 
     // dummy data
-    const title = "Edited First Post";
-    const content = "Hello, world, this is my edited first post";
+    const title = req.body.title;
+    const content = req.body.content;
     const published = false;
 
     try {
