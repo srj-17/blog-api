@@ -6,7 +6,7 @@ const {
     putUser,
     deleteUser,
 } = require("../controllers/usersController");
-const users = Router();
+const users = Router({ mergeParams: true });
 
 users.get("/", getUsers);
 users.post("/", postUsers);

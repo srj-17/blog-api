@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const prisma = require("../models/model");
+const prisma = require("../models");
 const CustomNotFoundError = require("../customErrors/CustomNotFoundError");
 const SALT = 10;
 
