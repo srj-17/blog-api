@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const prisma = require("../models");
 const CustomNotFoundError = require("../customErrors/CustomNotFoundError");
+const MisformedRequestError = require("../customErrors/UnprocessableContentError");
 const SALT = 10;
 
 async function getUsers(req, res) {
@@ -14,7 +15,14 @@ async function postUsers(req, res) {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const email = req.body.email;
-    const password_hash = await bcrypt.hash(req.body.password, SALT);
+    const password = req.body.password;
+    const password_hash = await bcrypt.hash(password, SALT);
+
+    if (!(firstName && lastName && email && password)) {
+        throw new MisformedRequestError(
+            "Values of all required fields not provided!",
+        );
+    }
 
     const createdUser = await prisma.user.create({
         data: {
@@ -49,7 +57,14 @@ async function putUser(req, res, next) {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const email = req.body.email;
-    const password_hash = await bcrypt.hash(req.body.password, SALT);
+    const password = req.body.password;
+    const password_hash = await bcrypt.hash(password, SALT);
+
+    if (!(firstName && lastName && email && password)) {
+        throw new MisformedRequestError(
+            "Values of all required fields not provided!",
+        );
+    }
 
     try {
         const user = await prisma.user.update({

@@ -1,8 +1,14 @@
+const BadRequestError = require("../customErrors/BadRequestError");
 const CustomNotFoundError = require("../customErrors/CustomNotFoundError");
+const UnprocessableContentError = require("../customErrors/UnprocessableContentError");
 const prisma = require("../models");
 
 async function getPosts(req, res) {
     const authorId = +req.params.userId;
+    if (!authorId) {
+        throw new BadRequestError();
+    }
+
     const posts = await prisma.post.findMany({
         where: {
             authorId: authorId,
@@ -16,11 +22,21 @@ async function postPosts(req, res) {
     const content = req.body.content;
 
     // req.body.published is "1" or "0"
-    const published = Boolean(+req.body.published);
+    const published = Boolean(+req.body.published) || false;
 
     const authorId = +req.params.userId;
     const createdAt = new Date();
     const publishedAt = new Date();
+
+    if (!authorId) {
+        throw new BadRequestError();
+    }
+
+    if (!(title && content)) {
+        throw new UnprocessableContentError(
+            "Values of all required fields not provided!",
+        );
+    }
 
     const post = await prisma.post.create({
         data: {
@@ -55,10 +71,15 @@ async function getPost(req, res, next) {
 async function putPost(req, res, next) {
     const postId = +req.params.postId;
 
-    // dummy data
     const title = req.body.title;
     const content = req.body.content;
-    const published = false;
+    const published = Boolean(+req.body.published) || false;
+
+    if (!(title && content)) {
+        throw new UnprocessableContentError(
+            "Values of all required fields not provided!",
+        );
+    }
 
     try {
         const post = await prisma.post.update({

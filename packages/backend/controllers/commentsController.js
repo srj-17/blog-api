@@ -1,4 +1,5 @@
 const CustomNotFoundError = require("../customErrors/CustomNotFoundError");
+const UnprocessableContentError = require("../customErrors/UnprocessableContentError");
 const prisma = require("../models");
 
 async function getComments(req, res) {
@@ -21,6 +22,10 @@ async function postComments(req, res) {
 
     const title = req.body.title;
     const content = req.body.content;
+
+    if (!(title && content)) {
+        throw new UnprocessableContentError("All required fields not provided");
+    }
 
     const comment = await prisma.comment.create({
         data: {
@@ -54,6 +59,10 @@ async function putComment(req, res, next) {
 
     const title = req.body.title;
     const content = req.body.content;
+
+    if (!(title && content)) {
+        throw new UnprocessableContentError("All required fields not provided");
+    }
 
     try {
         const comment = await prisma.comment.update({
