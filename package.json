@@ -12,5 +12,8 @@
     "packages/backend",
     "packages/frontend-view",
     "packages/frontend-edit"
-  ]
+  ],
+  "dependencies": {
+    "@quixo3/prisma-session-store": "^3.1.13"
+  }
 }

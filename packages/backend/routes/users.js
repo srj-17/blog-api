@@ -6,11 +6,14 @@ const {
     putUser,
     deleteUser,
 } = require("../controllers/usersController");
+const {
+    verifyToken,
+} = require("../authentication/utils/verifyTokenMiddelware");
 const users = Router({ mergeParams: true });
 
 users.get("/", getUsers);
 users.post("/", postUsers);
-users.get("/:userId", getUser);
+users.get("/:userId", verifyToken, getUser);
 users.put("/:userId", putUser);
 users.delete("/:userId", deleteUser);
 

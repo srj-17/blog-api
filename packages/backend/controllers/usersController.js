@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const prisma = require("../models");
+const jwt = require("jsonwebtoken");
 const CustomNotFoundError = require("../customErrors/CustomNotFoundError");
 const MisformedRequestError = require("../customErrors/UnprocessableContentError");
 const SALT = 10;
@@ -49,7 +50,7 @@ async function getUser(req, res) {
         throw new CustomNotFoundError("User not found");
     }
 
-    res.json(user);
+    return res.json(user);
 }
 
 async function putUser(req, res, next) {
