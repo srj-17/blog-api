@@ -7,13 +7,13 @@ const {
     deleteUser,
 } = require("../controllers/usersController");
 const {
-    verifyToken,
-} = require("../authentication/utils/verifyTokenMiddelware");
+    jwtAuthenticationMiddleware,
+} = require("../authentication/utils/authMiddleware");
 const users = Router({ mergeParams: true });
 
 users.get("/", getUsers);
 users.post("/", postUsers);
-users.get("/:userId", verifyToken, getUser);
+users.get("/:userId", jwtAuthenticationMiddleware, getUser);
 users.put("/:userId", putUser);
 users.delete("/:userId", deleteUser);
 

@@ -31,6 +31,7 @@ app.use(
 );
 
 // authentication
+require("./authentication/jwtStrategy");
 require("./authentication/localStrategy");
 app.use(passport.session());
 
