@@ -34,8 +34,16 @@ model User {
     id            Int       @id @default(autoincrement())
     firstName     String
     lastName      String
-    email         String
+    email         String    @unique
     password_hash String
     posts         Post[]
     comments      Comment[]
+}
+
+/// for session storage
+model Session {
+    id        String   @id
+    sid       String   @unique
+    data      String
+    expiresAt DateTime
 }
