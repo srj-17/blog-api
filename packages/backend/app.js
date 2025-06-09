@@ -5,8 +5,12 @@ const session = require("express-session");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const prisma = require("./models");
 const passport = require("passport");
+const cors = require("cors");
 
 const app = express();
+
+// cors
+app.use(cors());
 
 // parsers
 app.use(express.urlencoded({ extended: true }));

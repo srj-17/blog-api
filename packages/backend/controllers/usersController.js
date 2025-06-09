@@ -25,6 +25,16 @@ async function postUsers(req, res) {
         );
     }
 
+    const user = await prisma.user.findUnique({
+        where: {
+            email: email,
+        },
+    });
+
+    if (user) {
+        return res.json({ msg: "User with that email already exists" });
+    }
+
     const createdUser = await prisma.user.create({
         data: {
             firstName,
