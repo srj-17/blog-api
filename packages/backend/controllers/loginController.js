@@ -5,7 +5,6 @@ const bcrypt = require("bcryptjs");
 const ValidationError = require("../customErrors/ValidationError");
 
 async function postLogin(req, res, next) {
-    console.log(req.body);
     const { email, password } = req.body;
     let user = null;
 
