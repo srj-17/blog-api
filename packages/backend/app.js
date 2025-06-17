@@ -16,28 +16,6 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// session
-app.use(
-    session({
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: true,
-        store: new PrismaSessionStore(prisma, {
-            checkPeriod: 2,
-            dbRecordIdIsSessionId: true,
-            dbRecordIsFunction: undefined,
-        }),
-        cookie: {
-            // 30 days
-            maxAge: 30 * 24 * 60 * 60 * 1000,
-        },
-    }),
-);
-
-// authentication
-require("./authentication/localStrategy");
-app.use(passport.session());
-
 // routes
 app.use("/users/:userId/posts/:postId/comments", routes.comments);
 app.use("/users/:userId/posts", routes.posts);
