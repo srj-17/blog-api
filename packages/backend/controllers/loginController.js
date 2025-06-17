@@ -1,26 +1,45 @@
-const passport = require("passport");
 const jwt = require("jsonwebtoken");
+const CustomServerError = require("../customErrors/CustomServerError");
+const prisma = require("../models");
+const bcrypt = require("bcryptjs");
+const ValidationError = require("../customErrors/ValidationError");
 
-const postLogin = passport.authenticate("local", {
-    successRedirect: "/login",
-    failureRedirect: "/login",
-});
+async function postLogin(req, res, next) {
+    console.log(req.body);
+    const { email, password } = req.body;
+    let user = null;
 
-function getLogin(req, res, next) {
-    console.log("hello, from login");
-    if (!req.isAuthenticated()) {
-        return res.json({ msg: "Not Logged in!" });
+    try {
+        user = await prisma.user.findUnique({
+            where: {
+                email: email,
+            },
+        });
+
+        if (!user) {
+            throw new Error("No user with that username");
+        }
+
+        const hash = user.password_hash;
+        const match = await bcrypt.compare(password, hash);
+
+        if (!match) {
+            throw new Error("Incorrect Password");
+        }
+    } catch (e) {
+        console.error(e);
+        throw new ValidationError(e.message);
     }
 
     // token creation
-    const { id, email } = req.user;
-    const user = {
+    const { id } = user;
+    const userToken = {
         id,
         email,
     };
 
     jwt.sign(
-        { user: user },
+        { user: userToken },
         process.env.JWT_SECRET,
         { expiresIn: "30 days" },
         (err, token) => {
@@ -33,12 +52,8 @@ function getLogin(req, res, next) {
             });
         },
     );
-
-    // login message
-    // res.json({ msg: "Logged in successfully!" });
 }
 
 module.exports = {
     postLogin,
-    getLogin,
 };
