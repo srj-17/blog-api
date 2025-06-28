@@ -3,10 +3,19 @@ const CustomNotFoundError = require("../customErrors/CustomNotFoundError");
 const UnprocessableContentError = require("../customErrors/UnprocessableContentError");
 const prisma = require("../models");
 
+// returns all posts in descending order
+// when author is not provided, sends all
+// posts of author if author provided
 async function getPosts(req, res) {
     const authorId = +req.params.userId;
     if (!authorId) {
-        throw new BadRequestError();
+        const posts = await prisma.post.findMany({
+            orderBy: {
+                publishedAt: "desc",
+            },
+        });
+
+        return res.json(posts);
     }
 
     const posts = await prisma.post.findMany({
