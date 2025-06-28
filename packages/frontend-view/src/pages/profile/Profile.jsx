@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useFetch } from "../../../utils/fetch";
+import { useFetch } from "../../utils/fetch";
 
 export default function Profile() {
     const { userId } = useParams();

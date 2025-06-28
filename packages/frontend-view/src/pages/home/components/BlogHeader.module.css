@@ -1,0 +1,38 @@
+.blogHeader {
+    display: flex;
+}
+
+.brand {
+    color: var(--primary);
+    font-size: 10rem;
+}
+
+.navigationContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding: var(--std-padding);
+}
+
+.navBar {
+    display: flex;
+    gap: var(--std-gap);
+}
+
+.topBlog {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding: 80px;
+}
+
+.blogCard {
+    align-self: center;
+    padding: 80px;
+}
+
+.topBlogTitle {
+    font-size: 2rem;
+}

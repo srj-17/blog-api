@@ -1,8 +1,8 @@
-export default function ErrorElement() {
+export default function ErrorElement({ statusCode, message }) {
     return (
-        <div className="error-page">
-            <div className="code">404</div>
-            <div class="msg">Requested page not found.</div>
+        <div className="error">
+            <div className="code">{statusCode}</div>
+            <div className="msg">{message}</div>
         </div>
     );
 }

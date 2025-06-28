@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import FormInputContainer from "../../FormInputContainer";
+import FormInputContainer from "../../components/FormInputContainer";
 
 export default function LoginForm() {
     const [userInfo, setUserInfo] = useState({

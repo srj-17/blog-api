@@ -1,0 +1,28 @@
+/* reset */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 1rem;
+}
+
+/* defaults */
+:root {
+    --std-padding: 10px;
+    --std-gap: 20px;
+    --std-section-gap: 80px;
+    --std-section-padding: 80px;
+    --std-section-border-radius: 200px;
+
+    --background: grey;
+    --primary: peachpuff;
+    --secondary: green;
+}

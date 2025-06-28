@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import FormInputContainer from "../../FormInputContainer";
+import FormInputContainer from "../../components/FormInputContainer";
 
 export default function SignupForm() {
     const [userInfo, setUserInfo] = useState({

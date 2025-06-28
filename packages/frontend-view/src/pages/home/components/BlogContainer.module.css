@@ -1,0 +1,20 @@
+.blogsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--std-gap);
+}
+
+.blogsContainerTitle {
+    align-self: center;
+}
+
+.blogs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--std-gap);
+}
+
+.blogsContainerFooter {
+    align-self: center;
+}
