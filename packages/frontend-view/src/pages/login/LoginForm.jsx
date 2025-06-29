@@ -64,7 +64,7 @@ export default function LoginForm() {
         }
 
         if (isLoggedIn) {
-            return "Logged in successfully!";
+            return <Navigate to="/" />;
         }
     }
 

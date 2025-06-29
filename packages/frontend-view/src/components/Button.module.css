@@ -1,0 +1,11 @@
+.button {
+    font-family: inherit;
+    padding: 4px 20px;
+    border: none;
+    border-radius: 20px;
+    transition: transform 200ms;
+}
+
+.button:hover {
+    transform: scale(1.02);
+}

@@ -1,8 +1,25 @@
 .searchBar {
     display: flex;
     gap: var(--std-gap);
+    position: relative;
 }
 
 .searchInput {
     flex: 1;
+    appearance: none;
+    padding: 8px 24px;
+    border-radius: 20px;
+    border: 2px solid var(--accent);
+}
+
+.magnifyingGlass {
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+}
+
+/* remove the x button in search, so that we can add one ourselves */
+input[type="search"]::-webkit-search-cancel-button {
 }

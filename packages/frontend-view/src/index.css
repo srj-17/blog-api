@@ -25,4 +25,6 @@ h6 {
     --background: grey;
     --primary: peachpuff;
     --secondary: green;
+    --accent: black;
+    --text: black;
 }

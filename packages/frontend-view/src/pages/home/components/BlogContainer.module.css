@@ -18,3 +18,11 @@
 .blogsContainerFooter {
     align-self: center;
 }
+
+@media (max-width: 1024px) {
+    .blogs {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        place-items: center;
+    }
+}

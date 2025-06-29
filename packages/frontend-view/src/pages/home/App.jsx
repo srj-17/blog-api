@@ -1,27 +1,24 @@
 import { useFetch } from "#utils/fetch";
 import ErrorElement from "#components/ErrorElement";
 import styles from "./App.module.css";
-import { Link } from "react-router-dom";
 import BlogHeader from "./components/BlogHeader";
 import Separator from "#components/Separator";
 import BlogContainer from "./components/BlogContainer";
 
 function App() {
     const postsUrl = "http://localhost:3000/posts";
-    const userUrl = "http://localhost:3000/userUrl";
+    const userUrl = "http://localhost:3000/users";
     const { loggedIn, data: posts, error, loading } = useFetch(postsUrl);
-    console.log(posts);
+    const {
+        userLoggedIn,
+        data: userData,
+        error: userFetchError,
+        loading: userLoading,
+    } = useFetch(userUrl);
+    console.log(userData, userFetchError);
 
     if (loading) {
         return "Loading...";
-    }
-
-    if (!loggedIn) {
-        return (
-            <>
-                This is the homepage. <Link to="login"> Log In </Link>
-            </>
-        );
     }
 
     if (error) {
@@ -40,7 +37,13 @@ function App() {
     return (
         <div className={styles.pageContainer}>
             <div className={styles.topSection}>
-                <BlogHeader topPost={posts[0]} />
+                <BlogHeader
+                    topPost={posts[0]}
+                    loggedIn={loggedIn}
+                    userData={userData}
+                    userLoading={userLoading}
+                    userFetchError={userFetchError}
+                />
                 <Separator />
                 <BlogContainer blogs={posts} />
             </div>

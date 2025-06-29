@@ -13,6 +13,7 @@ export default function BlogContainer({ blogs }) {
                 {blogs.slice(0, 6).map((blog) => {
                     return (
                         <BlogCard
+                            key={blog.id}
                             title={blog.title}
                             content={blog.content}
                             publishedAt={dateStringToReadableDate(

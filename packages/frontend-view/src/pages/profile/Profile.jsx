@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useFetch } from "../../utils/fetch";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
     const { userId } = useParams();
@@ -9,8 +10,8 @@ export default function Profile() {
     if (!loggedIn) {
         return (
             <div>
-                You're not logged in. Please <a href="/login">Log In</a> to view
-                information.
+                You're not logged in. Please <Link to="/login">Log In</Link> to
+                view information.
             </div>
         );
     }
