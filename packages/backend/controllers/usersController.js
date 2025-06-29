@@ -3,6 +3,7 @@ const prisma = require("../models");
 const jwt = require("jsonwebtoken");
 const CustomNotFoundError = require("../customErrors/CustomNotFoundError");
 const MisformedRequestError = require("../customErrors/UnprocessableContentError");
+const UnauthenticatedError = require("../customErrors/CustomUnauthenticatedError");
 const SALT = 10;
 
 async function getUsers(req, res) {
@@ -49,6 +50,12 @@ async function postUsers(req, res) {
 
 async function getUser(req, res) {
     const userId = +req.params.userId;
+
+    if (!userId) {
+        // no need to check for authentication again, because
+        // we wouldn't reach here without jwt validation
+        return res.json(req.token.user);
+    }
 
     const user = await prisma.user.findUnique({
         where: {

@@ -11,9 +11,9 @@ const {
 } = require("../authentication/utils/verifyTokenMiddelware");
 const users = Router({ mergeParams: true });
 
-users.get("/", getUsers);
+users.get("/all", getUsers);
 users.post("/", postUsers);
-users.get("/:userId", verifyToken, getUser);
+users.get("/{:userId}", verifyToken, getUser);
 users.put("/:userId", putUser);
 users.delete("/:userId", deleteUser);
 

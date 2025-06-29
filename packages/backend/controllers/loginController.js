@@ -35,6 +35,7 @@ async function postLogin(req, res, next) {
     const userToken = {
         id,
         email,
+        name: `${user.firstName} ${user.lastName}`,
     };
 
     jwt.sign(
