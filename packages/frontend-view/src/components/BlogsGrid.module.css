@@ -1,0 +1,14 @@
+.blogs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--std-gap);
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .blogs {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        place-items: center;
+    }
+}

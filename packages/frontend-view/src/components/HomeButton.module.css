@@ -1,0 +1,14 @@
+.homeButton {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+}
+
+.homeButtonSvg {
+    fill: black;
+}
+
+.homeButtonText {
+    padding: var(--std-padding);
+}

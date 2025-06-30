@@ -39,14 +39,6 @@
     font-size: 2rem;
 }
 
-.avatar {
-    background: var(--primary);
-    text-decoration: none;
-    color: var(--text);
-    padding: 8px;
-    border-radius: 50%;
-}
-
 @media (max-width: 1024px) {
     .brand {
         text-align: center;

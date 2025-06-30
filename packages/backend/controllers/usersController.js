@@ -61,6 +61,9 @@ async function getUser(req, res) {
         where: {
             id: userId,
         },
+        include: {
+            posts: true,
+        },
     });
 
     if (!user) {

@@ -3,8 +3,7 @@ import BlogCard from "#components/BlogCard";
 import SearchBar from "#components/SearchBar";
 import dateStringToReadableDate from "#utils/dateStringToReadableDate";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
+import Avatar from "#components/Avatar";
 
 export default function BlogHeader({
     topPost,
@@ -13,66 +12,18 @@ export default function BlogHeader({
     userLoading,
     userFetchError,
 }) {
-    const [links, setLinks] = useState([
-        {
-            name: "Users",
-            href: "/users",
-            className: "users",
-        },
-        {
-            name: "Login",
-            href: "/login",
-            className: styles.avatar,
-        },
-    ]);
-
-    useEffect(() => {
-        if (loggedIn && !userLoading && !userFetchError) {
-            const [firstName, lastName] = userData.name.split(" ");
-            const userInitials = `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`;
-            setLinks([
-                {
-                    name: "Users",
-                    href: "/users",
-                    className: "users",
-                },
-                {
-                    name: userInitials,
-                    href: `/users/${userData.id}`,
-                    className: styles.avatar,
-                },
-            ]);
-        } else {
-            setLinks([
-                {
-                    name: "Users",
-                    href: "/users",
-                    className: "users",
-                },
-                {
-                    name: "Login",
-                    href: "/login",
-                    className: styles.avatar,
-                },
-            ]);
-        }
-    }, [userLoading]);
-
     return (
         <header className={styles.blogHeader}>
             <nav className={styles.navBar}>
                 <SearchBar />
-                {links.map((link, index) => {
-                    return (
-                        <Link
-                            key={index}
-                            to={link.href}
-                            className={link.className}
-                        >
-                            {link.name}
-                        </Link>
-                    );
-                })}
+                <Link to="/users" className="users">
+                    Users
+                </Link>
+                <Avatar
+                    userLoading={userLoading}
+                    userData={userData}
+                    loggedIn={loggedIn}
+                />
             </nav>
             <div className={styles.headerContent}>
                 <div className={styles.brand}>

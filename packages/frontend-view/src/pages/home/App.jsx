@@ -15,7 +15,6 @@ function App() {
         error: userFetchError,
         loading: userLoading,
     } = useFetch(userUrl);
-    console.log(userData, userFetchError);
 
     if (loading) {
         return "Loading...";
