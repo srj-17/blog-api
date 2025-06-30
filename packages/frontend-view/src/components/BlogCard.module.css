@@ -9,6 +9,10 @@
     height: 100%;
     max-width: 400px;
     cursor: default;
+    /* card height is 280px for 7 lines,
+     * which is how many lines we want 
+     * our blog card to show, before ... (ellipsis) */
+    min-height: 280px;
 
     gap: 8px;
 }

@@ -21,6 +21,8 @@
     color: var(--primary);
     font-size: 10rem;
     cursor: default;
+    line-height: 1.2;
+    align-self: center;
 }
 
 .topBlog {
