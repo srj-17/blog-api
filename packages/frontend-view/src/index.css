@@ -3,6 +3,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    line-height: 1.5;
 }
 
 h1,
@@ -27,4 +28,9 @@ h6 {
     --secondary: green;
     --accent: black;
     --text: black;
+
+    --std-button-bg: white;
+
+    /* text defaults */
+    --display-text-size: 3rem;
 }

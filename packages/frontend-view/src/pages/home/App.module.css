@@ -22,6 +22,7 @@
     background: white;
     display: flex;
     flex-direction: column;
+    cursor: default;
 }
 
 .middleSectionBigWords {
@@ -35,6 +36,7 @@
 }
 
 .bottomSection {
+    cursor: default;
     background: var(--background);
     padding: var(--std-section-padding);
     display: flex;

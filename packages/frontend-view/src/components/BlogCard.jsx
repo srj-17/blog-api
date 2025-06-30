@@ -4,7 +4,13 @@ import ReactEllipsis from "react-ellipsis-component";
 import capitalize from "#utils/capitalize";
 
 // className for additional styles
-export default function BlogCard({ className, title, content, publishedAt }) {
+export default function BlogCard({
+    id,
+    className,
+    title,
+    content,
+    publishedAt,
+}) {
     return (
         <div className={`${className} ${styles.blogCard}`}>
             <div className={styles.title}>{capitalize(title)}</div>
@@ -16,7 +22,9 @@ export default function BlogCard({ className, title, content, publishedAt }) {
                     maxLine="7"
                     ellipsisNode="..."
                 />
-                <Button>Read Blog</Button>
+                <Button variant="link" to={`/blogs/${id}`}>
+                    Read Blog
+                </Button>
             </div>
         </div>
     );

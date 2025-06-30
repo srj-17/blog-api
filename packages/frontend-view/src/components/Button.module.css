@@ -1,11 +1,21 @@
-.button {
+.button,
+.linkButton {
+    background: var(--std-button-bg);
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
     font-family: inherit;
     padding: 4px 20px;
     border: none;
     border-radius: 20px;
     transition: transform 200ms;
+    text-decoration: none;
+    color: var(--text);
 }
 
-.button:hover {
+.button:hover,
+.linkButton:hover {
     transform: scale(1.02);
 }

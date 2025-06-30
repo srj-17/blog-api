@@ -6,15 +6,19 @@ export default function Avatar({ userLoading, loggedIn, userData }) {
         const [firstName, lastName] = userData.name.split(" ");
         const userInitials = `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`;
         return (
-            <Link to={`/users/${userData.id}`} className={styles.avatar}>
-                {userInitials}
-            </Link>
+            <div>
+                <Link to={`/users/${userData.id}`} className={styles.avatar}>
+                    {userInitials}
+                </Link>
+            </div>
         );
     } else {
         return (
-            <Link to="/login" className="login">
-                Login
-            </Link>
+            <div>
+                <Link to="/login" className="login">
+                    Login
+                </Link>
+            </div>
         );
     }
 }

@@ -68,6 +68,9 @@ async function getPost(req, res, next) {
         where: {
             id: postId,
         },
+        include: {
+            author: true,
+        },
     });
 
     if (!post) {

@@ -11,6 +11,7 @@ export default function BlogsGrid({ blogs, count }) {
             {blogsToDisplay.map((blog) => {
                 return (
                     <BlogCard
+                        id={blog.id}
                         key={blog.id}
                         title={blog.title}
                         content={blog.content}

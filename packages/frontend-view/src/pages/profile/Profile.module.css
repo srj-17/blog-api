@@ -20,5 +20,5 @@
 }
 
 .profileTitle {
-    font-size: 3rem;
+    font-size: var(--display-text-size);
 }

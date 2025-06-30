@@ -33,6 +33,7 @@ export default function BlogHeader({
                 <div className={styles.topBlogContainer}>
                     <div className={styles.topBlog}>
                         <BlogCard
+                            id={topPost.id}
                             className={styles.blogCard}
                             title={topPost.title}
                             content={topPost.content}

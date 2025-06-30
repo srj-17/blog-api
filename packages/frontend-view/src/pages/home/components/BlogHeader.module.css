@@ -20,6 +20,7 @@
 .brand {
     color: var(--primary);
     font-size: 10rem;
+    cursor: default;
 }
 
 .topBlog {
