@@ -10,53 +10,48 @@ async function getPosts(req, res) {
     const authorId = +req.params.userId;
     const { searchQuery } = req.query;
 
+    let findManyOptions = {
+        orderBy: {
+            publishedAt: "desc",
+        },
+    };
+
+    if (!authorId && !searchQuery) {
+        const posts = await prisma.post.findMany(findManyOptions);
+        res.json(posts);
+    }
+
     if (!authorId) {
         if (searchQuery) {
-            const posts = await prisma.post.findMany({
-                where: {
-                    title: {
-                        contains: searchQuery,
-                    },
+            findManyOptions.where = {
+                title: {
+                    contains: searchQuery,
                 },
-                orderBy: {
-                    publishedAt: "desc",
-                },
-            });
-            return res.json(posts);
+            };
         }
 
-        const posts = await prisma.post.findMany({
-            orderBy: {
-                publishedAt: "desc",
-            },
-        });
+        const posts = await prisma.post.findMany(findManyOptions);
 
         return res.json(posts);
     }
 
-    if (searchQuery) {
-        const posts = await prisma.post.findMany({
-            where: {
-                title: {
-                    contains: searchQuery,
-                },
-                authorId: authorId,
-            },
-            orderBy: {
-                publishedAt: "desc",
-            },
-        });
+    if (!searchQuery) {
+        findManyOptions.where = {
+            authorId: authorId,
+        };
+
+        const posts = await prisma.post.findMany(findManyOptions);
         res.json(posts);
     }
 
-    const posts = await prisma.post.findMany({
-        where: {
-            authorId: authorId,
+    findManyOptions.where = {
+        title: {
+            contains: searchQuery,
         },
-        orderBy: {
-            publishedAt: "desc",
-        },
-    });
+        authorId: authorId,
+    };
+
+    const posts = await prisma.post.findMany(findManyOptions);
     res.json(posts);
 }
 
