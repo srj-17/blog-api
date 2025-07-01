@@ -6,6 +6,7 @@ import HomeButton from "#components/HomeButton";
 import capitalize from "#utils/capitalize";
 import UsersBlogsContainer from "./components/UsersBlogsContainer";
 import Separator from "#components/Separator";
+import Users from "../users/Users.jsx";
 
 export default function Profile() {
     const { userId } = useParams();
@@ -24,7 +25,7 @@ export default function Profile() {
 
     // request for all users
     if (!userId) {
-        return <div> Users </div>;
+        return <Users />;
     }
 
     return (

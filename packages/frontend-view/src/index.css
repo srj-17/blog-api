@@ -33,4 +33,8 @@ h6 {
 
     /* text defaults */
     --display-text-size: 3rem;
+
+    /* gaps */
+    /* hz = horizontal */
+    --std-hz-card-gap: 40px;
 }

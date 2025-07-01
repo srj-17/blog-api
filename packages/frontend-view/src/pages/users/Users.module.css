@@ -1,0 +1,37 @@
+.usersPage {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.title {
+    font-size: 2rem;
+}
+
+.users {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--std-gap);
+    padding: var(--std-padding);
+    cursor: default;
+}
+
+.metadata {
+    width: 100%;
+    justify-content: space-around;
+    display: flex;
+    gap: 80px;
+    font-weight: bold;
+}
+
+@media (max-width: 447px) {
+    .metadata {
+        display: none;
+    }
+
+    .users {
+        width: 90%;
+    }
+}
