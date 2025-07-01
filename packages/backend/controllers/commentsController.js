@@ -1,14 +1,13 @@
+const BadRequestError = require("../customErrors/BadRequestError");
 const CustomNotFoundError = require("../customErrors/CustomNotFoundError");
 const UnprocessableContentError = require("../customErrors/UnprocessableContentError");
 const prisma = require("../models");
 
 async function getComments(req, res) {
-    const authorId = +req.params.userId;
     const postId = +req.params.postId;
 
     const comments = await prisma.comment.findMany({
         where: {
-            authorId: authorId,
             postId: postId,
         },
     });
@@ -22,6 +21,12 @@ async function postComments(req, res) {
 
     const title = req.body.title;
     const content = req.body.content;
+
+    if (!authorId) {
+        throw new BadRequestError(
+            "Comment must come from author. Author not provided!",
+        );
+    }
 
     if (!(title && content)) {
         throw new UnprocessableContentError("All required fields not provided");
