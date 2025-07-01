@@ -46,7 +46,15 @@ export default function SearchBar() {
     }
 
     return (
-        <form className={styles.searchBar} method="get" action="#">
+        <form
+            className={styles.searchBar}
+            method="get"
+            action={
+                searchResults.length >= 1
+                    ? `/blogs/${searchResults[0].id}`
+                    : "#"
+            }
+        >
             <svg
                 className={styles.magnifyingGlass}
                 xmlns="http://www.w3.org/2000/svg"
@@ -80,17 +88,7 @@ export default function SearchBar() {
                     })}
                 </div>
             ) : null}
-            <Button
-                type="submit"
-                variant="link"
-                to={
-                    searchResults.length >= 1
-                        ? `/blogs/${searchResults[0].id}`
-                        : "/"
-                }
-            >
-                Search
-            </Button>
+            <Button type="submit">Search</Button>
         </form>
     );
 }
