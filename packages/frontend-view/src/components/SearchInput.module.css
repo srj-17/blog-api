@@ -1,0 +1,7 @@
+.searchInput {
+    flex: 1;
+    appearance: none;
+    padding: 8px 24px;
+    border-radius: 20px;
+    border: 2px solid var(--accent);
+}

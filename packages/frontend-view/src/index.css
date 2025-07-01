@@ -21,6 +21,7 @@ h6 {
     --std-gap: 20px;
     --std-section-gap: 80px;
     --std-section-padding: 80px;
+    --std-border-radius: 20px;
     --std-section-border-radius: 200px;
 
     --background: grey;

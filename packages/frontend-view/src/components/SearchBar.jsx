@@ -1,8 +1,50 @@
 import styles from "./SearchBar.module.css";
-import Button from "#components/Button";
+import Button from "./Button";
+import SearchInput from "./SearchInput";
+import { useState } from "react";
+import { useEffect } from "react";
+import SearchResultCard from "./SearchResultCard";
+import Separator from "./Separator";
 
 export default function SearchBar() {
-    // TODO: implement features for autocompletion here
+    // TODO: only allow certain number of search results to be fetched
+    // to prevent overflow (after implementing pagination of sorts in the
+    // server)
+    const [searchText, setSearchText] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
+
+    function handleSearch(e) {
+        e.preventDefault();
+    }
+
+    useEffect(() => {
+        async function fetchPosts() {
+            const postsUrl = `http://localhost:3000/posts?${new URLSearchParams(
+                {
+                    searchQuery: searchText,
+                },
+            ).toString()}`;
+
+            const response = await fetch(postsUrl);
+            const responseBody = await response.json();
+            if (response.statusCode >= 400) {
+                console.error(responseBody);
+            }
+
+            setSearchResults(responseBody);
+        }
+
+        if (searchText.length >= 3) {
+            fetchPosts();
+        } else {
+            setSearchResults([]);
+        }
+    }, [searchText]);
+
+    function handleSearchTextChange(e) {
+        setSearchText(e.target.value);
+    }
+
     return (
         <form className={styles.searchBar} method="get" action="#">
             <svg
@@ -16,14 +58,39 @@ export default function SearchBar() {
             >
                 <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
             </svg>
-            <input
-                className={styles.searchInput}
-                type="search"
-                name="search-bar"
-                autoComplete="off"
-                aria-label="search bar"
+            <SearchInput
+                onChange={handleSearchTextChange}
+                value={searchText}
+                name="searchQuery"
             />
-            <Button type="submit">Search</Button>
+            {searchResults && searchResults.length > 0 ? (
+                <div className={styles.searchResults}>
+                    {searchResults.map((result, index) => {
+                        return (
+                            <>
+                                <SearchResultCard
+                                    key={result.id}
+                                    result={result}
+                                />
+                                {index === searchResults.length - 1 ? null : (
+                                    <Separator />
+                                )}
+                            </>
+                        );
+                    })}
+                </div>
+            ) : null}
+            <Button
+                type="submit"
+                variant="link"
+                to={
+                    searchResults.length >= 1
+                        ? `/blogs/${searchResults[0].id}`
+                        : "/"
+                }
+            >
+                Search
+            </Button>
         </form>
     );
 }

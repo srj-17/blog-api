@@ -8,7 +8,23 @@ const prisma = require("../models");
 // posts of author if author provided
 async function getPosts(req, res) {
     const authorId = +req.params.userId;
+    const { searchQuery } = req.query;
+
     if (!authorId) {
+        if (searchQuery) {
+            const posts = await prisma.post.findMany({
+                where: {
+                    title: {
+                        contains: searchQuery,
+                    },
+                },
+                orderBy: {
+                    publishedAt: "desc",
+                },
+            });
+            return res.json(posts);
+        }
+
         const posts = await prisma.post.findMany({
             orderBy: {
                 publishedAt: "desc",
@@ -18,9 +34,27 @@ async function getPosts(req, res) {
         return res.json(posts);
     }
 
+    if (searchQuery) {
+        const posts = await prisma.post.findMany({
+            where: {
+                title: {
+                    contains: searchQuery,
+                },
+                authorId: authorId,
+            },
+            orderBy: {
+                publishedAt: "desc",
+            },
+        });
+        res.json(posts);
+    }
+
     const posts = await prisma.post.findMany({
         where: {
             authorId: authorId,
+        },
+        orderBy: {
+            publishedAt: "desc",
         },
     });
     res.json(posts);
