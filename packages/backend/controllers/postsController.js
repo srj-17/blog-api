@@ -97,14 +97,18 @@ async function postPosts(req, res) {
 
 async function getPost(req, res, next) {
     const postId = +req.params.postId;
+    const { include } = req.query;
+    let inclusionOptions = { author: true };
+
+    if (include === "comments") {
+        inclusionOptions.comments = true;
+    }
 
     const post = await prisma.post.findUnique({
         where: {
             id: postId,
         },
-        include: {
-            author: true,
-        },
+        include: inclusionOptions,
     });
 
     if (!post) {
