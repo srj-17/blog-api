@@ -1,0 +1,21 @@
+.blogComments {
+    composes: blogContent from "../BlogPage.module.css";
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: var(--std-gap);
+}
+
+.blogCommentsTitle {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.title {
+    font-size: 1.2rem;
+    cursor: default;
+}
+
+.content {
+    opacity: 0.8;
+}
