@@ -2,14 +2,41 @@ import styles from "./BlogComments.module.css";
 import Separator from "#components/Separator";
 import Button from "#components/Button";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Fragment, useState } from "react";
+import { useEffect } from "react";
+import { useFetch } from "../../../utils/fetch";
 
-export default function BlogComments({ comments, isLoggedIn, postId }) {
+export default function BlogComments({
+    comments: initialComments,
+    isLoggedIn,
+    postId,
+}) {
+    const [currentComments, setCurrentcomments] = useState(null);
+    const [addCommentsClicked, setAddCommentsClicked] = useState();
+    const [commentInputValue, setCommentInputValue] = useState("");
+
+    useEffect(() => {
+        if (addCommentsClicked) {
+            async function fetchComments() {
+                const commentsUrl = `http://localhost:3000/posts/${postId}/comments`;
+                const response = await fetch(commentsUrl, { mode: "cors" });
+                const newComments = await response.json();
+
+                if (response.ok) {
+                    setCurrentcomments(newComments);
+                }
+            }
+
+            fetchComments();
+            setAddCommentsClicked(false);
+            setCommentInputValue("");
+        }
+    }, [addCommentsClicked]);
+
     async function handleAddComment(e) {
         e.preventDefault();
         const postCommentUrl = `http://localhost:3000/posts/${postId}/comments`;
-        // dummy body
-        const requestBody = { content: "hello, from the program" };
+        const requestBody = { content: commentInputValue };
         const response = await fetch(postCommentUrl, {
             method: "POST",
             mode: "cors",
@@ -19,8 +46,10 @@ export default function BlogComments({ comments, isLoggedIn, postId }) {
             },
             body: JSON.stringify(requestBody),
         });
-        const addedComment = await response.json();
+        setAddCommentsClicked(true);
     }
+
+    const comments = currentComments ? currentComments : initialComments;
 
     return (
         <div className={styles.blogComments}>
@@ -33,6 +62,10 @@ export default function BlogComments({ comments, isLoggedIn, postId }) {
                         id="addCommentInput"
                         name="comment"
                         placeholder="The post was really good..."
+                        value={commentInputValue}
+                        onChange={(e) => {
+                            setCommentInputValue(e.target.value);
+                        }}
                         className={styles.addCommentInput}
                     />
                     <div className="addCommentButtonContainer">
@@ -47,7 +80,7 @@ export default function BlogComments({ comments, isLoggedIn, postId }) {
 
             {comments.map((comment, index) => {
                 return (
-                    <>
+                    <Fragment key={comment.id}>
                         <div className={styles.comment} key={comment.id}>
                             <div className={styles.commentAuthor}>
                                 {comment.author.email}
@@ -57,7 +90,7 @@ export default function BlogComments({ comments, isLoggedIn, postId }) {
                             </div>
                         </div>
                         {index === comments.length - 1 ? null : <Separator />}
-                    </>
+                    </Fragment>
                 );
             })}
         </div>

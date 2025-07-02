@@ -98,6 +98,7 @@ async function getPost(req, res, next) {
     if (include === "comments") {
         inclusionOptions.comments = {
             select: {
+                id: true,
                 content: true,
                 author: {
                     select: {

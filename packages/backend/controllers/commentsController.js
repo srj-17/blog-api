@@ -14,6 +14,7 @@ async function getComments(req, res) {
             createdDate: "desc",
         },
         select: {
+            id: true,
             content: true,
             author: {
                 select: {
