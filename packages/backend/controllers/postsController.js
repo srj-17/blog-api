@@ -6,9 +6,10 @@ const prisma = require("../models");
 // returns all posts in descending order
 // when author is not provided, sends all
 // posts of author if author provided
+// limit = number of posts the frontend is asking for
 async function getPosts(req, res) {
     const authorId = +req.params.userId;
-    const { searchQuery } = req.query;
+    const { searchQuery, limit } = req.query;
 
     let findManyOptions = {
         orderBy: {
@@ -16,12 +17,12 @@ async function getPosts(req, res) {
         },
     };
 
-    if (!authorId && !searchQuery) {
+    if (!authorId && !searchQuery && !limit) {
         const posts = await prisma.post.findMany(findManyOptions);
-        res.json(posts);
+        return res.json(posts);
     }
 
-    if (!authorId) {
+    if (!authorId && !limit) {
         if (searchQuery) {
             findManyOptions.where = {
                 title: {
@@ -35,24 +36,73 @@ async function getPosts(req, res) {
         return res.json(posts);
     }
 
-    if (!searchQuery) {
+    if (!searchQuery && !limit) {
         findManyOptions.where = {
             authorId: authorId,
         };
 
         const posts = await prisma.post.findMany(findManyOptions);
-        res.json(posts);
+        return res.json(posts);
     }
 
-    findManyOptions.where = {
-        title: {
-            contains: searchQuery,
+    if (!searchQuery && !authorId) {
+        findManyOptions.take = +limit;
+
+        const posts = await prisma.post.findMany(findManyOptions);
+        return res.json(posts);
+    }
+
+    if (!limit) {
+        findManyOptions.where = {
+            title: {
+                contains: searchQuery,
+            },
+            authorId: authorId,
+        };
+
+        const posts = await prisma.post.findMany(findManyOptions);
+        return res.json(posts);
+    }
+
+    if (!searchQuery) {
+        findManyOptions = {
+            take: +limit,
+            where: {
+                authorId: authorId,
+            },
+        };
+
+        const posts = await prisma.post.findMany(findManyOptions);
+        return res.json(posts);
+    }
+
+    if (!authorId) {
+        findManyOptions = {
+            take: +limit,
+            where: {
+                title: {
+                    contains: searchQuery,
+                },
+            },
+        };
+
+        const posts = await prisma.post.findMany(findManyOptions);
+        return res.json(posts);
+    }
+
+    // all 3 are available
+    findManyOptions = {
+        take: +limit,
+        where: {
+            title: {
+                contains: searchQuery,
+            },
+            authorId: authorId,
         },
-        authorId: authorId,
     };
 
     const posts = await prisma.post.findMany(findManyOptions);
-    res.json(posts);
+    return res.json(posts);
 }
 
 async function postPosts(req, res) {

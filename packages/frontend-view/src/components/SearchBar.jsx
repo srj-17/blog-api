@@ -7,21 +7,15 @@ import SearchResultCard from "./SearchResultCard";
 import Separator from "./Separator";
 
 export default function SearchBar() {
-    // TODO: only allow certain number of search results to be fetched
-    // to prevent overflow (after implementing pagination of sorts in the
-    // server)
     const [searchText, setSearchText] = useState("");
     const [searchResults, setSearchResults] = useState([]);
-
-    function handleSearch(e) {
-        e.preventDefault();
-    }
 
     useEffect(() => {
         async function fetchPosts() {
             const postsUrl = `http://localhost:3000/posts?${new URLSearchParams(
                 {
                     searchQuery: searchText,
+                    limit: 7,
                 },
             ).toString()}`;
 

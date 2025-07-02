@@ -4,7 +4,6 @@ import Button from "#components/Button";
 import { Link } from "react-router-dom";
 import { Fragment, useState } from "react";
 import { useEffect } from "react";
-import { useFetch } from "../../../utils/fetch";
 
 export default function BlogComments({
     comments: initialComments,
