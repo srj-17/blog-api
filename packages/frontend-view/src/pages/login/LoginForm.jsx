@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import FormInputContainer from "../../components/FormInputContainer";
+import Loading from "#components/Loading";
 
 export default function LoginForm() {
     const [userInfo, setUserInfo] = useState({
@@ -60,7 +61,7 @@ export default function LoginForm() {
         }
 
         if (loading) {
-            return "Loading...";
+            return <Loading />;
         }
 
         if (isLoggedIn) {

@@ -7,6 +7,7 @@ import capitalize from "#utils/capitalize";
 import UsersBlogsContainer from "./components/UsersBlogsContainer";
 import Separator from "#components/Separator";
 import Users from "../users/Users.jsx";
+import Loading from "#components/Loading"
 
 export default function Profile() {
     const { userId } = useParams();
@@ -30,7 +31,7 @@ export default function Profile() {
     return (
         <div className={styles.profilePage}>
             {loading ? (
-                "Loading..."
+                <Loading />
             ) : error ? (
                 "Error fetching user"
             ) : (

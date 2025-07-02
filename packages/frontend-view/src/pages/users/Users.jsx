@@ -1,6 +1,7 @@
 import { useFetch } from "#utils/fetch";
 import UserCard from "./components/UserCard.jsx";
 import styles from "./Users.module.css";
+import Loading from "#components/Loading";
 
 export default function Users() {
     const userUrl = "http://localhost:3000/users/all";
@@ -10,7 +11,7 @@ export default function Users() {
         return <div> You must log in to access this page. </div>;
     }
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <Loading />;
     if (error) return <div>Error fetching the users</div>;
 
     return (

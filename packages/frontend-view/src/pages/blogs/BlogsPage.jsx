@@ -3,6 +3,7 @@ import HomeButton from "#components/HomeButton";
 import Separator from "#components/Separator";
 import BlogsGrid from "#components/BlogsGrid";
 import styles from "./BlogsPage.module.css";
+import Loading from "#components/Loading";
 
 export default function BlogsPage() {
     // NOTE: Pagination not added because there aren't enough blogs
@@ -14,7 +15,7 @@ export default function BlogsPage() {
     return (
         <div className={styles.blogsPage}>
             {loading ? (
-                "Loading..."
+                <Loading />
             ) : error ? (
                 "Error fetching user"
             ) : (

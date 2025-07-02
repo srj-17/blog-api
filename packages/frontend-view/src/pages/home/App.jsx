@@ -4,6 +4,7 @@ import styles from "./App.module.css";
 import BlogHeader from "./components/BlogHeader";
 import Separator from "#components/Separator";
 import BlogContainer from "./components/BlogContainer";
+import Loading from "#components/Loading";
 
 function App() {
     const postsUrl = "http://localhost:3000/posts";
@@ -17,7 +18,7 @@ function App() {
     } = useFetch(userUrl);
 
     if (loading) {
-        return "Loading...";
+        return <Loading />;
     }
 
     if (error) {

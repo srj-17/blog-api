@@ -4,6 +4,7 @@ import HomeButton from "#components/HomeButton";
 import capitalize from "#utils/capitalize";
 import styles from "./BlogPage.module.css";
 import BlogComments from "./components/BlogComments";
+import Loading from "#components/Loading";
 
 export default function BlogPage(props) {
     const { blogId } = useParams();
@@ -19,7 +20,7 @@ export default function BlogPage(props) {
         loading: blogIsLoading,
     } = useFetch(blogUrl);
 
-    if (blogIsLoading) return "Loading...";
+    if (blogIsLoading) return <Loading />;
 
     const authorName = capitalize(
         `${blogData.author.firstName} ${blogData.author.lastName}`,
