@@ -6,10 +6,13 @@ const {
     putComment,
     deleteComment,
 } = require("../controllers/commentsController");
+const {
+    verifyToken,
+} = require("../authentication/utils/verifyTokenMiddelware");
 const comments = Router({ mergeParams: true });
 
 comments.get("/", getComments);
-comments.post("/", postComments);
+comments.post("/", verifyToken, postComments);
 comments.get("/:commentId", getComment);
 comments.put("/:commentId", putComment);
 comments.delete("/:commentId", deleteComment);

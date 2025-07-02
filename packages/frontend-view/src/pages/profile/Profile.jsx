@@ -12,7 +12,6 @@ export default function Profile() {
     const { userId } = useParams();
     const url = `http://localhost:3000/users/${userId}`;
     const { loggedIn, data: user, error, loading } = useFetch(url);
-    console.log(user);
 
     if (!loggedIn) {
         return (

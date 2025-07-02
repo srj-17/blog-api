@@ -30,7 +30,8 @@ h6 {
     --accent: black;
     --text: black;
 
-    --std-button-bg: white;
+    --std-button-bg: #343434;
+    --std-button-text: white;
 
     /* text defaults */
     --display-text-size: 3rem;

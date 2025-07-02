@@ -12,7 +12,7 @@
     border-radius: 20px;
     transition: transform 200ms;
     text-decoration: none;
-    color: var(--text);
+    color: var(--std-button-text);
 }
 
 .button:hover,

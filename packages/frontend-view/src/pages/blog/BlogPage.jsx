@@ -4,7 +4,7 @@ import HomeButton from "#components/HomeButton";
 import capitalize from "#utils/capitalize";
 import styles from "./BlogPage.module.css";
 import BlogComments from "./components/BlogComments";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function BlogPage(props) {
     const { blogId } = useParams();
@@ -13,9 +13,8 @@ export default function BlogPage(props) {
             include: "comments",
         },
     ).toString()}`;
-
     const {
-        isLoggedIn,
+        loggedIn: isLoggedIn,
         data: blogData,
         error: blogError,
         loading: blogIsLoading,
@@ -27,7 +26,6 @@ export default function BlogPage(props) {
         `${blogData.author.firstName} ${blogData.author.lastName}`,
     );
 
-    console.log(blogData.comments);
     return (
         <div className={styles.blogPage}>
             <HomeButton />
@@ -38,7 +36,11 @@ export default function BlogPage(props) {
                 </div>
             </div>
             <div className={styles.blogContent}>{blogData.content}</div>
-            <BlogComments comments={blogData.comments} />
+            <BlogComments
+                postId={blogData.id}
+                isLoggedIn={isLoggedIn}
+                comments={blogData.comments}
+            />
         </div>
     );
 }

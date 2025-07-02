@@ -96,7 +96,19 @@ async function getPost(req, res, next) {
     let inclusionOptions = { author: true };
 
     if (include === "comments") {
-        inclusionOptions.comments = true;
+        inclusionOptions.comments = {
+            select: {
+                content: true,
+                author: {
+                    select: {
+                        email: true,
+                    },
+                },
+            },
+            orderBy: {
+                createdDate: "desc",
+            },
+        };
     }
 
     const post = await prisma.post.findUnique({

@@ -10,16 +10,26 @@ async function getComments(req, res) {
         where: {
             postId: postId,
         },
+        orderBy: {
+            createdDate: "desc",
+        },
+        select: {
+            content: true,
+            author: {
+                select: {
+                    email: true,
+                },
+            },
+        },
     });
 
     res.json(comments);
 }
 
 async function postComments(req, res) {
-    const authorId = +req.params.userId;
+    const authorId = req.token.user.id;
     const postId = +req.params.postId;
 
-    const title = req.body.title;
     const content = req.body.content;
 
     if (!authorId) {
@@ -28,16 +38,16 @@ async function postComments(req, res) {
         );
     }
 
-    if (!(title && content)) {
+    if (!content) {
         throw new UnprocessableContentError("All required fields not provided");
     }
 
     const comment = await prisma.comment.create({
         data: {
-            title,
             content,
             authorId,
             postId,
+            createdDate: new Date(),
         },
     });
 
@@ -62,10 +72,9 @@ async function getComment(req, res) {
 async function putComment(req, res, next) {
     const commentId = +req.params.commentId;
 
-    const title = req.body.title;
     const content = req.body.content;
 
-    if (!(title && content)) {
+    if (!content) {
         throw new UnprocessableContentError("All required fields not provided");
     }
 
@@ -75,8 +84,8 @@ async function putComment(req, res, next) {
                 id: commentId,
             },
             data: {
-                title,
                 content,
+                createdDate: new Date(),
             },
         });
 
