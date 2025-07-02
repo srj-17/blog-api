@@ -4,7 +4,6 @@ import HomeButton from "#components/HomeButton";
 import capitalize from "#utils/capitalize";
 import styles from "./BlogPage.module.css";
 import BlogComments from "./components/BlogComments";
-import { useEffect, useState } from "react";
 
 export default function BlogPage(props) {
     const { blogId } = useParams();

@@ -6,6 +6,7 @@ import Signup from "../pages/signup/Signup";
 import Profile from "../pages/profile/Profile";
 import BlogPage from "../pages/blog/BlogPage";
 import Users from "../pages/users/Users";
+import BlogsPage from "../pages/blogs/BlogsPage";
 
 const router = createBrowserRouter([
     { index: true, element: <App />, errorElement: <ErrorElement /> },
@@ -13,6 +14,7 @@ const router = createBrowserRouter([
     { path: "login", element: <Login /> },
     { path: "users", element: <Users /> },
     { path: "users/:userId", element: <Profile /> },
+    { path: "blogs", element: <BlogsPage /> },
     { path: "blogs/:blogId", element: <BlogPage /> },
 ]);
 
