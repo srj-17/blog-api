@@ -1,10 +1,10 @@
 import { useFetch } from "#utils/fetch";
-import ErrorElement from "#components/ErrorElement";
 import styles from "./App.module.css";
 import BlogHeader from "./components/BlogHeader";
 import Separator from "#components/Separator";
 import BlogContainer from "./components/BlogContainer";
 import Loading from "#components/Loading";
+import ErrorPage from "../error/ErrorPage";
 
 function App() {
     const postsUrl = "http://localhost:3000/posts";
@@ -22,16 +22,13 @@ function App() {
     }
 
     if (error) {
+        // if error, the payload (data) has the error information
         return (
-            <ErrorElement
-                message="There was some error during fetching posts"
-                statusCode={500}
+            <ErrorPage
+                statusCode={posts.statusCode || 404}
+                message={posts.msg || "Not Found."}
             />
         );
-    }
-
-    if (!posts) {
-        return "There are no posts";
     }
 
     return (
@@ -45,7 +42,7 @@ function App() {
                     userFetchError={userFetchError}
                 />
                 <Separator />
-                <BlogContainer blogs={posts} />
+                {posts ? <BlogContainer blogs={posts} /> : "No Posts Found"}
             </div>
             <div className={styles.middleSection}>
                 <div className={styles.middleSectionBigWords}>CREATE</div>

@@ -2,6 +2,7 @@ import { useFetch } from "#utils/fetch";
 import UserCard from "./components/UserCard.jsx";
 import styles from "./Users.module.css";
 import Loading from "#components/Loading";
+import ErrorPage from "../error/ErrorPage.jsx";
 
 export default function Users() {
     const userUrl = "http://localhost:3000/users/all";
@@ -12,7 +13,13 @@ export default function Users() {
     }
 
     if (loading) return <Loading />;
-    if (error) return <div>Error fetching the users</div>;
+    if (error)
+        return (
+            <ErrorPage
+                message={users.msg || "Error Fetching Users."}
+                statusCode={users.statusCode || 404}
+            />
+        );
 
     return (
         <div className={styles.usersPage}>

@@ -4,6 +4,7 @@ import Separator from "#components/Separator";
 import BlogsGrid from "#components/BlogsGrid";
 import styles from "./BlogsPage.module.css";
 import Loading from "#components/Loading";
+import ErrorPage from "../error/ErrorPage";
 
 export default function BlogsPage() {
     // NOTE: Pagination not added because there aren't enough blogs
@@ -17,7 +18,10 @@ export default function BlogsPage() {
             {loading ? (
                 <Loading />
             ) : error ? (
-                "Error fetching user"
+                <ErrorPage
+                    statusCode={blogs.statusCode || 404}
+                    message={blogs.msg || "Not Found."}
+                />
             ) : (
                 <div className={styles.firstSection}>
                     <HomeButton className={styles.homeButton} />

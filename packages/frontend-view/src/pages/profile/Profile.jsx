@@ -7,7 +7,8 @@ import capitalize from "#utils/capitalize";
 import UsersBlogsContainer from "./components/UsersBlogsContainer";
 import Separator from "#components/Separator";
 import Users from "../users/Users.jsx";
-import Loading from "#components/Loading"
+import Loading from "#components/Loading";
+import ErrorPage from "../error/ErrorPage";
 
 export default function Profile() {
     const { userId } = useParams();
@@ -33,7 +34,10 @@ export default function Profile() {
             {loading ? (
                 <Loading />
             ) : error ? (
-                "Error fetching user"
+                <ErrorPage
+                    message={user.msg || "Not Found."}
+                    statusCode={user.statusCode || 404}
+                />
             ) : (
                 <div className={styles.firstSection}>
                     <HomeButton className={styles.homeButton} />
