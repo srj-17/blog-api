@@ -4,6 +4,7 @@ import Button from "#components/Button";
 import { Link } from "react-router-dom";
 import { Fragment, useState } from "react";
 import { useEffect } from "react";
+import UnauthorizedPage from "../../unauthorizedPage/UnauthorizedPage";
 
 export default function BlogComments({
     comments: initialComments,
@@ -72,9 +73,7 @@ export default function BlogComments({
                     </div>
                 </form>
             ) : (
-                <div className={styles.addCommentLoggedOut}>
-                    <Link to="/login">Log In</Link> to add your comment.
-                </div>
+                <UnauthorizedPage />
             )}
 
             {comments.map((comment, index) => {

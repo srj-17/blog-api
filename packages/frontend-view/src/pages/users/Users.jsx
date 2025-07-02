@@ -2,14 +2,14 @@ import { useFetch } from "#utils/fetch";
 import UserCard from "./components/UserCard.jsx";
 import styles from "./Users.module.css";
 import Loading from "#components/Loading";
-import ErrorPage from "../error/ErrorPage.jsx";
+import UnauthorizedPage from "../unauthorizedPage/UnauthorizedPage";
 
 export default function Users() {
     const userUrl = "http://localhost:3000/users/all";
     const { loggedIn, data: users, error, loading } = useFetch(userUrl);
 
     if (!loggedIn) {
-        return <div> You must log in to access this page. </div>;
+        return <UnauthorizedPage />;
     }
 
     if (loading) return <Loading />;
