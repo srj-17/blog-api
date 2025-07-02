@@ -42,6 +42,10 @@
     font-size: 2rem;
 }
 
+.logOutButton {
+    align-self: stretch;
+}
+
 @media (max-width: 1024px) {
     .brand {
         text-align: center;

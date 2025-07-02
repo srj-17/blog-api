@@ -4,6 +4,7 @@ import SearchBar from "#components/SearchBar";
 import dateStringToReadableDate from "#utils/dateStringToReadableDate";
 import { Link } from "react-router-dom";
 import Avatar from "#components/Avatar";
+import Button from "#components/Button";
 
 export default function BlogHeader({
     topPost,
@@ -11,7 +12,15 @@ export default function BlogHeader({
     userData,
     userLoading,
     userFetchError,
+    setLoggedIn,
 }) {
+    function logOutHandler(e) {
+        console.log("this runs");
+        console.log(loggedIn);
+        localStorage.removeItem("token");
+        setLoggedIn(false);
+    }
+
     return (
         <header className={styles.blogHeader}>
             <nav className={styles.navBar}>
@@ -19,6 +28,12 @@ export default function BlogHeader({
                 <Link to="/users" className="users">
                     Users
                 </Link>
+                <Button
+                    additionalStyles={styles.logOutButton}
+                    onClick={logOutHandler}
+                >
+                    Log Out
+                </Button>
                 <Avatar
                     userLoading={userLoading}
                     userData={userData}

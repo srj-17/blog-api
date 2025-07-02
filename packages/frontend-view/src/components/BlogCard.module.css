@@ -14,6 +14,7 @@
      * our blog card to show, before ... (ellipsis) */
     min-height: 280px;
 
+    width: 100%;
     gap: 8px;
 }
 

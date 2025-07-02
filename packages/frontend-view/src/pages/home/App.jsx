@@ -9,9 +9,14 @@ import ErrorPage from "../error/ErrorPage";
 function App() {
     const postsUrl = "http://localhost:3000/posts";
     const userUrl = "http://localhost:3000/users";
-    const { loggedIn, data: posts, error, loading } = useFetch(postsUrl);
     const {
-        userLoggedIn,
+        loggedIn,
+        data: posts,
+        error,
+        loading,
+        setLoggedIn,
+    } = useFetch(postsUrl);
+    const {
         data: userData,
         error: userFetchError,
         loading: userLoading,
@@ -21,6 +26,10 @@ function App() {
         return <Loading />;
     }
 
+    // NOTE: when the user logs out, and the request is sent,
+    // the useFetch should set the error as true as well, since 403
+    // is also error, but IDK why, for now, it's not setting it, and our
+    // app works as expected
     if (error) {
         // if error, the payload (data) has the error information
         return (
@@ -40,6 +49,7 @@ function App() {
                     userData={userData}
                     userLoading={userLoading}
                     userFetchError={userFetchError}
+                    setLoggedIn={setLoggedIn}
                 />
                 <Separator />
                 {posts ? <BlogContainer blogs={posts} /> : "No Posts Found"}

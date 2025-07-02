@@ -25,6 +25,7 @@ export function useFetch(url) {
 
                 // 403 = forbidden
                 if (response.status >= 400) {
+                    // assume forbidden is not an error
                     if (response.status === 403) {
                         localStorage.removeItem("token");
                         setLoggedIn(false);
@@ -44,5 +45,5 @@ export function useFetch(url) {
         getData();
     }, [url]);
 
-    return { loggedIn, data, error, loading };
+    return { loggedIn, data, error, loading, setLoggedIn };
 }
