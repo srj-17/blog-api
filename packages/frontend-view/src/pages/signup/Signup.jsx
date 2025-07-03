@@ -1,8 +1,9 @@
-import SignupForm from "./SignupForm";
+import SignupForm from "./components/SignupForm";
+import styles from "./Signup.module.css";
 
 export default function Signup() {
     return (
-        <div className="signup-container">
+        <div className={styles.signupFormContainer}>
             <SignupForm />
         </div>
     );

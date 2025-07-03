@@ -28,12 +28,14 @@ export default function BlogHeader({
                 <Link to="/users" className="users">
                     Users
                 </Link>
-                <Button
-                    additionalStyles={styles.logOutButton}
-                    onClick={logOutHandler}
-                >
-                    Log Out
-                </Button>
+                {loggedIn ? (
+                    <Button
+                        additionalStyles={styles.logOutButton}
+                        onClick={logOutHandler}
+                    >
+                        Log Out
+                    </Button>
+                ) : null}
                 <Avatar
                     userLoading={userLoading}
                     userData={userData}

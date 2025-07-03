@@ -1,0 +1,23 @@
+.formInputContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formInputContainer > input {
+    width: 30ch;
+    padding: 4px 20px;
+}
+
+.formInputContainer > input:valid {
+    border: 1px solid var(--valid-color);
+}
+
+.formInputContainer > input:invalid {
+    border: 1px solid var(--invalid-color);
+}
+
+.formInputContainer > label {
+    align-self: start;
+    opacity: 0.8;
+}

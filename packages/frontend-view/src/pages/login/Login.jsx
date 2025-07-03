@@ -1,15 +1,11 @@
-import LoginForm from "./LoginForm";
+import LoginForm from "./components/LoginForm";
 import { Link } from "react-router-dom";
+import styles from "./Login.module.css";
 
 export default function Login() {
     return (
-        <>
-            <div className="login-container">
-                <LoginForm />
-            </div>
-            <div className="signup-container">
-                Not logged in? <Link to="/signup">Sign Up</Link>
-            </div>
-        </>
+        <div className={styles.loginFormContainer}>
+            <LoginForm />
+        </div>
     );
 }

@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import FormInputContainer from "../../components/FormInputContainer";
+import FormInputContainer from "../../../components/FormInputContainer";
+import styles from "./SignupForm.module.css";
+import Separator from "#components/Separator";
+import Button from "#components/Button";
 
 export default function SignupForm() {
     const [userInfo, setUserInfo] = useState({
@@ -63,13 +66,20 @@ export default function SignupForm() {
         );
     } else {
         return (
-            <form method="POST" onSubmit={handleSubmit}>
+            <form
+                className={styles.signupForm}
+                method="POST"
+                onSubmit={handleSubmit}
+            >
+                <div className={styles.signupHeader}>Sign Up</div>
+                <Separator />
                 <FormInputContainer>
                     <label htmlFor="firstName">First Name</label>
                     <input
                         id="firstName"
                         type="text"
                         name="firstName"
+                        required
                         value={userInfo.firstName}
                         onChange={(e) =>
                             setUserInfo({
@@ -85,6 +95,7 @@ export default function SignupForm() {
                         id="lastName"
                         type="text"
                         name="lastName"
+                        required
                         value={userInfo.lastName}
                         onChange={(e) =>
                             setUserInfo({
@@ -100,6 +111,7 @@ export default function SignupForm() {
                         id="email"
                         type="email"
                         name="email"
+                        required
                         value={userInfo.email}
                         onChange={(e) =>
                             setUserInfo({ ...userInfo, email: e.target.value })
@@ -112,6 +124,7 @@ export default function SignupForm() {
                         id="password"
                         type="password"
                         name="password"
+                        required
                         value={userInfo.password}
                         onChange={(e) =>
                             setUserInfo({
@@ -121,7 +134,7 @@ export default function SignupForm() {
                         }
                     />
                 </FormInputContainer>
-                <button type="submit">Log In</button>
+                <Button type="submit">Sign Up</Button>
             </form>
         );
     }

@@ -29,6 +29,8 @@ h6 {
     --secondary: green;
     --accent: black;
     --text: black;
+    --valid-color: lightgreen;
+    --invalid-color: crimson;
 
     --std-button-bg: #343434;
     --std-button-text: white;

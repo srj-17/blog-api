@@ -1,0 +1,7 @@
+.loginFormContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding: var(--std-section-padding);
+}

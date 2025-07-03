@@ -1,0 +1,7 @@
+.signupForm {
+    composes: loginForm from "../../login/components/LoginForm.module.css";
+}
+
+.signupHeader {
+    composes: loginHeader from "../../login/components/LoginForm.module.css";
+}

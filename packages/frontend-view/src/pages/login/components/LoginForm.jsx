@@ -1,7 +1,11 @@
 import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import FormInputContainer from "../../components/FormInputContainer";
+import FormInputContainer from "#components/FormInputContainer";
 import Loading from "#components/Loading";
+import styles from "./LoginForm.module.css";
+import { Link } from "react-router-dom";
+import Separator from "#components/Separator";
+import Button from "#components/Button";
 
 export default function LoginForm() {
     const [userInfo, setUserInfo] = useState({
@@ -70,13 +74,20 @@ export default function LoginForm() {
     }
 
     return (
-        <form method="POST" onSubmit={handleSubmit}>
+        <form
+            className={styles.loginForm}
+            method="POST"
+            onSubmit={handleSubmit}
+        >
+            <div className={styles.loginHeader}>Log In</div>
+            <Separator />
             <FormInputContainer>
                 <label htmlFor="email">Email</label>
                 <input
                     id="email"
                     type="email"
                     name="email"
+                    required
                     value={userInfo.email}
                     onChange={(e) => {
                         setUserInfo({ ...userInfo, email: e.target.value });
@@ -89,13 +100,17 @@ export default function LoginForm() {
                     id="password"
                     type="password"
                     name="password"
+                    required
                     value={userInfo.password}
                     onChange={(e) => {
                         setUserInfo({ ...userInfo, password: e.target.value });
                     }}
                 />
             </FormInputContainer>
-            <button type="submit">Log In</button>
+            <Button type="submit">Log In</Button>
+            <div className="signup-container">
+                Not logged in? <Link to="/signup">Sign Up</Link>
+            </div>
         </form>
     );
 }
