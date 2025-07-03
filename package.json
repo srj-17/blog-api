@@ -4,7 +4,8 @@
     "description": "A blog api with frontends for creating and viewing",
     "main": "index.js",
     "scripts": {
-        "start:client": "npm run -w packages/frontend-view dev",
+        "start:client-view": "npm run -w packages/frontend-view dev",
+        "start:client-edit": "npm run -w packages/frontend-edit dev",
         "start:server": "npm run -w packages/backend start"
     },
     "author": "srj-17",
