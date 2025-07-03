@@ -4,10 +4,15 @@
     width: 100%;
     align-items: center;
     gap: var(--std-gap);
+    min-height: 100vh;
+    background: var(--background);
+    padding: var(--std-section-padding);
 }
 
 .title {
     font-size: 2rem;
+    font-weight: var(--title-weight);
+    cursor: default;
 }
 
 .users {

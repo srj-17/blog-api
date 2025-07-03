@@ -6,7 +6,7 @@
 }
 
 .homeButtonSvg {
-    fill: black;
+    fill: var(--link-color-200);
 }
 
 .homeButtonText {

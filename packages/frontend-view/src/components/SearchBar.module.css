@@ -36,6 +36,6 @@ input[type="search"]::-webkit-search-cancel-button {
 
     border-radius: var(--std-border-radius);
     padding: var(--std-padding);
-    border: 1px solid var(--accent);
+    border: 2px solid var(--accent);
     z-index: 1;
 }

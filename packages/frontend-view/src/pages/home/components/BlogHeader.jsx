@@ -15,8 +15,6 @@ export default function BlogHeader({
     setLoggedIn,
 }) {
     function logOutHandler(e) {
-        console.log("this runs");
-        console.log(loggedIn);
         localStorage.removeItem("token");
         setLoggedIn(false);
     }

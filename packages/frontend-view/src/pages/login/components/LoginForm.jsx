@@ -107,7 +107,9 @@ export default function LoginForm() {
                     }}
                 />
             </FormInputContainer>
-            <Button type="submit">Log In</Button>
+            <Button additionalStyles={styles.loginButton} type="submit">
+                Log In
+            </Button>
             <div className="signup-container">
                 Not logged in? <Link to="/signup">Sign Up</Link>
             </div>

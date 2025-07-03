@@ -4,6 +4,7 @@
     align-items: stretch;
     padding: var(--std-padding) 15px;
     background: var(--primary);
+    color: var(--text-inverted);
     border-radius: 28px;
     gap: 40px;
     justify-content: space-around;

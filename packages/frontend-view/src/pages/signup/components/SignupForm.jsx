@@ -134,7 +134,9 @@ export default function SignupForm() {
                         }
                     />
                 </FormInputContainer>
-                <Button type="submit">Sign Up</Button>
+                <Button additionalStyles={styles.signupButton} type="submit">
+                    Sign Up
+                </Button>
             </form>
         );
     }

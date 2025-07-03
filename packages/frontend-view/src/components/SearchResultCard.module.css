@@ -1,7 +1,7 @@
 .searchResult {
     padding: 2px 20px;
     text-decoration: none;
-    color: var(--text);
+    color: var(--text-inverted);
 }
 
 .resultTitle {

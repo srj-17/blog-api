@@ -3,6 +3,7 @@ import UserCard from "./components/UserCard.jsx";
 import styles from "./Users.module.css";
 import Loading from "#components/Loading";
 import UnauthorizedPage from "../unauthorizedPage/UnauthorizedPage";
+import HomeButton from "#components/HomeButton";
 
 export default function Users() {
     const userUrl = "http://localhost:3000/users/all";
@@ -23,6 +24,7 @@ export default function Users() {
 
     return (
         <div className={styles.usersPage}>
+            <HomeButton />
             <div className={styles.title}>Users</div>
             <div className={styles.users}>
                 <div className={styles.metadata}>

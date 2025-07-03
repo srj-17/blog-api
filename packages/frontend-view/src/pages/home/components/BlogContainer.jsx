@@ -12,7 +12,9 @@ export default function BlogContainer({ blogs }) {
                 <BlogsGrid blogs={blogs} count={6} />
             </div>
             <div className={styles.blogsContainerFooter}>
-                <Link to="/blogs">Explore More</Link>
+                <Link className={styles.exploreMoreLink} to="/blogs">
+                    Explore More
+                </Link>
             </div>
         </section>
     );

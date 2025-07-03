@@ -23,6 +23,7 @@
     cursor: default;
     line-height: 1.2;
     align-self: center;
+    font-family: var(--display-font-family);
 }
 
 .topBlog {
@@ -40,6 +41,8 @@
 
 .topBlogTitle {
     font-size: 2rem;
+    color: var(--primary);
+    cursor: default;
 }
 
 .logOutButton {
@@ -47,6 +50,10 @@
 }
 
 @media (max-width: 1024px) {
+    .blogHeader {
+        gap: var(--std-section-gap);
+    }
+
     .brand {
         text-align: center;
     }

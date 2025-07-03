@@ -6,7 +6,7 @@
 }
 
 .topSection {
-    background: var(--background);
+    background: linear-gradient(var(--background), var(--background-200));
     padding: var(--std-section-padding);
     display: flex;
     flex-direction: column;
@@ -26,8 +26,17 @@
 }
 
 .middleSectionBigWords {
+    font-weight: bold;
     font-size: 10rem;
+    letter-spacing: 2rem;
     line-height: 0.8;
+}
+
+@media (max-width: 1024px) {
+    .middleSectionBigWords {
+        letter-spacing: normal;
+        font-weight: normal;
+    }
 }
 
 .middleSectionSmallWords {
@@ -37,7 +46,7 @@
 
 .bottomSection {
     cursor: default;
-    background: var(--background);
+    background: linear-gradient(var(--background-100), var(--background));
     padding: var(--std-section-padding);
     display: flex;
     flex-direction: column;

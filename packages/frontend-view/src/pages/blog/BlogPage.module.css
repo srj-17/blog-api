@@ -3,6 +3,8 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    background: var(--background);
+    padding: var(--std-section-padding);
     gap: var(--std-section-gap);
 }
 
@@ -17,6 +19,9 @@
 
 .blogTitle {
     font-size: var(--display-text-size);
+    font-weight: var(--title-weight);
+    color: var(--title-color);
+    cursor: default;
 }
 
 .blogContent {

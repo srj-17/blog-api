@@ -1,17 +1,18 @@
 .button,
 .linkButton {
-    background: var(--std-button-bg);
     display: flex;
     width: 100%;
     justify-content: center;
     align-items: center;
 
     font-family: inherit;
+    font-size: 1rem;
     padding: 4px 20px;
     border: none;
     border-radius: 20px;
     transition: transform 200ms;
     text-decoration: none;
+    background: var(--std-button-bg);
     color: var(--std-button-text);
 }
 

@@ -7,6 +7,8 @@
 .formInputContainer > input {
     width: 30ch;
     padding: 4px 20px;
+    font-family: inherit;
+    font-size: 1rem;
 }
 
 .formInputContainer > input:valid {

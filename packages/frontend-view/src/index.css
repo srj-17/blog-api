@@ -24,15 +24,23 @@ h6 {
     --std-border-radius: 20px;
     --std-section-border-radius: 200px;
 
-    --background: grey;
-    --primary: peachpuff;
-    --secondary: green;
-    --accent: black;
-    --text: black;
+    --background: #cad2c5;
+    --background-100: hsl(from var(--background) h s 60);
+    --background-200: hsl(from var(--background) h s 50);
+    --primary: #2f3e46;
+    --secondary: #52796f;
+    --accent: #84a98c;
+    --text: #84a98c;
+    --text-inverted: #cad2c5;
     --valid-color: lightgreen;
     --invalid-color: crimson;
 
-    --std-button-bg: #343434;
+    /* derived */
+    --link-color-100: var(--accent);
+    --link-color-200: hsl(from var(--accent) h s 20);
+    --link-color-300: hsl(from var(--accent) h s 10);
+
+    --std-button-bg: var(--secondary);
     --std-button-text: white;
 
     /* text defaults */
@@ -41,4 +49,18 @@ h6 {
     /* gaps */
     /* hz = horizontal */
     --std-hz-card-gap: 40px;
+
+    /* fonts */
+    --display-font-family: "Style Script", cursive;
+    --body-font-family: "Domine", serif;
+    --title-weight: 600;
+    --title-color: var(--primary);
+}
+
+body {
+    --font-family: var(--body-font-family);
+}
+
+a {
+    color: var(--link-color-200);
 }

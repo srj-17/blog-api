@@ -12,3 +12,13 @@
 .blogsContainerFooter {
     align-self: center;
 }
+
+.exploreMoreLink {
+    color: var(--link-color-300);
+    font-size: 1.1rem;
+}
+
+.blogsContainerTitle {
+    composes: exploreMoreLink;
+    color: var(--primary);
+}
