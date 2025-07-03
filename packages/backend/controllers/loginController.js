@@ -1,8 +1,7 @@
 const jwt = require("jsonwebtoken");
-const CustomServerError = require("../customErrors/CustomServerError");
+const CustomUnauthenticatedError = require("../customErrors/CustomUnauthenticatedError");
 const prisma = require("../models");
 const bcrypt = require("bcryptjs");
-const ValidationError = require("../customErrors/ValidationError");
 
 async function postLogin(req, res, next) {
     const { email, password } = req.body;
@@ -27,7 +26,7 @@ async function postLogin(req, res, next) {
         }
     } catch (e) {
         console.error(e);
-        throw new ValidationError(e.message);
+        throw new CustomUnauthenticatedError(e.message);
     }
 
     // token creation
@@ -44,7 +43,10 @@ async function postLogin(req, res, next) {
         { expiresIn: "30 days" },
         (err, token) => {
             if (err) {
-                return res.json({ msg: "token couldn't be created" });
+                console.error(err);
+                throw new CustomUnauthenticatedError(
+                    "Token could not be created.",
+                );
             }
 
             res.json({

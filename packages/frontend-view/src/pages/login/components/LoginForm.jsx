@@ -6,6 +6,7 @@ import styles from "./LoginForm.module.css";
 import { Link } from "react-router-dom";
 import Separator from "#components/Separator";
 import Button from "#components/Button";
+import ErrorPage from "../../error/ErrorPage";
 
 export default function LoginForm() {
     const [userInfo, setUserInfo] = useState({
@@ -35,15 +36,18 @@ export default function LoginForm() {
                     const jsonData = await response.json();
 
                     if (response.status >= 400) {
-                        setFetchError(jsonData.msg);
+                        setFetchError({
+                            statusCode: response.status,
+                            message: jsonData.msg,
+                        });
+                    } else {
+                        // log in successful if server doesn't throw
+                        // error
+                        setIsLoggedIn(true);
+                        localStorage.setItem("token", jsonData.token);
                     }
-
-                    // log in successful if server doesn't throw
-                    // error
-                    setIsLoggedIn(true);
-                    localStorage.setItem("token", jsonData.token);
                 } catch (e) {
-                    setFetchError("Error during fetch");
+                    setFetchError({ msg: "Error during fetch" });
                     throw new Error(e);
                 }
 
@@ -61,7 +65,12 @@ export default function LoginForm() {
 
     if (isSubmitted) {
         if (fetchError) {
-            return "Error :" + fetchError;
+            return (
+                <ErrorPage
+                    statusCode={fetchError.statusCode || 400}
+                    message={fetchError.message || "Error during fetch."}
+                />
+            );
         }
 
         if (loading) {

@@ -29,9 +29,9 @@ export function useFetch(url) {
                     if (response.status === 403) {
                         localStorage.removeItem("token");
                         setLoggedIn(false);
+                    } else {
+                        setError(true);
                     }
-                    console.error(jsonData.msg);
-                    setError(true);
                 }
 
                 setData(jsonData);
