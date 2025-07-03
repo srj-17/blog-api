@@ -8,12 +8,13 @@ export default function Button({
     additionalStyles,
     onClick,
     children,
+    styleAsLink,
 }) {
     if (variant === "link") {
         return (
             <Link
                 to={to}
-                className={`${additionalStyles} ${styles.linkButton}`}
+                className={`${additionalStyles} ${styleAsLink ? styles.link : styles.linkButton}`}
             >
                 {children}
             </Link>
@@ -24,7 +25,7 @@ export default function Button({
         <button
             type={type}
             onClick={onClick}
-            className={`${additionalStyles} ${styles.button}`}
+            className={`${styleAsLink ? styles.link : styles.button} ${additionalStyles}`}
         >
             {children}
         </button>

@@ -28,6 +28,7 @@ export default function BlogHeader({
                 </Link>
                 {loggedIn ? (
                     <Button
+                        styleAsLink={true}
                         additionalStyles={styles.logOutButton}
                         onClick={logOutHandler}
                     >

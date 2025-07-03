@@ -20,3 +20,14 @@
 .linkButton:hover {
     transform: scale(1.02);
 }
+
+.link {
+    background: none;
+    text-decoration: underline;
+    border: none;
+    outline: none;
+    font-size: inherit;
+    font-family: inherit;
+    color: var(--link-color-200);
+    cursor: pointer;
+}

@@ -42,11 +42,12 @@
 .middleSectionSmallWords {
     align-self: end;
     font-size: 2rem;
+    opacity: 0.8;
 }
 
 .bottomSection {
     cursor: default;
-    background: linear-gradient(var(--background-100), var(--background));
+    background: linear-gradient(var(--background-200), var(--background) 95%);
     padding: var(--std-section-padding);
     display: flex;
     flex-direction: column;
@@ -69,6 +70,7 @@
     display: flex;
     gap: 2px;
     align-items: center;
+    gap: var(--std-gap);
 }
 
 .contactName {
