@@ -1,30 +1,38 @@
 const BadRequestError = require("../customErrors/BadRequestError");
 const CustomNotFoundError = require("../customErrors/CustomNotFoundError");
 const UnprocessableContentError = require("../customErrors/UnprocessableContentError");
+const CustomServerError = require("../customErrors/CustomServerError");
 const prisma = require("../models");
 
 async function getComments(req, res) {
-    const postId = +req.params.postId;
+    try {
+        const postId = +req.params.postId;
 
-    const comments = await prisma.comment.findMany({
-        where: {
-            postId: postId,
-        },
-        orderBy: {
-            createdDate: "desc",
-        },
-        select: {
-            id: true,
-            content: true,
-            author: {
-                select: {
-                    email: true,
+        const comments = await prisma.comment.findMany({
+            where: {
+                postId: postId,
+            },
+            orderBy: {
+                createdDate: "desc",
+            },
+            select: {
+                id: true,
+                content: true,
+                author: {
+                    select: {
+                        email: true,
+                    },
                 },
             },
-        },
-    });
+        });
 
-    res.json(comments);
+        res.json(comments);
+    } catch (e) {
+        console.error(e);
+        throw new CustomServerError(
+            "Cannot get the comments because of error in the server.",
+        );
+    }
 }
 
 async function postComments(req, res) {
@@ -43,31 +51,48 @@ async function postComments(req, res) {
         throw new UnprocessableContentError("All required fields not provided");
     }
 
-    const comment = await prisma.comment.create({
-        data: {
-            content,
-            authorId,
-            postId,
-            createdDate: new Date(),
-        },
-    });
+    try {
+        const comment = await prisma.comment.create({
+            data: {
+                content,
+                authorId,
+                postId,
+                createdDate: new Date(),
+            },
+        });
 
-    res.json(comment);
+        res.json(comment);
+    } catch (e) {
+        console.error(e);
+        throw new CustomServerError(
+            "Cannot post the comment because of error in the server.",
+        );
+    }
 }
 
 async function getComment(req, res) {
     const commentId = +req.params.commentId;
-    const comment = await prisma.comment.findUnique({
-        where: {
-            id: commentId,
-        },
-    });
+    try {
+        const comment = await prisma.comment.findUnique({
+            where: {
+                id: commentId,
+            },
+        });
 
-    if (!comment) {
-        throw new CustomNotFoundError("Comment not found");
+        if (!comment) {
+            throw new CustomNotFoundError("Comment not found");
+        }
+
+        res.json(comment);
+    } catch (e) {
+        console.error(e);
+        if (e.statusCode === 404) {
+            throw new CustomNotFoundError(e.message);
+        }
+        throw new CustomServerError(
+            "Cannot get the comment because of the error in the server.",
+        );
     }
-
-    res.json(comment);
 }
 
 async function putComment(req, res, next) {
@@ -92,6 +117,7 @@ async function putComment(req, res, next) {
 
         return res.json(comment);
     } catch (e) {
+        console.error(e);
         throw new CustomNotFoundError("User not found");
     }
 }
@@ -107,7 +133,8 @@ async function deleteComment(req, res, next) {
 
         return res.json(comment);
     } catch (e) {
-        throw new CustomNotFoundError("Comment not found");
+        console.error(e);
+        throw new CustomNotFoundError("Comment could not be deleted!");
     }
 }
 

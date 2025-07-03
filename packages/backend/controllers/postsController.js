@@ -1,6 +1,7 @@
 const BadRequestError = require("../customErrors/BadRequestError");
 const CustomNotFoundError = require("../customErrors/CustomNotFoundError");
 const UnprocessableContentError = require("../customErrors/UnprocessableContentError");
+const CustomServerError = require("../customErrors/CustomServerError");
 const prisma = require("../models");
 
 // returns all posts in descending order
@@ -17,92 +18,99 @@ async function getPosts(req, res) {
         },
     };
 
-    if (!authorId && !searchQuery && !limit) {
-        const posts = await prisma.post.findMany(findManyOptions);
-        return res.json(posts);
-    }
+    try {
+        if (!authorId && !searchQuery && !limit) {
+            const posts = await prisma.post.findMany(findManyOptions);
+            return res.json(posts);
+        }
 
-    if (!authorId && !limit) {
-        if (searchQuery) {
+        if (!authorId && !limit) {
+            if (searchQuery) {
+                findManyOptions.where = {
+                    title: {
+                        contains: searchQuery,
+                    },
+                };
+            }
+
+            const posts = await prisma.post.findMany(findManyOptions);
+
+            return res.json(posts);
+        }
+
+        if (!searchQuery && !limit) {
+            findManyOptions.where = {
+                authorId: authorId,
+            };
+
+            const posts = await prisma.post.findMany(findManyOptions);
+            return res.json(posts);
+        }
+
+        if (!searchQuery && !authorId) {
+            findManyOptions.take = +limit;
+
+            const posts = await prisma.post.findMany(findManyOptions);
+            return res.json(posts);
+        }
+
+        if (!limit) {
             findManyOptions.where = {
                 title: {
                     contains: searchQuery,
                 },
+                authorId: authorId,
             };
+
+            const posts = await prisma.post.findMany(findManyOptions);
+            return res.json(posts);
         }
 
-        const posts = await prisma.post.findMany(findManyOptions);
+        if (!searchQuery) {
+            findManyOptions = {
+                take: +limit,
+                where: {
+                    authorId: authorId,
+                },
+            };
 
-        return res.json(posts);
-    }
+            const posts = await prisma.post.findMany(findManyOptions);
+            return res.json(posts);
+        }
 
-    if (!searchQuery && !limit) {
-        findManyOptions.where = {
-            authorId: authorId,
-        };
+        if (!authorId) {
+            findManyOptions = {
+                take: +limit,
+                where: {
+                    title: {
+                        contains: searchQuery,
+                    },
+                },
+            };
 
-        const posts = await prisma.post.findMany(findManyOptions);
-        return res.json(posts);
-    }
+            const posts = await prisma.post.findMany(findManyOptions);
+            return res.json(posts);
+        }
 
-    if (!searchQuery && !authorId) {
-        findManyOptions.take = +limit;
-
-        const posts = await prisma.post.findMany(findManyOptions);
-        return res.json(posts);
-    }
-
-    if (!limit) {
-        findManyOptions.where = {
-            title: {
-                contains: searchQuery,
-            },
-            authorId: authorId,
-        };
-
-        const posts = await prisma.post.findMany(findManyOptions);
-        return res.json(posts);
-    }
-
-    if (!searchQuery) {
+        // all 3 are available
         findManyOptions = {
             take: +limit,
             where: {
+                title: {
+                    contains: searchQuery,
+                },
                 authorId: authorId,
             },
         };
 
         const posts = await prisma.post.findMany(findManyOptions);
         return res.json(posts);
+    } catch (e) {
+        console.error(e);
+        throw new CustomServerError(
+            "Cannot get the posts because of some error in the server.",
+        );
     }
-
-    if (!authorId) {
-        findManyOptions = {
-            take: +limit,
-            where: {
-                title: {
-                    contains: searchQuery,
-                },
-            },
-        };
-
-        const posts = await prisma.post.findMany(findManyOptions);
-        return res.json(posts);
-    }
-
-    // all 3 are available
-    findManyOptions = {
-        take: +limit,
-        where: {
-            title: {
-                contains: searchQuery,
-            },
-            authorId: authorId,
-        },
-    };
-
-    const posts = await prisma.post.findMany(findManyOptions);
-    return res.json(posts);
 }
 
 async function postPosts(req, res) {
@@ -126,18 +134,25 @@ async function postPosts(req, res) {
         );
     }
 
-    const post = await prisma.post.create({
-        data: {
-            title,
-            content,
-            createdAt,
-            publishedAt,
-            published,
-            authorId,
-        },
-    });
+    try {
+        const post = await prisma.post.create({
+            data: {
+                title,
+                content,
+                createdAt,
+                publishedAt,
+                published,
+                authorId,
+            },
+        });
 
-    res.json(post);
+        res.json(post);
+    } catch (e) {
+        console.error(e);
+        throw new CustomServerError(
+            "Cannot create the post because of some error in the server.",
+        );
+    }
 }
 
 async function getPost(req, res, next) {
@@ -162,18 +177,29 @@ async function getPost(req, res, next) {
         };
     }
 
-    const post = await prisma.post.findUnique({
-        where: {
-            id: postId,
-        },
-        include: inclusionOptions,
-    });
+    try {
+        const post = await prisma.post.findUnique({
+            where: {
+                id: postId,
+            },
+            include: inclusionOptions,
+        });
 
-    if (!post) {
-        throw new CustomNotFoundError("Post not found");
+        if (!post) {
+            throw new CustomNotFoundError("Post not found");
+        }
+
+        res.json(post);
+    } catch (e) {
+        console.error(e);
+        if (e.statusCode === 404) {
+            throw new CustomNotFoundError();
+        }
+
+        throw new CustomServerError(
+            "Cannot get the post because of some error in the server.",
+        );
     }
-
-    res.json(post);
 }
 
 async function putPost(req, res, next) {

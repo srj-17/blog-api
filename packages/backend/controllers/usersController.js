@@ -3,7 +3,7 @@ const prisma = require("../models");
 const jwt = require("jsonwebtoken");
 const CustomNotFoundError = require("../customErrors/CustomNotFoundError");
 const MisformedRequestError = require("../customErrors/UnprocessableContentError");
-const UnauthenticatedError = require("../customErrors/CustomUnauthenticatedError");
+const CustomServerError = require("../customErrors/CustomServerError");
 const SALT = 10;
 
 async function getUsers(req, res) {
@@ -26,26 +26,34 @@ async function postUsers(req, res) {
         );
     }
 
-    const user = await prisma.user.findUnique({
-        where: {
-            email: email,
-        },
-    });
+    try {
+        const user = await prisma.user.findUnique({
+            where: {
+                email: email,
+            },
+        });
 
-    if (user) {
-        return res.json({ msg: "User with that email already exists" });
+        // TODO: test in frontend for this use case
+        if (user) {
+            return res.json({ msg: "User with that email already exists" });
+        }
+
+        const createdUser = await prisma.user.create({
+            data: {
+                firstName,
+                lastName,
+                email,
+                password_hash,
+            },
+        });
+
+        res.json(createdUser);
+    } catch (e) {
+        console.error(e);
+        throw new CustomServerError(
+            "Cannot create the user due to some error in the server.",
+        );
     }
-
-    const createdUser = await prisma.user.create({
-        data: {
-            firstName,
-            lastName,
-            email,
-            password_hash,
-        },
-    });
-
-    res.json(createdUser);
 }
 
 async function getUser(req, res) {
@@ -57,20 +65,27 @@ async function getUser(req, res) {
         return res.json(req.token.user);
     }
 
-    const user = await prisma.user.findUnique({
-        where: {
-            id: userId,
-        },
-        include: {
-            posts: true,
-        },
-    });
+    try {
+        const user = await prisma.user.findUnique({
+            where: {
+                id: userId,
+            },
+            include: {
+                posts: true,
+            },
+        });
 
-    if (!user) {
-        throw new CustomNotFoundError("User not found");
+        if (!user) {
+            throw new CustomNotFoundError("User not found");
+        }
+
+        return res.json(user);
+    } catch (e) {
+        if (e.statusCode === 404) throw new CustomNotFoundError(e.message);
+        throw new CustomServerError(
+            "Cannot find the user due to some error in the server.",
+        );
     }
-
-    return res.json(user);
 }
 
 async function putUser(req, res, next) {
