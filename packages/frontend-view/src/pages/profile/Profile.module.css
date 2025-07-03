@@ -1,0 +1,28 @@
+.profilePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background: var(--background);
+    padding: var(--std-section-padding);
+    padding-top: var(--std-padding);
+}
+
+.firstSection {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: var(--std-section-gap);
+}
+
+.homeButton {
+    align-self: start;
+}
+
+.profileTitle {
+    font-size: var(--display-text-size);
+    font-weight: var(--title-weight);
+    cursor: default;
+}

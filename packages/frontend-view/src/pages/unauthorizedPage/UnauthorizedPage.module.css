@@ -1,0 +1,11 @@
+.unauthorizedPage {
+    composes: errorPage from "../error/ErrorPage.module.css";
+}
+
+.statusCode {
+    composes: statusCode from "../error/ErrorPage.module.css";
+}
+
+.message {
+    composes: message from "../error/ErrorPage.module.css";
+}

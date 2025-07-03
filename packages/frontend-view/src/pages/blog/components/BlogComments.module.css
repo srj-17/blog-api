@@ -1,0 +1,33 @@
+.blogComments {
+    composes: blogContent from "../BlogPage.module.css";
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: var(--std-gap);
+}
+
+.blogCommentsTitle {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.addComment {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: var(--std-gap);
+}
+
+.addCommentInput {
+    align-self: stretch;
+    padding: var(--std-padding);
+}
+
+.addCommentLoggedOut {
+    align-self: center;
+}
+
+.commentAuthor {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}

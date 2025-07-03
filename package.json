@@ -1,16 +1,21 @@
 {
-  "name": "blog-api",
-  "version": "1.0.0",
-  "description": "A blog api with frontends for creating and viewing",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "srj-17",
-  "license": "ISC",
-  "workspaces": [
-    "packages/backend",
-    "packages/frontend-view",
-    "packages/frontend-edit"
-  ]
+    "name": "blog-api",
+    "version": "1.0.0",
+    "description": "A blog api with frontends for creating and viewing",
+    "main": "index.js",
+    "scripts": {
+        "start:client": "npm run -w packages/frontend-view dev",
+        "start:server": "npm run -w packages/backend start"
+    },
+    "author": "srj-17",
+    "license": "ISC",
+    "workspaces": [
+        "packages/backend",
+        "packages/frontend-view",
+        "packages/frontend-edit"
+    ],
+    "dependencies": {
+        "@quixo3/prisma-session-store": "^3.1.13",
+        "react-router-dom": "^7.6.2"
+    }
 }

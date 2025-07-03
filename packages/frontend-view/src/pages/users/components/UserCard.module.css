@@ -1,0 +1,42 @@
+.userCard {
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    padding: var(--std-padding) 15px;
+    background: var(--primary);
+    color: var(--text-inverted);
+    border-radius: 28px;
+    gap: 40px;
+    justify-content: space-around;
+}
+
+.userName {
+    display: flex;
+}
+
+.email {
+    display: flex;
+}
+
+.nameMeta {
+    display: none;
+}
+
+.emailMeta {
+    display: none;
+}
+
+@media (max-width: 447px) {
+    .userCard {
+        flex-direction: column;
+        gap: var(--std-gap);
+    }
+
+    .nameMeta {
+        display: block;
+    }
+
+    .emailMeta {
+        display: block;
+    }
+}

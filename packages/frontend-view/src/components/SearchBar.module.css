@@ -1,0 +1,41 @@
+.searchBar {
+    display: flex;
+    gap: var(--std-gap);
+    position: relative;
+}
+
+.searchInput {
+    flex: 1;
+    appearance: none;
+    padding: 8px 24px;
+    border-radius: 20px;
+    border: 2px solid var(--accent);
+}
+
+.magnifyingGlass {
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+}
+
+/* remove the x button in search, so that we can add one ourselves */
+input[type="search"]::-webkit-search-cancel-button {
+}
+
+.searchResults {
+    position: absolute;
+    bottom: 0;
+    background: var(--primary);
+    transform: translateY(calc(100% + 10px));
+    display: grid;
+    grid-auto-flow: row;
+    gap: 10px;
+    width: 100%;
+
+    border-radius: var(--std-border-radius);
+    padding: var(--std-padding);
+    border: 2px solid var(--accent);
+    z-index: 1;
+}

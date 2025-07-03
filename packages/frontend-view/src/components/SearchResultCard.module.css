@@ -1,0 +1,14 @@
+.searchResult {
+    padding: 2px 20px;
+    text-decoration: none;
+    color: var(--text-inverted);
+}
+
+.resultTitle {
+    font-size: 1rem;
+}
+
+.resultContent {
+    font-size: 0.8rem;
+    opacity: 0.5;
+}

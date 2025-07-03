@@ -1,0 +1,66 @@
+/* reset */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 1rem;
+}
+
+/* defaults */
+:root {
+    --std-padding: 10px;
+    --std-gap: 20px;
+    --std-section-gap: 80px;
+    --std-section-padding: 80px;
+    --std-border-radius: 20px;
+    --std-section-border-radius: 200px;
+
+    --background: #cad2c5;
+    --background-100: hsl(from var(--background) h s 60);
+    --background-200: hsl(from var(--background) h s 50);
+    --primary: #2f3e46;
+    --secondary: #52796f;
+    --accent: #84a98c;
+    --text: #84a98c;
+    --text-inverted: #cad2c5;
+    --valid-color: lightgreen;
+    --invalid-color: crimson;
+
+    /* derived */
+    --link-color-100: var(--accent);
+    --link-color-200: hsl(from var(--accent) h s 20);
+    --link-color-300: hsl(from var(--accent) h s 10);
+
+    --std-button-bg: var(--secondary);
+    --std-button-text: white;
+
+    /* text defaults */
+    --display-text-size: 3rem;
+
+    /* gaps */
+    /* hz = horizontal */
+    --std-hz-card-gap: 40px;
+
+    /* fonts */
+    --display-font-family: "Style Script", cursive;
+    --body-font-family: "Domine", serif;
+    --title-weight: 600;
+    --title-color: var(--primary);
+}
+
+body {
+    --font-family: var(--body-font-family);
+}
+
+a {
+    color: var(--link-color-200);
+}

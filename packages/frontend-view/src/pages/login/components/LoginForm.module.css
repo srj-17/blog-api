@@ -1,0 +1,20 @@
+.loginForm {
+    background: var(--primary);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--std-gap);
+    color: var(--text-inverted);
+
+    border-radius: var(--std-border-radius);
+}
+
+.loginHeader {
+    font-size: 2rem;
+    cursor: default;
+}
+
+.loginButton {
+    font-size: 1rem;
+}
