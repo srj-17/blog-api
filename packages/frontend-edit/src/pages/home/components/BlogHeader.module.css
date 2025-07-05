@@ -1,0 +1,16 @@
+.blogHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--std-padding);
+    width: 100%;
+}
+
+.headerTitle {
+    font-size: 10rem;
+    font-family: var(--display-font-family);
+}
+
+.navBar {
+    align-self: end;
+}

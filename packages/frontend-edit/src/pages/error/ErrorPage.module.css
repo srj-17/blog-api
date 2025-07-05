@@ -1,0 +1,16 @@
+.errorPage {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding: var(--std-section-padding);
+    cursor: default;
+}
+
+.statusCode {
+    font-size: 2rem;
+}
+
+.message {
+    opacity: 0.6;
+}

@@ -1,0 +1,35 @@
+.button,
+.linkButton {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 4px 20px;
+    border: none;
+    border-radius: 20px;
+    transition: transform 200ms;
+    text-decoration: none;
+    background: var(--std-button-bg);
+    color: var(--std-button-text);
+
+    cursor: default;
+}
+
+.button:hover,
+.linkButton:hover {
+    transform: scale(1.02);
+}
+
+.link {
+    background: none;
+    text-decoration: underline;
+    border: none;
+    outline: none;
+    font-size: inherit;
+    font-family: inherit;
+    color: var(--link-color-200);
+    cursor: pointer;
+}
