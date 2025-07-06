@@ -26,6 +26,22 @@ export default function BlogCard({ blog, setBlogChanged }) {
         }
     }
 
+    async function handleDeleteBlog() {
+        const updateUrl = `http://localhost:3000/posts/${blog.id}`;
+        const response = await fetch(updateUrl, {
+            method: "DELETE",
+            mode: "cors",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (response.ok) {
+            setBlogChanged(true);
+        }
+    }
+
     return (
         <div className={styles.blogCard}>
             <div className={styles.blogInfo}>
@@ -40,7 +56,7 @@ export default function BlogCard({ blog, setBlogChanged }) {
                 <Button variant="link" to={`/edit/${blog.id}`}>
                     Edit
                 </Button>
-                <Button>Delete</Button>
+                <Button onClick={handleDeleteBlog}>Delete</Button>
                 <Button onClick={handlePublishBlog}>
                     {blog.published ? "Unpublish" : "Publish"}
                 </Button>
