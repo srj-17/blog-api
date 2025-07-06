@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: var(--std-padding);
+    padding: var(--std-section-padding);
     width: 100%;
 }
 
@@ -13,4 +13,11 @@
 
 .navBar {
     align-self: end;
+    display: flex;
+    align-items: center;
+    gap: var(--std-gap);
+}
+
+.logOutButton {
+    text-wrap: nowrap;
 }

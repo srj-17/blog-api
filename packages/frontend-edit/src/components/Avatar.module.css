@@ -1,0 +1,9 @@
+.avatar {
+    background: var(--primary);
+    text-decoration: none;
+    color: var(--text);
+    padding: 8px;
+    border-radius: 50%;
+    line-height: 1;
+    cursor: default;
+}
