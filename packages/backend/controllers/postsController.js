@@ -224,11 +224,13 @@ async function putPost(req, res, next) {
                 title,
                 content,
                 published,
+                publishedAt: published ? new Date() : null,
             },
         });
 
         res.json(post);
     } catch (e) {
+        console.error(e);
         throw new CustomNotFoundError("Post not found");
     }
 }

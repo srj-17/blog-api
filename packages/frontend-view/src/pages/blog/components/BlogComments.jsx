@@ -46,6 +46,8 @@ export default function BlogComments({
             },
             body: JSON.stringify(requestBody),
         });
+
+        // TODO: check for errors here
         setAddCommentsClicked(true);
     }
 

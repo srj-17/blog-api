@@ -13,8 +13,8 @@ model Post {
     title       String
     content     String
     createdAt   DateTime
-    publishedAt DateTime
-    published   Boolean
+    publishedAt DateTime?
+    published   Boolean   @default(false)
     author      User      @relation(fields: [authorId], references: [id])
     authorId    Int
     comments    Comment[]

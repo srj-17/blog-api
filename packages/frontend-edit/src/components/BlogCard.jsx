@@ -3,7 +3,29 @@ import Button from "#components/Button";
 import capitalize from "#utils/capitalize";
 import dateStringToReadableDate from "#utils/dateStringToReadableDate";
 
-export default function BlogCard({ blog }) {
+export default function BlogCard({ blog, setBlogChanged }) {
+    async function handlePublishBlog() {
+        const newPublishedState = blog.published ? false : true;
+        const newBlogInformation = {
+            ...blog,
+            published: newPublishedState,
+        };
+        const updateUrl = `http://localhost:3000/posts/${blog.id}`;
+        const response = await fetch(updateUrl, {
+            method: "PUT",
+            mode: "cors",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newBlogInformation),
+        });
+
+        if (response.ok) {
+            setBlogChanged(true);
+        }
+    }
+
     return (
         <div className={styles.blogCard}>
             <div className={styles.blogInfo}>
@@ -19,11 +41,9 @@ export default function BlogCard({ blog }) {
                     Edit
                 </Button>
                 <Button>Delete</Button>
-                {blog.published ? (
-                    <Button>UnPublish</Button>
-                ) : (
-                    <Button>Publish</Button>
-                )}
+                <Button onClick={handlePublishBlog}>
+                    {blog.published ? "Unpublish" : "Publish"}
+                </Button>
             </div>
         </div>
     );
