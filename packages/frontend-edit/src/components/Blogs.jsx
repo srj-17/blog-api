@@ -9,6 +9,7 @@ export default function Blogs() {
     const blogsUrl = "http://localhost:3000/posts";
     const { loggedIn, data: blogs, error, loading } = useFetch(blogsUrl);
     const [blogChanged, setBlogChanged] = useState(false);
+    const [blogNotification, setBlogNotification] = useState(null);
     const [updatedBlogs, setUpdatedBlogs] = useState(null);
     const [fetchError, setFetchError] = useState(null);
 
@@ -28,6 +29,12 @@ export default function Blogs() {
         }
 
         setBlogChanged(false);
+
+        const id = setTimeout(() => {
+            setBlogNotification(null);
+        }, 1000);
+
+        return () => clearTimeout(id);
     }, [blogChanged]);
 
     const blogsToDisplay = updatedBlogs ?? blogs;
@@ -39,6 +46,11 @@ export default function Blogs() {
                 <ErrorPage />
             ) : (
                 <div className={styles.blogs}>
+                    {blogNotification ? (
+                        <div className={styles.blogNotification}>
+                            {blogNotification}
+                        </div>
+                    ) : null}
                     <div className={styles.blogsHeader}>Your Blogs</div>
                     {blogsToDisplay.map((blog) => {
                         return (
@@ -46,6 +58,7 @@ export default function Blogs() {
                                 key={blog.id}
                                 blog={blog}
                                 setBlogChanged={setBlogChanged}
+                                setBlogNotification={setBlogNotification}
                             />
                         );
                     })}

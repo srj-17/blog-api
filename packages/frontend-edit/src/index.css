@@ -32,6 +32,7 @@ h6 {
     --accent: #84a98c;
     --text: #84a98c;
     --text-inverted: #cad2c5;
+    --text-black: #222;
     --valid-color: lightgreen;
     --invalid-color: crimson;
 

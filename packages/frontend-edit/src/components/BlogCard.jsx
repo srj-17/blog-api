@@ -3,7 +3,11 @@ import Button from "#components/Button";
 import capitalize from "#utils/capitalize";
 import dateStringToReadableDate from "#utils/dateStringToReadableDate";
 
-export default function BlogCard({ blog, setBlogChanged }) {
+export default function BlogCard({
+    blog,
+    setBlogChanged,
+    setBlogNotification,
+}) {
     async function handlePublishBlog() {
         const newPublishedState = blog.published ? false : true;
         const newBlogInformation = {
@@ -23,6 +27,9 @@ export default function BlogCard({ blog, setBlogChanged }) {
 
         if (response.ok) {
             setBlogChanged(true);
+            setBlogNotification(
+                `Blog "${blog.title}" ${newPublishedState ? "published" : "saved back to draft."}`,
+            );
         }
     }
 
@@ -39,6 +46,7 @@ export default function BlogCard({ blog, setBlogChanged }) {
 
         if (response.ok) {
             setBlogChanged(true);
+            setBlogNotification(`Blog "${blog.title}" deleted.`);
         }
     }
 
