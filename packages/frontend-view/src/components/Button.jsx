@@ -14,7 +14,7 @@ export default function Button({
         return (
             <Link
                 to={to}
-                className={`${additionalStyles} ${styleAsLink ? styles.link : styles.linkButton}`}
+                className={`${additionalStyles || ""} ${styleAsLink ? styles.link : styles.linkButton}`}
             >
                 {children}
             </Link>
@@ -25,7 +25,7 @@ export default function Button({
         <button
             type={type}
             onClick={onClick}
-            className={`${styleAsLink ? styles.link : styles.button} ${additionalStyles}`}
+            className={`${styleAsLink ? styles.link : styles.button} ${additionalStyles || ""}`}
         >
             {children}
         </button>
