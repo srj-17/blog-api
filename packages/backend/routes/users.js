@@ -17,5 +17,6 @@ users.post("/", postUsers);
 users.get("/{:userId}", verifyToken, getUser);
 users.put("/:userId", putUser);
 users.delete("/:userId", deleteUser);
+users.use("/:userId/posts", postRouter);
 
 module.exports = users;
