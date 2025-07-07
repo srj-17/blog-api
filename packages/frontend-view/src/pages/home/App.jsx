@@ -7,7 +7,7 @@ import Loading from "#components/Loading";
 import ErrorPage from "../error/ErrorPage";
 
 function App() {
-    const postsUrl = "http://localhost:3000/posts";
+    const postsUrl = "http://localhost:3000/posts/all";
     const userUrl = "http://localhost:3000/users";
     const {
         loggedIn,

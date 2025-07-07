@@ -17,7 +17,12 @@ export default function Blogs() {
     useEffect(() => {
         if (blogChanged) {
             async function fetchBlogs() {
-                const response = await fetch(blogsUrl, { mode: "cors" });
+                const response = await fetch(blogsUrl, {
+                    mode: "cors",
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                });
                 const responseJson = await response.json();
                 if (response.status >= 400) {
                     setFetchError(true);

@@ -12,7 +12,7 @@ export default function SearchBar() {
 
     useEffect(() => {
         async function fetchPosts() {
-            const postsUrl = `http://localhost:3000/posts?${new URLSearchParams(
+            const postsUrl = `http://localhost:3000/posts/all?${new URLSearchParams(
                 {
                     searchQuery: searchText,
                     limit: 7,

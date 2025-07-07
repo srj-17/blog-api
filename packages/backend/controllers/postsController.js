@@ -1,14 +1,10 @@
-const BadRequestError = require("../customErrors/BadRequestError");
 const CustomNotFoundError = require("../customErrors/CustomNotFoundError");
 const UnprocessableContentError = require("../customErrors/UnprocessableContentError");
 const CustomServerError = require("../customErrors/CustomServerError");
+const CustomForbiddenError = require("../customErrors/CustomForbiddenError");
 const prisma = require("../models");
 
-// returns all posts in descending order
-// when author is not provided, sends all
-// posts of author if author provided
-// limit = number of posts the frontend is asking for
-async function getPosts(req, res) {
+async function getAllPosts(req, res) {
     const authorId = +req.params.userId;
     const { searchQuery, limit } = req.query;
 
@@ -16,27 +12,75 @@ async function getPosts(req, res) {
         orderBy: {
             publishedAt: "desc",
         },
+        where: {
+            published: true,
+        },
     };
 
+    if (searchQuery) {
+        findManyOptions.where = {
+            title: {
+                contains: searchQuery,
+            },
+        };
+    }
+
+    if (limit) {
+        findManyOptions.take = +limit;
+    }
+
+    if (authorId) {
+        findManyOptions.where = {
+            authorId: authorId,
+        };
+    }
+
     try {
-        if (searchQuery) {
-            findManyOptions.where = {
-                title: {
-                    contains: searchQuery,
-                },
-            };
-        }
+        const posts = await prisma.post.findMany(findManyOptions);
+        return res.json(posts);
+    } catch (e) {
+        console.error(e);
+        throw new CustomServerError(
+            "Cannot get the posts because of some error in the server.",
+        );
+    }
+}
 
-        if (limit) {
-            findManyOptions.take = +limit;
-        }
+// returns all posts in descending order
+// when author is not provided, sends all
+// posts of author if author provided
+// limit = number of posts the frontend is asking for
+async function getPosts(req, res) {
+    const { searchQuery, limit } = req.query;
+    const token = req.token;
 
-        if (authorId) {
-            findManyOptions.where = {
-                authorId: authorId,
-            };
-        }
+    let findManyOptions = {
+        orderBy: {
+            publishedAt: "desc",
+        },
+    };
 
+    if (token) {
+        findManyOptions.where = {
+            authorId: token.user.id,
+        };
+    } else {
+        throw new CustomForbiddenError();
+    }
+
+    if (searchQuery) {
+        findManyOptions.where = {
+            title: {
+                contains: searchQuery,
+            },
+        };
+    }
+
+    if (limit) {
+        findManyOptions.take = +limit;
+    }
+
+    try {
         const posts = await prisma.post.findMany(findManyOptions);
         return res.json(posts);
     } catch (e) {
@@ -186,4 +230,5 @@ module.exports = {
     getPost,
     putPost,
     deletePost,
+    getAllPosts,
 };

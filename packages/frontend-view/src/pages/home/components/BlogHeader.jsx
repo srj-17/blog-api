@@ -48,18 +48,22 @@ export default function BlogHeader({
                 </div>
                 <div className={styles.topBlogContainer}>
                     <div className={styles.topBlog}>
-                        <BlogCard
-                            id={topPost.id}
-                            className={styles.blogCard}
-                            title={topPost.title}
-                            content={topPost.content}
-                            publishedAt={dateStringToReadableDate(
-                                topPost.publishedAt,
-                            )}
-                        />
-                        <div className={styles.topBlogTitle}>
-                            Read What's Happening
-                        </div>
+                        {topPost ? (
+                            <>
+                                <BlogCard
+                                    id={topPost.id}
+                                    className={styles.blogCard}
+                                    title={topPost.title}
+                                    content={topPost.content}
+                                    publishedAt={dateStringToReadableDate(
+                                        topPost.publishedAt,
+                                    )}
+                                />
+                                <div className={styles.topBlogTitle}>
+                                    Read What's Happening
+                                </div>
+                            </>
+                        ) : null}{" "}
                     </div>
                 </div>
             </div>
