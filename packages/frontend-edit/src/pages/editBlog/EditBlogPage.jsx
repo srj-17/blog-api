@@ -116,7 +116,9 @@ export default function EditBlogPage() {
                         >
                             Save As Draft
                         </Button>
-                        <Button>Discard Blog</Button>
+                        <Button variant="link" to="/">
+                            Discard Blog
+                        </Button>
                     </div>
                 </div>
             )}
