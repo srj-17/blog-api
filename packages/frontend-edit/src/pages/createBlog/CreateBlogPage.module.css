@@ -6,6 +6,7 @@
 
 .createBlogHeader {
     padding: var(--std-padding);
+    padding-bottom: none;
     font-size: var(--display-text-size);
     align-self: center;
     cursor: default;
@@ -39,4 +40,5 @@
     align-self: end;
     padding: 0 var(--std-section-padding) var(--std-padding)
         var(--std-section-padding);
+    gap: var(--std-gap);
 }

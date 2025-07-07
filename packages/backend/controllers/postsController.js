@@ -117,8 +117,7 @@ async function postPosts(req, res) {
     const title = req.body.title;
     const content = req.body.content;
 
-    // req.body.published is "1" or "0"
-    const published = Boolean(+req.body.published) || false;
+    const published = Boolean(req.body.published);
 
     const authorId = req.token.user.id;
     const createdAt = new Date();

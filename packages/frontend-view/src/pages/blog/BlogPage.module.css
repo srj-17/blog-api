@@ -27,4 +27,11 @@
 .blogContent {
     max-width: 70ch;
     font-size: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--std-gap);
+}
+
+.blogContent > h1 {
+    font-size: 2rem;
 }

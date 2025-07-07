@@ -21,8 +21,17 @@ export default function CreateBlogPage() {
         setBlogBody(quillRef.current.getContents());
     }, []);
 
-    async function handlePublishBlog() {
+    async function handlePublishBlog(publishStatus = false) {
         const publishUrl = `http://localhost:3000/posts`;
+        const bodyContent = {
+            title: blogTitle,
+            content: JSON.stringify(blogBody),
+        };
+
+        if (publishStatus === true) {
+            bodyContent.published = true;
+        }
+
         const response = await fetch(publishUrl, {
             mode: "cors",
             method: "POST",
@@ -30,10 +39,7 @@ export default function CreateBlogPage() {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                title: blogTitle,
-                content: JSON.stringify(blogBody),
-            }),
+            body: JSON.stringify(bodyContent),
         });
 
         // TODO: handle error cases
@@ -85,9 +91,21 @@ export default function CreateBlogPage() {
                         />
                     </div>
                     <div className={styles.createBlogActions}>
-                        <Button onClick={handlePublishBlog}>
+                        <Button
+                            onClick={() => {
+                                handlePublishBlog(true);
+                            }}
+                        >
                             Publish Blog
                         </Button>
+                        <Button
+                            onClick={() => {
+                                handlePublishBlog(false);
+                            }}
+                        >
+                            Save As Draft
+                        </Button>
+                        <Button>Discard Blog</Button>
                     </div>
                 </div>
             )}

@@ -5,6 +5,8 @@ import capitalize from "#utils/capitalize";
 import styles from "./BlogPage.module.css";
 import BlogComments from "./components/BlogComments";
 import Loading from "#components/Loading";
+import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
+import DOMPurify from "dompurify";
 
 export default function BlogPage(props) {
     const { blogId } = useParams();
@@ -26,6 +28,11 @@ export default function BlogPage(props) {
         `${blogData.author.firstName} ${blogData.author.lastName}`,
     );
 
+    const delta = JSON.parse(blogData.content);
+    const deltaOps = delta.ops;
+    const converter = new QuillDeltaToHtmlConverter(deltaOps);
+    const htmlBlogContent = converter.convert();
+
     return (
         <div className={styles.blogPage}>
             <HomeButton />
@@ -35,7 +42,15 @@ export default function BlogPage(props) {
                     {capitalize(blogData.title)}
                 </div>
             </div>
-            <div className={styles.blogContent}>{blogData.content}</div>
+            {/* not so dangerous because user doesn't provide this input,
+            we get that by parsing the deltaOps created by frontend-edit, 
+            but just to be safe, we're using DOMPurify */}
+            <div
+                className={styles.blogContent}
+                dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(htmlBlogContent),
+                }}
+            />
             <BlogComments
                 postId={blogData.id}
                 isLoggedIn={isLoggedIn}
