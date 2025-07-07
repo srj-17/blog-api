@@ -14,7 +14,7 @@ const comments = Router({ mergeParams: true });
 comments.get("/", getComments);
 comments.post("/", verifyToken, postComments);
 comments.get("/:commentId", getComment);
-comments.put("/:commentId", putComment);
-comments.delete("/:commentId", deleteComment);
+comments.put("/:commentId", verifyToken, putComment);
+comments.delete("/:commentId", verifyToken, deleteComment);
 
 module.exports = comments;
