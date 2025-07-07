@@ -2,13 +2,21 @@ import styles from "./BlogCard.module.css";
 import Button from "#components/Button";
 import capitalize from "#utils/capitalize";
 import dateStringToReadableDate from "#utils/dateStringToReadableDate";
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 export default function BlogCard({
     blog,
     setBlogChanged,
     setBlogNotification,
 }) {
-    async function handlePublishBlog() {
+    const [viewBlogTrigger, setViewBlogTrigger] = useState(false);
+    async function handleViewBlog() {
+        setViewBlogTrigger(true);
+    }
+
+    async function handlePublishBlog(e) {
+        e.stopPropagation();
         const newPublishedState = blog.published ? false : true;
         const newBlogInformation = {
             ...blog,
@@ -33,7 +41,8 @@ export default function BlogCard({
         }
     }
 
-    async function handleDeleteBlog() {
+    async function handleDeleteBlog(e) {
+        e.stopPropagation();
         const updateUrl = `http://localhost:3000/posts/${blog.id}`;
         const response = await fetch(updateUrl, {
             method: "DELETE",
@@ -51,24 +60,32 @@ export default function BlogCard({
     }
 
     return (
-        <div className={styles.blogCard}>
-            <div className={styles.blogInfo}>
-                <div className={styles.blogDate}>
-                    {blog.published
-                        ? `Published At: ${dateStringToReadableDate(blog.publishedAt)}`
-                        : `Created At: ${dateStringToReadableDate(blog.createdAt)}`}
+        <>
+            {viewBlogTrigger ? (
+                <Navigate to={`/blogs/${blog.id}`} />
+            ) : (
+                <div className={styles.blogCard} onClick={handleViewBlog}>
+                    <div className={styles.blogInfo}>
+                        <div className={styles.blogDate}>
+                            {blog.published
+                                ? `Published At: ${dateStringToReadableDate(blog.publishedAt)}`
+                                : `Created At: ${dateStringToReadableDate(blog.createdAt)}`}
+                        </div>
+                        <div className={styles.blogTitle}>
+                            {capitalize(blog.title)}
+                        </div>
+                    </div>
+                    <div className={styles.blogActions}>
+                        <Button variant="link" to={`/edit/${blog.id}`}>
+                            Edit
+                        </Button>
+                        <Button onClick={handleDeleteBlog}>Delete</Button>
+                        <Button onClick={handlePublishBlog}>
+                            {blog.published ? "Unpublish" : "Publish"}
+                        </Button>
+                    </div>
                 </div>
-                <div className={styles.blogTitle}>{capitalize(blog.title)}</div>
-            </div>
-            <div className={styles.blogActions}>
-                <Button variant="link" to={`/edit/${blog.id}`}>
-                    Edit
-                </Button>
-                <Button onClick={handleDeleteBlog}>Delete</Button>
-                <Button onClick={handlePublishBlog}>
-                    {blog.published ? "Unpublish" : "Publish"}
-                </Button>
-            </div>
-        </div>
+            )}
+        </>
     );
 }

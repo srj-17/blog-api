@@ -18,6 +18,7 @@ async function getComments(req, res) {
             select: {
                 id: true,
                 content: true,
+                postId: true,
                 author: {
                     select: {
                         email: true,

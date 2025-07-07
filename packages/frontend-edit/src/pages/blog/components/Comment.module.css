@@ -1,0 +1,15 @@
+.comment {
+    display: flex;
+    flex-direction: column;
+}
+
+.commentAuthor {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.commentActionButtons {
+    align-self: end;
+    display: flex;
+    gap: var(--std-gap);
+}
