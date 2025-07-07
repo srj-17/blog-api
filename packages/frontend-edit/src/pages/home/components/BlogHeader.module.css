@@ -9,6 +9,7 @@
 .headerTitle {
     font-size: 10rem;
     font-family: var(--display-font-family);
+    cursor: default;
 }
 
 .navBar {

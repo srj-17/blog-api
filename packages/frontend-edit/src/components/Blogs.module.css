@@ -9,6 +9,7 @@
 
 .blogsHeader {
     font-size: 2rem;
+    cursor: default;
 }
 
 .blogNotification {

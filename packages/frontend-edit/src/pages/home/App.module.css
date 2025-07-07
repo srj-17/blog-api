@@ -4,4 +4,5 @@
     align-items: center;
     text-align: center;
     gap: var(--std-section-gap);
+    background: var(--background);
 }
