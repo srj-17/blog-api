@@ -1,6 +1,7 @@
 import styles from "./BlogHeader.module.css";
 import Button from "#components/Button";
 import Avatar from "#components/Avatar";
+import { Link } from "react-router-dom";
 
 export default function BlogHeader({
     userLoading,
@@ -16,7 +17,7 @@ export default function BlogHeader({
     return (
         <header className={styles.blogHeader}>
             <nav className={styles.navBar}>
-                <Button>Add New Blog</Button>
+                <Link to="/create">Create Blog</Link>
                 {/* no need to ask for login because only logged in users should be able to view this */}
                 <Button
                     styleAsLink={true}

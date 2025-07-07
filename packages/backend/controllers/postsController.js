@@ -120,13 +120,9 @@ async function postPosts(req, res) {
     // req.body.published is "1" or "0"
     const published = Boolean(+req.body.published) || false;
 
-    const authorId = +req.params.userId;
+    const authorId = req.token.user.id;
     const createdAt = new Date();
     const publishedAt = new Date();
-
-    if (!authorId) {
-        throw new BadRequestError();
-    }
 
     if (!(title && content)) {
         throw new UnprocessableContentError(

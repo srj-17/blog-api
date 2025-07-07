@@ -1,0 +1,42 @@
+.createBlogPage {
+    display: flex;
+    flex-direction: column;
+    gap: var(--std-section-gap);
+}
+
+.createBlogHeader {
+    padding: var(--std-padding);
+    font-size: var(--display-text-size);
+    align-self: center;
+    cursor: default;
+    font-family: var(--display-font-family);
+}
+
+.blogEditorContainer {
+    padding: var(--std-section-padding);
+    display: flex;
+    flex-direction: column;
+    gap: var(--std-gap);
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.titleLabel {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.titleInput {
+    padding: var(--std-padding);
+    font: inherit;
+}
+
+.createBlogActions {
+    display: flex;
+    align-self: end;
+    padding: 0 var(--std-section-padding) var(--std-padding)
+        var(--std-section-padding);
+}

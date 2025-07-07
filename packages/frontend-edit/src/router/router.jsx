@@ -4,6 +4,7 @@ import EditBlogPage from "../pages/editBlog/EditBlogPage";
 import ErrorPage from "../pages/error/ErrorPage";
 import Login from "../pages/login/Login";
 import Signup from "../pages/signup/Signup.jsx";
+import CreateBlogPage from "../pages/createBlog/CreateBlogPage";
 
 const router = createBrowserRouter([
     {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
     { path: "edit/:blogId", element: <EditBlogPage /> },
     { path: "login", element: <Login /> },
     { path: "signup", element: <Signup /> },
+    { path: "create", element: <CreateBlogPage /> },
 ]);
 
 export default router;

@@ -10,6 +10,8 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "html-to-text": "^9.0.5",
+        "quill-delta-to-html": "^0.12.1",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
         "react-ellipsis-component": "^1.1.11"

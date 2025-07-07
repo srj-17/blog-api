@@ -4,6 +4,7 @@ import Loading from "#components/Loading";
 import ErrorPage from "../pages/error/ErrorPage";
 import BlogCard from "#components/BlogCard";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Blogs() {
     const blogsUrl = "http://localhost:3000/posts";
@@ -52,16 +53,23 @@ export default function Blogs() {
                         </div>
                     ) : null}
                     <div className={styles.blogsHeader}>Your Blogs</div>
-                    {blogsToDisplay.map((blog) => {
-                        return (
-                            <BlogCard
-                                key={blog.id}
-                                blog={blog}
-                                setBlogChanged={setBlogChanged}
-                                setBlogNotification={setBlogNotification}
-                            />
-                        );
-                    })}
+                    {blogsToDisplay.length >= 1 ? (
+                        blogsToDisplay.map((blog) => {
+                            return (
+                                <BlogCard
+                                    key={blog.id}
+                                    blog={blog}
+                                    setBlogChanged={setBlogChanged}
+                                    setBlogNotification={setBlogNotification}
+                                />
+                            );
+                        })
+                    ) : (
+                        <div>
+                            No Blogs found.{" "}
+                            <Link to="/create">Create Blog</Link>.
+                        </div>
+                    )}
                 </div>
             )}
         </>
