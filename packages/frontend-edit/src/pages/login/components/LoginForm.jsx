@@ -44,7 +44,7 @@ export default function LoginForm() {
                         // log in successful if server doesn't throw
                         // error
                         setIsLoggedIn(true);
-                        localStorage.setItem("token", jsonData.token);
+                        localStorage.setItem("editToken", jsonData.token);
                     }
                 } catch (e) {
                     setFetchError({ msg: "Error during fetch" });

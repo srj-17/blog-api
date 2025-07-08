@@ -9,7 +9,7 @@ export function useFetch(url) {
     useEffect(() => {
         async function getData() {
             try {
-                const jwtToken = localStorage.getItem("token");
+                const jwtToken = localStorage.getItem("editToken");
 
                 if (!jwtToken) {
                     setLoggedIn(false);
@@ -27,7 +27,7 @@ export function useFetch(url) {
                 if (response.status >= 400) {
                     // assume forbidden is not an error
                     if (response.status === 403) {
-                        localStorage.removeItem("token");
+                        localStorage.removeItem("editToken");
                         setLoggedIn(false);
                     } else {
                         setError(true);

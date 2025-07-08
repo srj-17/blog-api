@@ -15,7 +15,7 @@ export default function BlogHeader({
     setLoggedIn,
 }) {
     function logOutHandler(e) {
-        localStorage.removeItem("token");
+        localStorage.removeItem("viewToken");
         setLoggedIn(false);
     }
 

@@ -43,3 +43,8 @@
         var(--std-section-padding);
     gap: var(--std-gap);
 }
+
+.homeButtonContainer {
+    align-self: start;
+    padding: 0 var(--std-section-padding);
+}

@@ -11,6 +11,8 @@ export default function BlogCard({
     setBlogNotification,
 }) {
     const [viewBlogTrigger, setViewBlogTrigger] = useState(false);
+    const [editBlogTrigger, setEditBlogTrigger] = useState(false);
+
     async function handleViewBlog() {
         setViewBlogTrigger(true);
     }
@@ -27,7 +29,7 @@ export default function BlogCard({
             method: "PUT",
             mode: "cors",
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${localStorage.getItem("editToken")}`,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(newBlogInformation),
@@ -48,7 +50,7 @@ export default function BlogCard({
             method: "DELETE",
             mode: "cors",
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${localStorage.getItem("editToken")}`,
                 "Content-Type": "application/json",
             },
         });
@@ -59,9 +61,16 @@ export default function BlogCard({
         }
     }
 
+    function handleBlogEdit(e) {
+        e.stopPropagation();
+        setEditBlogTrigger(true);
+    }
+
     return (
         <>
-            {viewBlogTrigger ? (
+            {editBlogTrigger ? (
+                <Navigate to={`/edit/${blog.id}`} />
+            ) : viewBlogTrigger ? (
                 <Navigate to={`/blogs/${blog.id}`} />
             ) : (
                 <div className={styles.blogCard} onClick={handleViewBlog}>
@@ -76,9 +85,7 @@ export default function BlogCard({
                         </div>
                     </div>
                     <div className={styles.blogActions}>
-                        <Button variant="link" to={`/edit/${blog.id}`}>
-                            Edit
-                        </Button>
+                        <Button onClick={handleBlogEdit}>Edit</Button>
                         <Button onClick={handleDeleteBlog}>Delete</Button>
                         <Button onClick={handlePublishBlog}>
                             {blog.published ? "Unpublish" : "Publish"}

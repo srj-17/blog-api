@@ -12,7 +12,7 @@ export default function Comment({ comment, setCommentsChanged }) {
         const response = await fetch(deleteUrl, {
             method: "DELETE",
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${localStorage.getItem("editToken")}`,
             },
             mode: "cors",
         });
@@ -35,7 +35,7 @@ export default function Comment({ comment, setCommentsChanged }) {
             method: "PUT",
             mode: "cors",
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${localStorage.getItem("editToken")}`,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({ content: commentContent }),

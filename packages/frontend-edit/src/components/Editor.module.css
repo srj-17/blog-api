@@ -1,0 +1,5 @@
+.editor {
+    border: 2px solid var(--accent);
+    border-radius: var(--std-border-radius);
+    padding: var(--std-padding);
+}

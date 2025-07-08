@@ -46,7 +46,7 @@ export default function EditBlogPage() {
             mode: "cors",
             method: "PUT",
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${localStorage.getItem("editToken")}`,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(bodyContent),
@@ -72,7 +72,9 @@ export default function EditBlogPage() {
                 <Navigate to="/" />
             ) : (
                 <div className={styles.editBlogPage}>
-                    <HomeButton />
+                    <div className={styles.homeButtonContainer}>
+                        <HomeButton />
+                    </div>
                     <div className={styles.editBlogHeader}>Edit Blog</div>
                     <div className={styles.blogEditorContainer}>
                         <div className={styles.titleContainer}>

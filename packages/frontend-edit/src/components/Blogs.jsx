@@ -20,7 +20,7 @@ export default function Blogs() {
                 const response = await fetch(blogsUrl, {
                     mode: "cors",
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        Authorization: `Bearer ${localStorage.getItem("editToken")}`,
                     },
                 });
                 const responseJson = await response.json();

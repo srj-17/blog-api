@@ -1,5 +1,6 @@
 import React, { forwardRef, useEffect, useLayoutEffect, useRef } from "react";
 import Quill from "quill";
+import styles from "./Editor.module.css";
 
 // Editor is an uncontrolled React component
 export default function Editor({
@@ -39,5 +40,5 @@ export default function Editor({
         };
     }, [ref]);
 
-    return <div ref={containerRef}></div>;
+    return <div className={styles.editor} ref={containerRef}></div>;
 }

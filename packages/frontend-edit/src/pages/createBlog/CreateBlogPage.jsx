@@ -36,7 +36,7 @@ export default function CreateBlogPage() {
             mode: "cors",
             method: "POST",
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${localStorage.getItem("editToken")}`,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(bodyContent),
@@ -56,7 +56,9 @@ export default function CreateBlogPage() {
                 <Navigate to="/" />
             ) : (
                 <div className={styles.createBlogPage}>
-                    <HomeButton />
+                    <div className={styles.homeButtonContainer}>
+                        <HomeButton />
+                    </div>
                     <div className={styles.createBlogHeader}>
                         Create New Blog
                     </div>

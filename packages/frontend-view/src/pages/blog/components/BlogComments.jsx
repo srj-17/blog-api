@@ -41,7 +41,7 @@ export default function BlogComments({
             method: "POST",
             mode: "cors",
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${localStorage.getItem("viewToken")}`,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(requestBody),
