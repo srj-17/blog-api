@@ -14,6 +14,7 @@ export default function BlogComments({
     const [currentComments, setCurrentcomments] = useState(null);
     const [commentsChanged, setCommentsChanged] = useState(false);
     const [commentInputValue, setCommentInputValue] = useState("");
+    const [commentNotification, setCommentNotification] = useState(null);
 
     useEffect(() => {
         if (commentsChanged) {
@@ -31,7 +32,13 @@ export default function BlogComments({
             setCommentsChanged(false);
             setCommentInputValue("");
         }
-    }, [commentsChanged]);
+
+        const NOTIFICATION_PERIOD = 1000;
+        const id = setTimeout(() => {
+            setCommentNotification(null);
+        }, NOTIFICATION_PERIOD);
+        return () => clearTimeout(id);
+    }, [commentsChanged, postId]);
 
     async function handleAddComment(e) {
         e.preventDefault();
@@ -47,7 +54,14 @@ export default function BlogComments({
             body: JSON.stringify(requestBody),
         });
 
-        // TODO: check for errors here
+        if (response.ok) {
+            setCommentNotification("Comment Added!");
+        }
+
+        if (response.status >= 400) {
+            setCommentNotification("Comment could not be added.");
+        }
+
         setCommentsChanged(true);
     }
 
@@ -55,11 +69,17 @@ export default function BlogComments({
 
     return (
         <div className={styles.blogComments}>
+            {commentNotification ? (
+                <div className={styles.commentNotification}>
+                    {commentNotification}
+                </div>
+            ) : null}
             <div className={styles.blogCommentsTitle}>Comments</div>
 
             {isLoggedIn ? (
                 <form className={styles.addComment} action="#">
                     <input
+                        autoComplete="off"
                         type="text"
                         id="addCommentInput"
                         name="comment"
@@ -84,6 +104,7 @@ export default function BlogComments({
                         <Comment
                             comment={comment}
                             setCommentsChanged={setCommentsChanged}
+                            setCommentNotification={setCommentNotification}
                         />
                         {index === comments.length - 1 ? null : <Separator />}
                     </Fragment>

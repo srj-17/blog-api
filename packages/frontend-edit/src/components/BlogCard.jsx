@@ -86,9 +86,14 @@ export default function BlogCard({
                     </div>
                     <div className={styles.blogActions}>
                         <Button onClick={handleBlogEdit}>Edit</Button>
-                        <Button onClick={handleDeleteBlog}>Delete</Button>
                         <Button onClick={handlePublishBlog}>
                             {blog.published ? "Unpublish" : "Publish"}
+                        </Button>
+                        <Button
+                            onClick={handleDeleteBlog}
+                            variant="destructive"
+                        >
+                            Delete
                         </Button>
                     </div>
                 </div>

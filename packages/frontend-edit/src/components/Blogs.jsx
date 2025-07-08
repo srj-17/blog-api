@@ -36,9 +36,10 @@ export default function Blogs() {
 
         setBlogChanged(false);
 
+        const NOTIFICATION_PERIOD = 1000;
         const id = setTimeout(() => {
             setBlogNotification(null);
-        }, 1000);
+        }, NOTIFICATION_PERIOD);
 
         return () => clearTimeout(id);
     }, [blogChanged]);

@@ -21,6 +21,11 @@
     transform: scale(1.02);
 }
 
+.button:active,
+.linkButton:active {
+    background: var(--accent);
+}
+
 .link {
     background: none;
     text-decoration: underline;

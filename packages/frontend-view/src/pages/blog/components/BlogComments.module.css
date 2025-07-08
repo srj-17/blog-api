@@ -37,3 +37,26 @@
     flex-direction: column;
     align-items: center;
 }
+
+.commentNotification {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: slideIn 200ms forwards;
+    background: var(--background-100);
+    color: var(--text-black);
+
+    padding: var(--std-padding);
+    border-radius: var(--std-border-radius);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translate(-50%, 20vh);
+    }
+
+    to {
+        transform: translate(-50%, -20px);
+    }
+}

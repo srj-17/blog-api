@@ -3,7 +3,11 @@ import Button from "#components/Button";
 import { useState } from "react";
 import { useEffect } from "react";
 
-export default function Comment({ comment, setCommentsChanged }) {
+export default function Comment({
+    comment,
+    setCommentsChanged,
+    setCommentNotification,
+}) {
     const [commentEditMode, setCommentEditMode] = useState(false);
     const [commentContent, setCommentContent] = useState(comment.content);
 
@@ -19,6 +23,7 @@ export default function Comment({ comment, setCommentsChanged }) {
 
         if (response.ok) {
             setCommentsChanged(true);
+            setCommentNotification("Comment Deleted!");
         }
     }
 
@@ -44,6 +49,7 @@ export default function Comment({ comment, setCommentsChanged }) {
         if (response.ok) {
             setCommentEditMode(false);
             setCommentsChanged(true);
+            setCommentNotification("Comment Edited!");
         }
     }
 
@@ -52,6 +58,7 @@ export default function Comment({ comment, setCommentsChanged }) {
             <div className={styles.commentAuthor}>{comment.author.email}</div>
             {commentEditMode ? (
                 <input
+                    autoComplete="off"
                     className={styles.commentEdit}
                     value={commentContent}
                     onChange={(e) => {
@@ -72,7 +79,12 @@ export default function Comment({ comment, setCommentsChanged }) {
                 ) : (
                     <>
                         <Button onClick={handleCommentEditToggle}>Edit</Button>
-                        <Button onClick={handleCommentDelete}>Delete</Button>
+                        <Button
+                            onClick={handleCommentDelete}
+                            variant="destructive"
+                        >
+                            Delete
+                        </Button>
                     </>
                 )}
             </div>

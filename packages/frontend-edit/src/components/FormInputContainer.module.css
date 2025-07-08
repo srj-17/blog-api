@@ -16,7 +16,7 @@
 }
 
 .formInputContainer > input:invalid {
-    border: 1px solid var(--invalid-color);
+    border: 1px solid var(--error-color);
 }
 
 .formInputContainer > label {

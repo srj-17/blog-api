@@ -12,11 +12,12 @@ export default function BlogComments({
     postId,
 }) {
     const [currentComments, setCurrentcomments] = useState(null);
-    const [addCommentsClicked, setAddCommentsClicked] = useState();
+    const [commentsChanged, setCommentsChanged] = useState();
     const [commentInputValue, setCommentInputValue] = useState("");
+    const [commentNotification, setCommentNotification] = useState(null);
 
     useEffect(() => {
-        if (addCommentsClicked) {
+        if (commentsChanged) {
             async function fetchComments() {
                 const commentsUrl = `http://localhost:3000/posts/${postId}/comments`;
                 const response = await fetch(commentsUrl, { mode: "cors" });
@@ -28,10 +29,16 @@ export default function BlogComments({
             }
 
             fetchComments();
-            setAddCommentsClicked(false);
+            setCommentsChanged(false);
             setCommentInputValue("");
         }
-    }, [addCommentsClicked]);
+
+        const NOTIFICATION_PERIOD = 1000;
+        const id = setTimeout(() => {
+            setCommentNotification(null);
+        }, NOTIFICATION_PERIOD);
+        return () => clearTimeout(id);
+    }, [commentsChanged, postId]);
 
     async function handleAddComment(e) {
         e.preventDefault();
@@ -47,19 +54,32 @@ export default function BlogComments({
             body: JSON.stringify(requestBody),
         });
 
-        // TODO: check for errors here
-        setAddCommentsClicked(true);
+        if (response.ok) {
+            setCommentNotification("Comment Added!");
+        }
+
+        if (response.status >= 400) {
+            setCommentNotification("Comment could not be added.");
+        }
+
+        setCommentsChanged(true);
     }
 
     const comments = currentComments ? currentComments : initialComments;
 
     return (
         <div className={styles.blogComments}>
+            {commentNotification ? (
+                <div className={styles.commentNotification}>
+                    {commentNotification}
+                </div>
+            ) : null}
             <div className={styles.blogCommentsTitle}>Comments</div>
 
             {isLoggedIn ? (
                 <form className={styles.addComment} action="#">
                     <input
+                        autoComplete="off"
                         type="text"
                         id="addCommentInput"
                         name="comment"

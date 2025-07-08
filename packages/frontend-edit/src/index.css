@@ -33,8 +33,10 @@ h6 {
     --text: #84a98c;
     --text-inverted: #cad2c5;
     --text-black: #222;
-    --valid-color: lightgreen;
-    --invalid-color: crimson;
+    --valid-color-200: hsl(90, 60, 60);
+    --error-color: hsl(10, 95, 60);
+    --error-color-active: hsl(10, 95, 60);
+    --error-color-200: hsl(10 95 55);
 
     /* derived */
     --link-color-100: var(--accent);

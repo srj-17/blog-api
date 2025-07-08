@@ -25,7 +25,13 @@ export default function Button({
         <button
             type={type}
             onClick={onClick}
-            className={`${styleAsLink ? styles.link : styles.button} ${additionalStyles || ""}`}
+            className={`${
+                styleAsLink
+                    ? styles.link
+                    : variant === "destructive"
+                      ? styles.destructiveButton
+                      : styles.button
+            } ${additionalStyles || ""}`}
         >
             {children}
         </button>

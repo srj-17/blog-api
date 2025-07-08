@@ -23,6 +23,16 @@
     transform: scale(1.02);
 }
 
+.button:active,
+.linkButton:active {
+    background: var(--accent);
+}
+
+.destructiveButton {
+    composes: button;
+    background: var(--error-color-200);
+}
+
 .link {
     background: none;
     text-decoration: underline;
