@@ -5,6 +5,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import SearchResultCard from "./SearchResultCard";
 import Separator from "./Separator";
+import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
+import { convert as htmlToTextConvert } from "html-to-text";
+import { Fragment } from "react";
 
 export default function SearchBar() {
     const [searchText, setSearchText] = useState("");
@@ -67,9 +70,19 @@ export default function SearchBar() {
             />
             {searchResults && searchResults.length > 0 ? (
                 <div className={styles.searchResults}>
-                    {searchResults.map((result, index) => {
+                    {searchResults.map((searchResult, index) => {
+                        const delta = JSON.parse(searchResult.content);
+                        const deltaOps = delta.ops;
+                        const converter = new QuillDeltaToHtmlConverter(
+                            deltaOps,
+                        );
+                        const htmlBlogContent = converter.convert();
+                        const result = {
+                            ...searchResult,
+                            content: htmlToTextConvert(htmlBlogContent),
+                        };
                         return (
-                            <>
+                            <Fragment key={index}>
                                 <SearchResultCard
                                     key={result.id}
                                     result={result}
@@ -77,7 +90,7 @@ export default function SearchBar() {
                                 {index === searchResults.length - 1 ? null : (
                                     <Separator />
                                 )}
-                            </>
+                            </Fragment>
                         );
                     })}
                 </div>

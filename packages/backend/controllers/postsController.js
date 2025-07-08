@@ -21,6 +21,7 @@ async function getAllPosts(req, res) {
         findManyOptions.where = {
             title: {
                 contains: searchQuery,
+                mode: "insensitive",
             },
         };
     }
@@ -72,6 +73,7 @@ async function getPosts(req, res) {
         findManyOptions.where = {
             title: {
                 contains: searchQuery,
+                mode: "insensitive",
             },
         };
     }
