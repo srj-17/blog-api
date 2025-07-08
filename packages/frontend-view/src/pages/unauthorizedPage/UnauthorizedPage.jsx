@@ -9,7 +9,7 @@ export default function UnauthorizedPage() {
                 You are not allowed to view this page.
             </div>
             <div className={styles.homeLink}>
-                <Link to="/">Log In</Link> to view.
+                <Link to="/login">Log In</Link> to view.
             </div>
         </div>
     );

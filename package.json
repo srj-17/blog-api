@@ -6,6 +6,7 @@
     "scripts": {
         "start:client-view": "npm run -w packages/frontend-view dev",
         "start:client-edit": "npm run -w packages/frontend-edit dev",
+        "start:clients": "npm run start:client-view & npm run start:client-edit",
         "start:server": "npm run -w packages/backend start"
     },
     "author": "srj-17",

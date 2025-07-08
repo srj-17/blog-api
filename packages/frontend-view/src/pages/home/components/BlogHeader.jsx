@@ -23,6 +23,7 @@ export default function BlogHeader({
         <header className={styles.blogHeader}>
             <nav className={styles.navBar}>
                 <SearchBar />
+                <Link to="http://localhost:5000">Admin Mode</Link>
                 <Link to="/users" className="users">
                     Users
                 </Link>

@@ -17,6 +17,7 @@ export default function BlogHeader({
     return (
         <header className={styles.blogHeader}>
             <nav className={styles.navBar}>
+                <Link to="http://localhost:5173">View Mode</Link>
                 <Link to="/create">Create Blog</Link>
                 {/* no need to ask for login because only logged in users should be able to view this */}
                 <Button

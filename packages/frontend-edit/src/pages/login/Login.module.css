@@ -6,4 +6,9 @@
     align-items: center;
     padding: var(--std-section-padding);
     background: var(--background);
+    gap: var(--std-gap);
+}
+
+.viewLink {
+    align-self: start;
 }
