@@ -62,7 +62,7 @@ export default function EditBlogPage() {
 
     if (loading) return <Loading />;
 
-    if (!loggedIn) return <UnauthorizedPage />;
+    if (!loggedIn) return <Navigate to="/login" />;
 
     if (error) return <ErrorPage statusCode={500} message={blogData.message} />;
 

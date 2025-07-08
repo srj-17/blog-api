@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { useFetch } from "../../utils/fetch";
 import HomeButton from "#components/HomeButton";
 import capitalize from "#utils/capitalize";
@@ -35,28 +35,34 @@ export default function BlogPage(props) {
     const htmlBlogContent = converter.convert();
 
     return (
-        <div className={styles.blogPage}>
-            <HomeButton />
-            <div className={styles.blogMeta}>
-                <div className={styles.author}>{authorName}</div>
-                <div className={styles.blogTitle}>
-                    {capitalize(blogData.title)}
-                </div>
-            </div>
-            {/* not so dangerous because user doesn't provide this input,
+        <>
+            {isLoggedIn ? (
+                <div className={styles.blogPage}>
+                    <HomeButton />
+                    <div className={styles.blogMeta}>
+                        <div className={styles.author}>{authorName}</div>
+                        <div className={styles.blogTitle}>
+                            {capitalize(blogData.title)}
+                        </div>
+                    </div>
+                    {/* not so dangerous because user doesn't provide this input,
             we get that by parsing the deltaOps created by frontend-edit, 
             but just to be safe, we're using DOMPurify */}
-            <div
-                className={styles.blogContent}
-                dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(htmlBlogContent),
-                }}
-            />
-            <BlogComments
-                postId={blogData.id}
-                isLoggedIn={isLoggedIn}
-                comments={blogData.comments}
-            />
-        </div>
+                    <div
+                        className={styles.blogContent}
+                        dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(htmlBlogContent),
+                        }}
+                    />
+                    <BlogComments
+                        postId={blogData.id}
+                        isLoggedIn={isLoggedIn}
+                        comments={blogData.comments}
+                    />
+                </div>
+            ) : (
+                <Navigate to="/login" />
+            )}
+        </>
     );
 }

@@ -3,7 +3,7 @@ import Separator from "#components/Separator";
 import Button from "#components/Button";
 import { Fragment, useState } from "react";
 import { useEffect } from "react";
-import UnauthorizedPage from "../../unauthorizedPage/UnauthorizedPage";
+import { Link } from "react-router-dom";
 import Comment from "./Comment";
 
 export default function BlogComments({
@@ -95,7 +95,12 @@ export default function BlogComments({
                     </div>
                 </form>
             ) : (
-                <UnauthorizedPage />
+                <div className={styles.loggedOut}>
+                    <div>
+                        You are not allowed to comment.{" "}
+                        <Link to="/login">Log In</Link> to comment.
+                    </div>
+                </div>
             )}
 
             {comments.map((comment, index) => {

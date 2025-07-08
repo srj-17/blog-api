@@ -27,20 +27,15 @@
     align-self: center;
 }
 
-.comment {
-    display: flex;
-    flex-direction: column;
-}
-
 .commentAuthor {
     font-size: 0.9rem;
     opacity: 0.8;
 }
 
-.commentActionButtons {
-    align-self: end;
+.loggedOut {
     display: flex;
-    gap: var(--std-gap);
+    flex-direction: column;
+    align-items: center;
 }
 
 .commentNotification {
