@@ -34,6 +34,9 @@
 .titleInput {
     padding: var(--std-padding);
     font: inherit;
+    border: 2px solid var(--accent);
+    border-radius: var(--std-border-radius);
+    background: var(--background);
 }
 
 .createBlogActions {
@@ -47,4 +50,27 @@
 .homeButtonContainer {
     align-self: start;
     padding: 0 var(--std-section-padding);
+}
+
+@media (max-width: 592px) {
+    .editBlogPage {
+        gap: var(--std-gap);
+    }
+
+    .titleContainer {
+        width: 100%;
+    }
+
+    .blogEditorContainer {
+        padding: var(--std-padding);
+    }
+
+    .createBlogActions {
+        flex-direction: column;
+        padding: 0 var(--std-padding);
+    }
+
+    .homeButtonContainer {
+        padding: 0 var(--std-padding);
+    }
 }

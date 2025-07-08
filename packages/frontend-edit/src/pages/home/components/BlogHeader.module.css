@@ -22,3 +22,14 @@
 .logOutButton {
     text-wrap: nowrap;
 }
+
+@media (max-width: 500px) {
+    .blogHeader {
+        padding-bottom: 0;
+    }
+
+    .navBar {
+        flex-direction: column-reverse;
+        align-self: center;
+    }
+}
