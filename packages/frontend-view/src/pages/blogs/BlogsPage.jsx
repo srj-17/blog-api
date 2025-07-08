@@ -8,9 +8,11 @@ import ErrorPage from "../error/ErrorPage";
 
 export default function BlogsPage() {
     // NOTE: Pagination not added because there aren't enough blogs
-    const blogUrl = `http://localhost:3000/posts/all?${new URLSearchParams({
-        limit: 30,
-    }).toString()}`;
+    const blogUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/all?${new URLSearchParams(
+        {
+            limit: 30,
+        },
+    ).toString()}`;
     const { loggedIn, data: blogs, error, loading } = useFetch(blogUrl);
 
     return (

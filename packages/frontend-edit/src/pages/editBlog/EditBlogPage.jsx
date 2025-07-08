@@ -12,7 +12,7 @@ import { useFetch } from "#utils/fetch";
 
 export default function EditBlogPage() {
     const { blogId } = useParams();
-    const blogUrl = `http://localhost:3000/posts/${blogId}`;
+    const blogUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/${blogId}`;
     const [blogTitle, setBlogTitle] = useState("");
     const [blogBody, setBlogBody] = useState(null);
     const [blogSubmitted, setBlogSubmitted] = useState(false);
@@ -32,7 +32,7 @@ export default function EditBlogPage() {
     }, [loading]);
 
     async function handlePublishBlog(publishStatus = false) {
-        const publishUrl = `http://localhost:3000/posts/${blogId}`;
+        const publishUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/${blogId}`;
         const bodyContent = {
             title: blogTitle,
             content: JSON.stringify(blogBody),

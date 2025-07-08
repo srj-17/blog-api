@@ -5,6 +5,7 @@ import Separator from "#components/Separator";
 import Button from "#components/Button";
 import { Navigate } from "react-router-dom";
 import ErrorPage from "../../error/ErrorPage";
+import Loading from "#components/Loading";
 
 export default function SignupForm() {
     const [userInfo, setUserInfo] = useState({
@@ -17,7 +18,7 @@ export default function SignupForm() {
     const [responseJson, setResponseJson] = useState(null);
     const [fetchError, setFetchError] = useState(null);
     const [loading, setLoading] = useState(true);
-    const signupSubmitUrl = "http://localhost:3000/users";
+    const signupSubmitUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/users`;
 
     useEffect(() => {
         if (isSubmitted) {
@@ -60,7 +61,7 @@ export default function SignupForm() {
             <div>
                 {" "}
                 {loading ? (
-                    "Submitting the form..."
+                    <Loading />
                 ) : fetchError ? (
                     <ErrorPage
                         message={"There was some error during form submission"}

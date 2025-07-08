@@ -24,7 +24,7 @@ export default function BlogCard({
             ...blog,
             published: newPublishedState,
         };
-        const updateUrl = `http://localhost:3000/posts/${blog.id}`;
+        const updateUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/${blog.id}`;
         const response = await fetch(updateUrl, {
             method: "PUT",
             mode: "cors",
@@ -45,7 +45,7 @@ export default function BlogCard({
 
     async function handleDeleteBlog(e) {
         e.stopPropagation();
-        const updateUrl = `http://localhost:3000/posts/${blog.id}`;
+        const updateUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/${blog.id}`;
         const response = await fetch(updateUrl, {
             method: "DELETE",
             mode: "cors",

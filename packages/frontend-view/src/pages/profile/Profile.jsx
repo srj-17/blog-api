@@ -12,7 +12,7 @@ import ErrorPage from "../error/ErrorPage";
 
 export default function Profile() {
     const { userId } = useParams();
-    const url = `http://localhost:3000/users/${userId}`;
+    const url = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/users/${userId}`;
     const { loggedIn, data: user, error, loading } = useFetch(url);
 
     if (!loggedIn) {

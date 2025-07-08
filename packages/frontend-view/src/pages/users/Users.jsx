@@ -6,7 +6,7 @@ import UnauthorizedPage from "../unauthorizedPage/UnauthorizedPage";
 import HomeButton from "#components/HomeButton";
 
 export default function Users() {
-    const userUrl = "http://localhost:3000/users/all";
+    const userUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/users/all`;
     const { loggedIn, data: users, error, loading } = useFetch(userUrl);
 
     if (!loggedIn) {

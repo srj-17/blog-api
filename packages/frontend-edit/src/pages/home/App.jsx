@@ -8,7 +8,7 @@ import ErrorPage from "../error/ErrorPage";
 import { Navigate } from "react-router-dom";
 
 export default function App() {
-    const loggedInUserUrl = "http://localhost:3000/users";
+    const loggedInUserUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/users`;
     const {
         loggedIn,
         data: userData,

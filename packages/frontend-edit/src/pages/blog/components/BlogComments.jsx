@@ -19,7 +19,7 @@ export default function BlogComments({
     useEffect(() => {
         if (commentsChanged) {
             async function fetchComments() {
-                const commentsUrl = `http://localhost:3000/posts/${postId}/comments`;
+                const commentsUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/${postId}/comments`;
                 const response = await fetch(commentsUrl, { mode: "cors" });
                 const newComments = await response.json();
 
@@ -42,7 +42,7 @@ export default function BlogComments({
 
     async function handleAddComment(e) {
         e.preventDefault();
-        const postCommentUrl = `http://localhost:3000/posts/${postId}/comments`;
+        const postCommentUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/${postId}/comments`;
         const requestBody = { content: commentInputValue };
         const response = await fetch(postCommentUrl, {
             method: "POST",

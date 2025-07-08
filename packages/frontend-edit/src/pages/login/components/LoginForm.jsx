@@ -17,7 +17,7 @@ export default function LoginForm() {
     const [responseJson, setResponseJson] = useState(null);
     const [fetchError, setFetchError] = useState(null);
     const [loading, setLoading] = useState(true);
-    const loginUrl = "http://localhost:3000/login";
+    const loginUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/login`;
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {

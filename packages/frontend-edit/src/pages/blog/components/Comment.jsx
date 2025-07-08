@@ -12,7 +12,7 @@ export default function Comment({
     const [commentContent, setCommentContent] = useState(comment.content);
 
     async function handleCommentDelete() {
-        const deleteUrl = `http://localhost:3000/posts/${comment.postId}/comments/${comment.id}`;
+        const deleteUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/${comment.postId}/comments/${comment.id}`;
         const response = await fetch(deleteUrl, {
             method: "DELETE",
             headers: {
@@ -35,7 +35,7 @@ export default function Comment({
     }
 
     async function handleCommentEdit() {
-        const commentChangeUrl = `http://localhost:3000/posts/${comment.postId}/comments/${comment.id}`;
+        const commentChangeUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/${comment.postId}/comments/${comment.id}`;
         const response = await fetch(commentChangeUrl, {
             method: "PUT",
             mode: "cors",

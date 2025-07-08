@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 
 export default function BlogPage(props) {
     const { blogId } = useParams();
-    const blogUrl = `http://localhost:3000/posts/${blogId}?${new URLSearchParams(
+    const blogUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/${blogId}?${new URLSearchParams(
         {
             include: "comments",
         },

@@ -22,7 +22,7 @@ export default function CreateBlogPage() {
     }, []);
 
     async function handlePublishBlog(publishStatus = false) {
-        const publishUrl = `http://localhost:3000/posts`;
+        const publishUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts`;
         const bodyContent = {
             title: blogTitle,
             content: JSON.stringify(blogBody),

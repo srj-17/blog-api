@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Blogs() {
-    const blogsUrl = "http://localhost:3000/posts";
+    const blogsUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts`;
     const { loggedIn, data: blogs, error, loading } = useFetch(blogsUrl);
     const [blogChanged, setBlogChanged] = useState(false);
     const [blogNotification, setBlogNotification] = useState(null);
