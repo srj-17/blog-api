@@ -6,4 +6,4 @@ class ForbiddenError extends Error {
     }
 }
 
-module.exports = ForbiddenError;
+export default ForbiddenError;

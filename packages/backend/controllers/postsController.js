@@ -1,8 +1,8 @@
-const CustomNotFoundError = require("../customErrors/CustomNotFoundError");
-const UnprocessableContentError = require("../customErrors/UnprocessableContentError");
-const CustomServerError = require("../customErrors/CustomServerError");
-const CustomForbiddenError = require("../customErrors/CustomForbiddenError");
-const prisma = require("../models");
+import CustomNotFoundError from "../customErrors/CustomNotFoundError.js";
+import UnprocessableContentError from "../customErrors/UnprocessableContentError.js";
+import CustomServerError from "../customErrors/CustomServerError.js";
+import CustomForbiddenError from "../customErrors/CustomForbiddenError.js";
+import prisma from "../models/index.js";
 
 async function getAllPosts(req, res) {
     const authorId = +req.params.userId;
@@ -227,11 +227,4 @@ async function deletePost(req, res, next) {
     }
 }
 
-module.exports = {
-    getPosts,
-    postPosts,
-    getPost,
-    putPost,
-    deletePost,
-    getAllPosts,
-};
+export { getPosts, postPosts, getPost, putPost, deletePost, getAllPosts };

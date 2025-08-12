@@ -1,16 +1,14 @@
-const commentsRouter = require("./comments");
-const { Router } = require("express");
-const {
-    verifyToken,
-} = require("../authentication/utils/verifyTokenMiddelware");
-const {
+import commentsRouter from "./comments.js";
+import { Router } from "express";
+import { verifyToken } from "../authentication/utils/verifyTokenMiddelware.js";
+import {
     getPosts,
     postPosts,
     getPost,
     putPost,
     deletePost,
     getAllPosts,
-} = require("../controllers/postsController");
+} from "../controllers/postsController.js";
 const posts = Router({ mergeParams: true });
 
 // get all published posts
@@ -30,4 +28,4 @@ posts.put("/:postId", verifyToken, putPost);
 posts.delete("/:postId", deletePost);
 posts.use("/:postId/comments", commentsRouter);
 
-module.exports = posts;
+export default posts;

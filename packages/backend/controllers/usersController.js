@@ -1,9 +1,8 @@
-const bcrypt = require("bcryptjs");
-const prisma = require("../models");
-const jwt = require("jsonwebtoken");
-const CustomNotFoundError = require("../customErrors/CustomNotFoundError");
-const MisformedRequestError = require("../customErrors/UnprocessableContentError");
-const CustomServerError = require("../customErrors/CustomServerError");
+import bcrypt from "bcryptjs";
+import prisma from "../models/index.js";
+import CustomNotFoundError from "../customErrors/CustomNotFoundError.js";
+import MisformedRequestError from "../customErrors/UnprocessableContentError.js";
+import CustomServerError from "../customErrors/CustomServerError.js";
 const SALT = 10;
 
 async function getUsers(req, res) {
@@ -136,10 +135,4 @@ async function deleteUser(req, res, next) {
     }
 }
 
-module.exports = {
-    getUsers,
-    postUsers,
-    getUser,
-    putUser,
-    deleteUser,
-};
+export { getUsers, postUsers, getUser, putUser, deleteUser };

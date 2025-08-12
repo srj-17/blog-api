@@ -1,11 +1,6 @@
-const comments = require("./comments");
-const login = require("./login");
-const posts = require("./posts");
-const users = require("./users");
+import comments from "./comments.js";
+import login from "./login.js";
+import posts from "./posts.js";
+import users from "./users.js";
 
-module.exports = {
-    comments,
-    posts,
-    users,
-    login,
-};
+export default { comments, posts, users, login };

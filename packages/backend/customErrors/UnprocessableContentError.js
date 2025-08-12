@@ -8,4 +8,4 @@ class UnprocessableContentError extends Error {
     }
 }
 
-module.exports = UnprocessableContentError;
+export default UnprocessableContentError;

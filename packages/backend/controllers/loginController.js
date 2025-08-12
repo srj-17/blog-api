@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken");
-const CustomUnauthenticatedError = require("../customErrors/CustomUnauthenticatedError");
-const prisma = require("../models");
-const bcrypt = require("bcryptjs");
+import jwt from "jsonwebtoken";
+import CustomUnauthenticatedError from "../customErrors/CustomUnauthenticatedError.js";
+import prisma from "../models/index.js";
+import bcrypt from "bcryptjs";
 
 async function postLogin(req, res, next) {
     const { email, password } = req.body;
@@ -56,6 +56,4 @@ async function postLogin(req, res, next) {
     );
 }
 
-module.exports = {
-    postLogin,
-};
+export { postLogin };

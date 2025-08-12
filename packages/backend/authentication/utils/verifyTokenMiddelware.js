@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken");
-const ForbiddenError = require("../../customErrors/CustomForbiddenError");
+import jwt from "jsonwebtoken";
+import ForbiddenError from "../../customErrors/CustomForbiddenError.js";
 
-function verifyToken(req, res, next) {
+export function verifyToken(req, res, next) {
     const bearerHeader = req.header("authorization");
     if (typeof bearerHeader !== "undefined") {
         const [bearer, token] = bearerHeader.split(" ");
@@ -19,7 +19,3 @@ function verifyToken(req, res, next) {
         throw new ForbiddenError();
     }
 }
-
-module.exports = {
-    verifyToken,
-};

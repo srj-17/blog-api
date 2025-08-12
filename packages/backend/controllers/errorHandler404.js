@@ -1,9 +1,7 @@
-const CustomNotFoundError = require("../customErrors/CustomNotFoundError");
+import CustomNotFoundError from "../customErrors/CustomNotFoundError.js";
 
 function errorHandler404(req, res) {
     throw new CustomNotFoundError();
 }
 
-module.exports = {
-    errorHandler404,
-};
+export { errorHandler404 };

@@ -2,7 +2,7 @@
     "name": "@srj-blog-api/backend",
     "version": "1.0.0",
     "main": "index.js",
-    "type": "commonjs",
+    "type": "module",
     "scripts": {
         "start": "node --watch app.js"
     },

@@ -1,8 +1,8 @@
-const BadRequestError = require("../customErrors/BadRequestError");
-const CustomNotFoundError = require("../customErrors/CustomNotFoundError");
-const UnprocessableContentError = require("../customErrors/UnprocessableContentError");
-const CustomServerError = require("../customErrors/CustomServerError");
-const prisma = require("../models");
+import BadRequestError from "../customErrors/BadRequestError.js";
+import CustomNotFoundError from "../customErrors/CustomNotFoundError.js";
+import UnprocessableContentError from "../customErrors/UnprocessableContentError.js";
+import CustomServerError from "../customErrors/CustomServerError.js";
+import prisma from "../models/index.js";
 
 async function getComments(req, res) {
     try {
@@ -139,10 +139,4 @@ async function deleteComment(req, res, next) {
     }
 }
 
-module.exports = {
-    getComments,
-    postComments,
-    getComment,
-    putComment,
-    deleteComment,
-};
+export { getComments, postComments, getComment, putComment, deleteComment };

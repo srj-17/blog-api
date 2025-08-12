@@ -8,4 +8,4 @@ class CustomServerError extends Error {
     }
 }
 
-module.exports = CustomServerError;
+export default CustomServerError;

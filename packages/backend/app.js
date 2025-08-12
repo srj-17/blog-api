@@ -1,11 +1,7 @@
-const express = require("express");
-const routes = require("./routes");
-const { errorHandler404 } = require("./controllers/errorHandler404");
-const session = require("express-session");
-const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
-const prisma = require("./models");
-const passport = require("passport");
-const cors = require("cors");
+import express from "express";
+import routes from "./routes/index.js";
+import { errorHandler404 } from "./controllers/errorHandler404.js";
+import cors from "cors";
 
 const app = express();
 

@@ -1,14 +1,12 @@
-const { Router } = require("express");
-const {
+import { Router } from "express";
+import {
     getComments,
     postComments,
     getComment,
     putComment,
     deleteComment,
-} = require("../controllers/commentsController");
-const {
-    verifyToken,
-} = require("../authentication/utils/verifyTokenMiddelware");
+} from "../controllers/commentsController.js";
+import { verifyToken } from "../authentication/utils/verifyTokenMiddelware.js";
 const comments = Router({ mergeParams: true });
 
 comments.get("/", getComments);
@@ -17,4 +15,4 @@ comments.get("/:commentId", getComment);
 comments.put("/:commentId", verifyToken, putComment);
 comments.delete("/:commentId", verifyToken, deleteComment);
 
-module.exports = comments;
+export default comments;
