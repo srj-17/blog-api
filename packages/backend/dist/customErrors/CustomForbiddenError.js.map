@@ -1,0 +1,1 @@
+{"version":3,"file":"CustomForbiddenError.js","sourceRoot":"","sources":["../../src/customErrors/CustomForbiddenError.ts"],"names":[],"mappings":"AAAA,MAAM,cAAe,SAAQ,KAAK;IAC9B,UAAU,CAAS;IACnB,IAAI,CAAS;IAEb,YAAY,OAAgB;QACxB,KAAK,CAAC,OAAO,IAAI,+CAA+C,CAAC,CAAC;QAClE,IAAI,CAAC,UAAU,GAAG,GAAG,CAAC;QACtB,IAAI,CAAC,IAAI,GAAG,gBAAgB,CAAC;IACjC,CAAC;CACJ;AAED,eAAe,cAAc,CAAC"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"errorHandler404.js","sourceRoot":"","sources":["../../src/controllers/errorHandler404.ts"],"names":[],"mappings":"AAAA,OAAO,mBAAmB,MAAM,wCAAwC,CAAC;AACzE,OAAO,EAA+B,MAAM,SAAS,CAAC;AAEtD,SAAS,eAAe,CAAC,GAAY,EAAE,GAAa;IAChD,MAAM,IAAI,mBAAmB,EAAE,CAAC;AACpC,CAAC;AAED,OAAO,EAAE,eAAe,EAAE,CAAC"}

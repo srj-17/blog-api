@@ -1,0 +1,1 @@
+{"version":3,"file":"errorHandler404.d.ts","sourceRoot":"","sources":["../../src/controllers/errorHandler404.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,KAAK,OAAO,EAAE,KAAK,QAAQ,EAAE,MAAM,SAAS,CAAC;AAEtD,iBAAS,eAAe,CAAC,GAAG,EAAE,OAAO,EAAE,GAAG,EAAE,QAAQ,QAEnD;AAED,OAAO,EAAE,eAAe,EAAE,CAAC"}
