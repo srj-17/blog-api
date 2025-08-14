@@ -2,7 +2,7 @@ import styles from "./BlogContainer.module.css";
 import { Link } from "react-router-dom";
 import BlogsGrid from "#components/BlogsGrid";
 
-export default function BlogContainer({ blogs }) {
+export default function BlogContainer({ blogs }: { blogs: any[] }) {
     if (blogs.length === 0) return <div>No Blogs Found</div>;
     return (
         <section className={styles.blogsContainer}>

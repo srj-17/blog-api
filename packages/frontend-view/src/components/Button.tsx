@@ -1,5 +1,16 @@
+import type React from "react";
 import styles from "./Button.module.css";
 import { Link } from "react-router-dom";
+
+export interface ButtonProps {
+    variant?: string;
+    to?: string;
+    type?: "button" | "submit" | "reset";
+    additionalStyles?: string;
+    onClick?: (e: any) => void;
+    children?: React.ReactNode;
+    styleAsLink?: boolean;
+}
 
 export default function Button({
     variant,
@@ -9,11 +20,11 @@ export default function Button({
     onClick,
     children,
     styleAsLink,
-}) {
+}: ButtonProps) {
     if (variant === "link") {
         return (
             <Link
-                to={to}
+                to={to!}
                 className={`${additionalStyles || ""} ${styleAsLink ? styles.link : styles.linkButton}`}
             >
                 {children}

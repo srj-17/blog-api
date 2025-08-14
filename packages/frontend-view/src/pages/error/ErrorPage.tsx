@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import styles from "./ErrorPage.module.css";
 
-export default function ErrorPage({ statusCode, message }) {
+interface ErrorPageProps {
+    statusCode: number;
+    message: string;
+}
+
+export default function ErrorPage({ statusCode, message }: ErrorPageProps) {
     return (
         <div className={styles.errorPage}>
             <div className={styles.statusCode}>{statusCode || 404}</div>

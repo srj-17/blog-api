@@ -1,6 +1,17 @@
 import styles from "./SearchInput.module.css";
 
-export default function SearchInput({ onChange, value, name }) {
+interface SearchInputProps {
+    // TODO: more specific
+    onChange: (e: any) => any;
+    value: string;
+    name: string;
+}
+
+export default function SearchInput({
+    onChange,
+    value,
+    name,
+}: SearchInputProps) {
     return (
         <input
             onChange={onChange}

@@ -9,22 +9,31 @@ import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
 import { convert as htmlToTextConvert } from "html-to-text";
 import { Fragment } from "react";
 
+// there are more properties, but these
+// are what we're concerned with here
+interface Blog {
+    id: number;
+    title: string;
+    content: string;
+}
+
 export default function SearchBar() {
     const [searchText, setSearchText] = useState("");
-    const [searchResults, setSearchResults] = useState([]);
+    const [searchResults, setSearchResults] = useState<Blog[]>([]);
 
     useEffect(() => {
         async function fetchPosts() {
+            const searchParams = {
+                searchQuery: searchText,
+                limit: 7,
+            };
             const postsUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/all?${new URLSearchParams(
-                {
-                    searchQuery: searchText,
-                    limit: 7,
-                },
+                searchParams as any,
             ).toString()}`;
 
             const response = await fetch(postsUrl);
             const responseBody = await response.json();
-            if (response.statusCode >= 400) {
+            if (response.status >= 400) {
                 console.error(responseBody);
             }
 
@@ -38,7 +47,7 @@ export default function SearchBar() {
         }
     }, [searchText]);
 
-    function handleSearchTextChange(e) {
+    function handleSearchTextChange(e: any) {
         setSearchText(e.target.value);
     }
 

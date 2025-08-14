@@ -1,7 +1,7 @@
 import BlogsGrid from "#components/BlogsGrid";
 import styles from "./UsersBlogsContainer.module.css";
 
-export default function UsersBlogsContainer({ blogs }) {
+export default function UsersBlogsContainer({ blogs }: any) {
     return (
         <div className={styles.blogsContainer}>
             <BlogsGrid blogs={blogs} />

@@ -1,7 +1,14 @@
 import styles from "./UserCard.module.css";
 import Button from "#components/Button";
 
-export default function UserCard({ user }) {
+export interface User {
+    firstName: string;
+    lastName: string;
+    email: string;
+    id: number;
+}
+
+export default function UserCard({ user }: { user: User }) {
     return (
         <div className={styles.userCard}>
             <div className={styles.userName}>

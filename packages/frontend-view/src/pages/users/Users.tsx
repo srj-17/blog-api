@@ -1,13 +1,20 @@
-import { useFetch } from "#utils/fetch";
+import { useFetch, type FetchedData } from "#utils/fetch";
 import UserCard from "./components/UserCard.jsx";
 import styles from "./Users.module.css";
 import Loading from "#components/Loading";
 import UnauthorizedPage from "../unauthorizedPage/UnauthorizedPage";
 import HomeButton from "#components/HomeButton";
+import ErrorPage from "../error/ErrorPage.js";
+import type { User } from "./components/UserCard.jsx";
 
 export default function Users() {
     const userUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/users/all`;
-    const { loggedIn, data: users, error, loading } = useFetch(userUrl);
+    const {
+        loggedIn,
+        data: users,
+        error,
+        loading,
+    }: FetchedData = useFetch(userUrl);
 
     if (!loggedIn) {
         return <UnauthorizedPage />;
@@ -32,7 +39,7 @@ export default function Users() {
                     <div className="email">Email</div>
                     <div className="profile">Profile</div>
                 </div>
-                {users.map((user) => {
+                {users.map((user: User) => {
                     return <UserCard key={user.id} user={user} />;
                 })}
             </div>

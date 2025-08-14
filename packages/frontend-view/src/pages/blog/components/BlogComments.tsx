@@ -4,17 +4,30 @@ import Button from "#components/Button";
 import { Link } from "react-router-dom";
 import { Fragment, useState } from "react";
 import { useEffect } from "react";
-import UnauthorizedPage from "../../unauthorizedPage/UnauthorizedPage";
+
+export interface Comment {
+    id: number;
+    author: {
+        email: string;
+    };
+    content: string;
+}
+
+interface BlogCommentsProps {
+    comments: Array<Comment>;
+    isLoggedIn: boolean;
+    postId: number;
+}
 
 export default function BlogComments({
     comments: initialComments,
     isLoggedIn,
     postId,
-}) {
-    const [currentComments, setCurrentcomments] = useState(null);
-    const [commentsChanged, setCommentsChanged] = useState();
+}: BlogCommentsProps) {
+    const [currentComments, setCurrentcomments] = useState<Comment[]>();
+    const [commentsChanged, setCommentsChanged] = useState<boolean>();
     const [commentInputValue, setCommentInputValue] = useState("");
-    const [commentNotification, setCommentNotification] = useState(null);
+    const [commentNotification, setCommentNotification] = useState<string>();
 
     useEffect(() => {
         if (commentsChanged) {
@@ -35,12 +48,12 @@ export default function BlogComments({
 
         const NOTIFICATION_PERIOD = 1000;
         const id = setTimeout(() => {
-            setCommentNotification(null);
+            setCommentNotification("");
         }, NOTIFICATION_PERIOD);
         return () => clearTimeout(id);
     }, [commentsChanged, postId]);
 
-    async function handleAddComment(e) {
+    async function handleAddComment(e: any) {
         e.preventDefault();
         const postCommentUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/${postId}/comments`;
         const requestBody = { content: commentInputValue };
@@ -103,7 +116,7 @@ export default function BlogComments({
                 </div>
             )}
 
-            {comments.map((comment, index) => {
+            {comments.map((comment: Comment, index: number) => {
                 return (
                     <Fragment key={comment.id}>
                         <div className={styles.comment} key={comment.id}>

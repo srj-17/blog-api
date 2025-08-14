@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useFetch } from "../../utils/fetch";
+import { useFetch, type FetchedData } from "../../utils/fetch";
 import { Link } from "react-router-dom";
 import styles from "./Profile.module.css";
 import HomeButton from "#components/HomeButton";
@@ -13,7 +13,7 @@ import ErrorPage from "../error/ErrorPage";
 export default function Profile() {
     const { userId } = useParams();
     const url = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/users/${userId}`;
-    const { loggedIn, data: user, error, loading } = useFetch(url);
+    const { loggedIn, data: user, error, loading }: FetchedData = useFetch(url);
 
     if (!loggedIn) {
         return (
@@ -40,7 +40,7 @@ export default function Profile() {
                 />
             ) : (
                 <div className={styles.firstSection}>
-                    <HomeButton className={styles.homeButton} />
+                    <HomeButton />
                     <div className={styles.profileTitle}>
                         {capitalize(user.firstName)} {capitalize(user.lastName)}
                         's Blogs

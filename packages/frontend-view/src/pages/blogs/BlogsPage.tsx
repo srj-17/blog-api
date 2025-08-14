@@ -1,4 +1,4 @@
-import { useFetch } from "#utils/fetch";
+import { useFetch, type FetchedData } from "#utils/fetch";
 import HomeButton from "#components/HomeButton";
 import Separator from "#components/Separator";
 import BlogsGrid from "#components/BlogsGrid";
@@ -8,12 +8,15 @@ import ErrorPage from "../error/ErrorPage";
 
 export default function BlogsPage() {
     // NOTE: Pagination not added because there aren't enough blogs
+
+    // TODO: make type more specific
+    const searchParams = {
+        limit: 30,
+    };
     const blogUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/all?${new URLSearchParams(
-        {
-            limit: 30,
-        },
+        searchParams as any,
     ).toString()}`;
-    const { loggedIn, data: blogs, error, loading } = useFetch(blogUrl);
+    const { data: blogs, error, loading }: FetchedData = useFetch(blogUrl);
 
     return (
         <div className={styles.blogsPage}>
@@ -26,7 +29,7 @@ export default function BlogsPage() {
                 />
             ) : (
                 <div className={styles.firstSection}>
-                    <HomeButton className={styles.homeButton} />
+                    <HomeButton />
                     <div className={styles.blogsTitle}>Explore Blogs</div>
                     <Separator />
                     <div className={styles.blogsContainer}>

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useFetch } from "../../utils/fetch";
+import { useFetch, type FetchedData } from "../../utils/fetch";
 import HomeButton from "#components/HomeButton";
 import capitalize from "#utils/capitalize";
 import styles from "./BlogPage.module.css";
@@ -8,7 +8,7 @@ import Loading from "#components/Loading";
 import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
 import DOMPurify from "dompurify";
 
-export default function BlogPage(props) {
+export default function BlogPage() {
     const { blogId } = useParams();
     const blogUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/${blogId}?${new URLSearchParams(
         {
@@ -18,9 +18,8 @@ export default function BlogPage(props) {
     const {
         loggedIn: isLoggedIn,
         data: blogData,
-        error: blogError,
         loading: blogIsLoading,
-    } = useFetch(blogUrl);
+    }: FetchedData = useFetch(blogUrl);
 
     if (blogIsLoading) return <Loading />;
 

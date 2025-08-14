@@ -5,6 +5,7 @@ import Separator from "#components/Separator";
 import BlogContainer from "./components/BlogContainer";
 import Loading from "#components/Loading";
 import ErrorPage from "../error/ErrorPage";
+import { type FetchedData } from "#utils/fetch";
 
 function App() {
     const postsUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/all`;
@@ -15,12 +16,9 @@ function App() {
         error,
         loading,
         setLoggedIn,
-    } = useFetch(postsUrl);
-    const {
-        data: userData,
-        error: userFetchError,
-        loading: userLoading,
-    } = useFetch(userUrl);
+    }: FetchedData = useFetch(postsUrl);
+    const { data: userData, loading: userLoading }: FetchedData =
+        useFetch(userUrl);
 
     if (loading) {
         return <Loading />;
@@ -48,7 +46,6 @@ function App() {
                     loggedIn={loggedIn}
                     userData={userData}
                     userLoading={userLoading}
-                    userFetchError={userFetchError}
                     setLoggedIn={setLoggedIn}
                 />
                 <Separator />

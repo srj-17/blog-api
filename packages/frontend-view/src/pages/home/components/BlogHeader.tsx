@@ -6,15 +6,29 @@ import { Link } from "react-router-dom";
 import Avatar from "#components/Avatar";
 import Button from "#components/Button";
 
+interface Blog {
+    id: number;
+    title: string;
+    content: string;
+    publishedAt: string;
+}
+
+interface BlogHeaderProps {
+    topPost: Blog;
+    loggedIn: boolean;
+    userData: any;
+    userLoading: boolean;
+    setLoggedIn: (arg: boolean) => any;
+}
+
 export default function BlogHeader({
     topPost,
     loggedIn,
     userData,
     userLoading,
-    userFetchError,
     setLoggedIn,
-}) {
-    function logOutHandler(e) {
+}: BlogHeaderProps) {
+    function logOutHandler() {
         localStorage.removeItem("viewToken");
         setLoggedIn(false);
     }

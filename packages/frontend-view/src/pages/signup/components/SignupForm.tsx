@@ -15,7 +15,6 @@ export default function SignupForm() {
         password: "",
     });
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [responseJson, setResponseJson] = useState(null);
     const [fetchError, setFetchError] = useState(null);
     const [loading, setLoading] = useState(true);
     const signupSubmitUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/users`;
@@ -26,7 +25,7 @@ export default function SignupForm() {
                 try {
                     const response = await fetch(signupSubmitUrl, {
                         method: "POST",
-                        cors: true,
+                        mode: "cors",
                         body: JSON.stringify(userInfo),
                         headers: {
                             "Content-Type": "application/json",
@@ -38,9 +37,7 @@ export default function SignupForm() {
                     if (response.status >= 400) {
                         throw new Error(jsonData.msg);
                     }
-
-                    setResponseJson(jsonData);
-                } catch (e) {
+                } catch (e: any) {
                     setFetchError(e);
                 }
 
@@ -51,7 +48,7 @@ export default function SignupForm() {
         }
     }, [isSubmitted, userInfo]);
 
-    function handleSubmit(e) {
+    function handleSubmit(e: any) {
         e.preventDefault();
         setIsSubmitted(true);
     }

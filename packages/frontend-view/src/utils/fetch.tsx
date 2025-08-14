@@ -1,6 +1,23 @@
 import { useState, useEffect } from "react";
 
-export function useFetch(url) {
+/*
+ ** TODO: "data" is used in many places, and maybe
+ ** it's used there with "null" checks. So, I can't
+ ** use this now, but need to think of a way to make
+ ** type checking of the fetched data work.
+ **
+ ** It doesn't work now because null isn't assignable to
+ ** [] or most other types
+ */
+export interface FetchedData<FetchedDataType = any> {
+    loggedIn: boolean;
+    data: FetchedDataType;
+    error: boolean;
+    loading: boolean;
+    setLoggedIn?: (arg: any) => any;
+}
+
+export function useFetch(url: string) {
     const [loggedIn, setLoggedIn] = useState(true);
     const [data, setData] = useState(null);
     const [error, setError] = useState(false);
@@ -16,7 +33,7 @@ export function useFetch(url) {
                 }
 
                 const response = await fetch(url, {
-                    cors: true,
+                    mode: "cors",
                     headers: {
                         Authorization: `Bearer ${jwtToken}`,
                     },

@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import styles from "./HomeButton.module.css";
+import { type ButtonProps } from "./Button";
 
-export default function HomeButton(props) {
+export default function HomeButton(props: ButtonProps) {
     return (
         <Link
             {...props}
