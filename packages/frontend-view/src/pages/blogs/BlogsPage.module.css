@@ -17,10 +17,6 @@
     gap: var(--std-section-gap);
 }
 
-.homeButton {
-    align-self: start;
-}
-
 .blogsTitle {
     font-size: var(--display-text-size);
     font-weight: var(--title-weight);

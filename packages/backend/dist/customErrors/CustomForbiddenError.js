@@ -1,0 +1,11 @@
+class ForbiddenError extends Error {
+    statusCode;
+    name;
+    constructor(message) {
+        super(message || "You're not authorized to access the resource!");
+        this.statusCode = 403;
+        this.name = "ForbiddenError";
+    }
+}
+export default ForbiddenError;
+//# sourceMappingURL=CustomForbiddenError.js.map

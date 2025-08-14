@@ -1,0 +1,1 @@
+{"version":3,"file":"CustomForbiddenError.d.ts","sourceRoot":"","sources":["../../src/customErrors/CustomForbiddenError.ts"],"names":[],"mappings":"AAAA,cAAM,cAAe,SAAQ,KAAK;IAC9B,UAAU,EAAE,MAAM,CAAC;IACnB,IAAI,EAAE,MAAM,CAAC;gBAED,OAAO,CAAC,EAAE,MAAM;CAK/B;AAED,eAAe,cAAc,CAAC"}

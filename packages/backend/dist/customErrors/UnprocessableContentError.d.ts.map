@@ -1,0 +1,1 @@
+{"version":3,"file":"UnprocessableContentError.d.ts","sourceRoot":"","sources":["../../src/customErrors/UnprocessableContentError.ts"],"names":[],"mappings":"AAAA,cAAM,yBAA0B,SAAQ,KAAK;IACzC,UAAU,EAAE,MAAM,CAAC;IACnB,IAAI,EAAE,MAAM,CAAC;gBAED,OAAO,CAAC,EAAE,MAAM;CAO/B;AAED,eAAe,yBAAyB,CAAC"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"CustomNotFoundError.js","sourceRoot":"","sources":["../../src/customErrors/CustomNotFoundError.ts"],"names":[],"mappings":"AAAA,MAAM,mBAAoB,SAAQ,KAAK;IACnC,UAAU,CAAS;IACnB,IAAI,CAAS;IAEb,YAAY,OAAgB;QACxB,KAAK,CAAC,OAAO,IAAI,oBAAoB,CAAC,CAAC;QACvC,IAAI,CAAC,UAAU,GAAG,GAAG,CAAC;QACtB,IAAI,CAAC,IAAI,GAAG,WAAW,CAAC;IAC5B,CAAC;CACJ;AAED,eAAe,mBAAmB,CAAC"}
