@@ -3,7 +3,7 @@ import BlogHeader from "./components/BlogHeader";
 import Separator from "#components/Separator";
 import Blogs from "#components/Blogs";
 import Loading from "#components/Loading";
-import { useFetch } from "#utils/fetch";
+import { useFetch, type FetchedData } from "#utils/fetch";
 import ErrorPage from "../error/ErrorPage";
 import { Navigate } from "react-router-dom";
 
@@ -15,7 +15,7 @@ export default function App() {
         error,
         loading,
         setLoggedIn,
-    } = useFetch(loggedInUserUrl);
+    }: FetchedData = useFetch(loggedInUserUrl);
 
     if (loading) return <Loading />;
 

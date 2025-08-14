@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Quill from "quill";
 import styles from "./Editor.module.css";
 
@@ -11,12 +11,17 @@ export default function Editor({
     ref,
     defaultValue,
     setBlogBody,
+}: {
+    // TODO: what the heck is this! Use better types
+    ref: any;
+    defaultValue: any;
+    setBlogBody: any;
 }) {
     // points to the editor container
     const containerRef = useRef(null);
 
     useEffect(() => {
-        const container = containerRef.current;
+        const container = containerRef.current as unknown as HTMLElement;
         const editorContainer = container.appendChild(
             container.ownerDocument.createElement("div"),
         );

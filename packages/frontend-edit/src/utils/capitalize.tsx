@@ -1,4 +1,4 @@
-export default function capitalize(text) {
+export default function capitalize(text: string) {
     if (typeof text !== "string") {
         return;
     }

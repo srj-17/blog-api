@@ -1,12 +1,20 @@
 import styles from "./Comment.module.css";
 import Button from "#components/Button";
-import { useState } from "react";
-import { useEffect } from "react";
+import React, { useState } from "react";
+import { type Comment } from "./BlogComments";
 
 export default function Comment({
     comment,
     setCommentsChanged,
     setCommentNotification,
+}: {
+    comment: Comment;
+    setCommentsChanged: React.Dispatch<
+        React.SetStateAction<boolean | undefined>
+    >;
+    setCommentNotification: React.Dispatch<
+        React.SetStateAction<string | undefined>
+    >;
 }) {
     const [commentEditMode, setCommentEditMode] = useState(false);
     const [commentContent, setCommentContent] = useState(comment.content);

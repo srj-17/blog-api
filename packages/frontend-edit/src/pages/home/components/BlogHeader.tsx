@@ -3,13 +3,20 @@ import Button from "#components/Button";
 import Avatar from "#components/Avatar";
 import { Link } from "react-router-dom";
 
+interface BlogHeaderProps {
+    loggedIn: boolean;
+    userData: any;
+    userLoading: boolean;
+    setLoggedIn: (arg: boolean) => any;
+}
+
 export default function BlogHeader({
     userLoading,
     loggedIn,
     userData,
     setLoggedIn,
-}) {
-    function logOutHandler(e) {
+}: BlogHeaderProps) {
+    function logOutHandler() {
         localStorage.removeItem("editToken");
         setLoggedIn(false);
     }

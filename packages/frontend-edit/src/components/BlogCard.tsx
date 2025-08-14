@@ -5,11 +5,26 @@ import dateStringToReadableDate from "#utils/dateStringToReadableDate";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 
+export interface Blog {
+    id: number;
+    title: string;
+    content: string;
+    published: boolean;
+    publishedAt: string;
+    createdAt: string;
+}
+
+interface BlogCardProps {
+    blog: Blog;
+    setBlogChanged: (arg: boolean) => any;
+    setBlogNotification: any;
+}
+
 export default function BlogCard({
     blog,
     setBlogChanged,
     setBlogNotification,
-}) {
+}: BlogCardProps) {
     const [viewBlogTrigger, setViewBlogTrigger] = useState(false);
     const [editBlogTrigger, setEditBlogTrigger] = useState(false);
 
@@ -17,7 +32,7 @@ export default function BlogCard({
         setViewBlogTrigger(true);
     }
 
-    async function handlePublishBlog(e) {
+    async function handlePublishBlog(e: any) {
         e.stopPropagation();
         const newPublishedState = blog.published ? false : true;
         const newBlogInformation = {
@@ -43,7 +58,7 @@ export default function BlogCard({
         }
     }
 
-    async function handleDeleteBlog(e) {
+    async function handleDeleteBlog(e: any) {
         e.stopPropagation();
         const updateUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/${blog.id}`;
         const response = await fetch(updateUrl, {
@@ -61,7 +76,7 @@ export default function BlogCard({
         }
     }
 
-    function handleBlogEdit(e) {
+    function handleBlogEdit(e: any) {
         e.stopPropagation();
         setEditBlogTrigger(true);
     }

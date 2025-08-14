@@ -14,8 +14,10 @@ export default function LoginForm() {
         password: "",
     });
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [responseJson, setResponseJson] = useState(null);
-    const [fetchError, setFetchError] = useState(null);
+    const [fetchError, setFetchError] = useState<{
+        statusCode?: number;
+        message: string;
+    }>();
     const [loading, setLoading] = useState(true);
     const loginUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/login`;
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,7 +28,7 @@ export default function LoginForm() {
                 try {
                     const response = await fetch(loginUrl, {
                         method: "POST",
-                        cors: true,
+                        mode: "cors",
                         body: JSON.stringify(userInfo),
                         headers: {
                             "Content-Type": "application/json",
@@ -46,8 +48,8 @@ export default function LoginForm() {
                         setIsLoggedIn(true);
                         localStorage.setItem("editToken", jsonData.token);
                     }
-                } catch (e) {
-                    setFetchError({ msg: "Error during fetch" });
+                } catch (e: any) {
+                    setFetchError({ message: "Error during fetch" });
                     throw new Error(e);
                 }
 
@@ -58,7 +60,7 @@ export default function LoginForm() {
         }
     }, [isSubmitted, userInfo]);
 
-    function handleSubmit(e) {
+    function handleSubmit(e: any) {
         e.preventDefault();
         setIsSubmitted(true);
     }

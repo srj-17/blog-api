@@ -1,18 +1,18 @@
 import styles from "./Blogs.module.css";
-import { useFetch } from "../utils/fetch";
+import { useFetch, type FetchedData } from "../utils/fetch";
 import Loading from "#components/Loading";
 import ErrorPage from "../pages/error/ErrorPage";
-import BlogCard from "#components/BlogCard";
+import BlogCard, { type Blog } from "#components/BlogCard";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Blogs() {
     const blogsUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts`;
-    const { loggedIn, data: blogs, error, loading } = useFetch(blogsUrl);
+    const { data: blogs, error, loading }: FetchedData = useFetch(blogsUrl);
     const [blogChanged, setBlogChanged] = useState(false);
     const [blogNotification, setBlogNotification] = useState(null);
     const [updatedBlogs, setUpdatedBlogs] = useState(null);
-    const [fetchError, setFetchError] = useState(null);
+    const [fetchError, setFetchError] = useState(false);
 
     useEffect(() => {
         if (blogChanged) {
@@ -60,7 +60,7 @@ export default function Blogs() {
                     ) : null}
                     <div className={styles.blogsHeader}>Your Blogs</div>
                     {blogsToDisplay.length >= 1 ? (
-                        blogsToDisplay.map((blog) => {
+                        blogsToDisplay.map((blog: Blog) => {
                             return (
                                 <BlogCard
                                     key={blog.id}

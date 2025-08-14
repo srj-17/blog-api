@@ -1,42 +1,33 @@
-import { Navigate, useParams } from "react-router-dom";
-import styles from "./EditBlogPage.module.css";
-import HomeButton from "#components/HomeButton";
-import Quill from "quill";
-import { useState, useEffect, useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Editor from "#components/Editor";
+import Quill from "quill";
+import styles from "./CreateBlogPage.module.css";
+import HomeButton from "#components/HomeButton";
 import Button from "#components/Button";
-import Loading from "#components/Loading";
-import ErrorPage from "../error/ErrorPage";
-import UnauthorizedPage from "../unauthorizedPage/UnauthorizedPage";
-import { useFetch } from "#utils/fetch";
+import { Navigate } from "react-router-dom";
+import type { Blog } from "#components/BlogCard";
 
-export default function EditBlogPage() {
-    const { blogId } = useParams();
-    const blogUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/${blogId}`;
+const Delta = Quill.import("delta");
+
+export default function CreateBlogPage() {
     const [blogTitle, setBlogTitle] = useState("");
+
+    // NOTE: body is in the form of quillDelta
     const [blogBody, setBlogBody] = useState(null);
     const [blogSubmitted, setBlogSubmitted] = useState(false);
-    const { loggedIn, data: blogData, error, loading } = useFetch(blogUrl);
 
     // Use a ref to access the quill instance directly
-    const quillRef = useRef();
-
+    const quillRef = useRef<null | { getContents: any }>(null);
     useEffect(() => {
-        if (!error && !loading) {
-            setBlogTitle(blogData.title);
-
-            // we'll have the reference to editor once the
-            // child is mounted and updates the current
-            setBlogBody(quillRef.current.getContents());
-        }
-    }, [loading]);
+        if (quillRef.current) setBlogBody(quillRef.current.getContents());
+    }, []);
 
     async function handlePublishBlog(publishStatus = false) {
-        const publishUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts/${blogId}`;
+        const publishUrl = `${import.meta.env.VITE_SERVER_URL || "http://localhost:3000"}/posts`;
         const bodyContent = {
             title: blogTitle,
             content: JSON.stringify(blogBody),
-        };
+        } as Blog;
 
         if (publishStatus === true) {
             bodyContent.published = true;
@@ -44,7 +35,7 @@ export default function EditBlogPage() {
 
         const response = await fetch(publishUrl, {
             mode: "cors",
-            method: "PUT",
+            method: "POST",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("editToken")}`,
                 "Content-Type": "application/json",
@@ -60,22 +51,18 @@ export default function EditBlogPage() {
         }
     }
 
-    if (loading) return <Loading />;
-
-    if (!loggedIn) return <Navigate to="/login" />;
-
-    if (error) return <ErrorPage statusCode={500} message={blogData.message} />;
-
     return (
         <>
             {blogSubmitted ? (
                 <Navigate to="/" />
             ) : (
-                <div className={styles.editBlogPage}>
+                <div className={styles.createBlogPage}>
                     <div className={styles.homeButtonContainer}>
                         <HomeButton />
                     </div>
-                    <div className={styles.editBlogHeader}>Edit Blog</div>
+                    <div className={styles.createBlogHeader}>
+                        Create New Blog
+                    </div>
                     <div className={styles.blogEditorContainer}>
                         <div className={styles.titleContainer}>
                             <label
@@ -99,7 +86,10 @@ export default function EditBlogPage() {
                         </div>
                         <Editor
                             ref={quillRef}
-                            defaultValue={JSON.parse(blogData.content)}
+                            defaultValue={new Delta()
+                                .insert("Your Topic")
+                                .insert("\n", { header: 1 })
+                                .insert("Write your beautiful blog here...")}
                             setBlogBody={setBlogBody}
                         />
                     </div>
