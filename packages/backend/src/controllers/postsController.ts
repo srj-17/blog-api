@@ -10,10 +10,6 @@ async function getAllPosts(req: Request, res: Response) {
     const authorId = req.params.userId ? +req.params.userId : null;
     const { searchQuery, limit } = req.query;
 
-    if (!authorId) {
-        throw new BadRequestError("No authorid provided in the request");
-    }
-
     // TODO: add good typing here
     let findManyOptions: any = {
         orderBy: {
