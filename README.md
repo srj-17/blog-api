@@ -31,6 +31,7 @@ DATABASE_URL="postgresql://username:password@servername:port/database"
 ```bash
 cd packages/backend
 npx prisma migrate dev
+npx prisma generate
 ```
 
 4. Start the application
