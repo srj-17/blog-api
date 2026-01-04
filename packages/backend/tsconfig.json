@@ -5,6 +5,7 @@
     "moduleResolution": "nodenext",
     "target": "esnext",
     "types": ["node", "express"],
+    "esModuleInterop": true
 
     // Other Outputs
     "sourceMap": true,
