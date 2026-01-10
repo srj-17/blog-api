@@ -15,8 +15,21 @@
     cursor: default;
 }
 
+.signupButtonsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
 .loginButton {
     font-size: 1rem;
+    background: var(--secondary);
+    text-decoration: none;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 40px;
+    cursor: pointer;
 }
 
 .signupLink {

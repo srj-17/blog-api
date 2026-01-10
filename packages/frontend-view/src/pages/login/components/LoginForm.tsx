@@ -118,13 +118,18 @@ export default function LoginForm() {
                     }}
                 />
             </FormInputContainer>
-            <Button additionalStyles={styles.loginButton} type="submit">
-                Log In
-            </Button>
             <div>
-                Not logged in?{" "}
+                <Button additionalStyles={styles.loginButton} type="submit">
+                    Login
+                </Button>
+            </div>
+            Not logged in?
+            <div className={styles.signupButtonsContainer}>
                 <Link className={styles.signupLink} to="/signup">
                     Sign Up
+                </Link>
+                <Link to="http://localhost:3000/login/oauth">
+                    Login with Google
                 </Link>
             </div>
         </form>

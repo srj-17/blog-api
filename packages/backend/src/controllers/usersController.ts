@@ -57,7 +57,9 @@ async function postUsers(req: Request, res: Response) {
     }
 }
 
-async function getUser(req: Request & { token: { user: any } }, res: Response) {
+async function getUser(
+    req: Request & { token: { user: any } },
+    res: Response) {
     const userId = req.params.userId ? +req.params.userId : null;
 
     if (!userId) {
