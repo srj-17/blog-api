@@ -67,3 +67,22 @@ body {
 a {
     color: var(--link-color-200);
 }
+
+/* Responsive Design - Tablet */
+@media (max-width: 768px) {
+    :root {
+        --std-section-padding: 40px;
+        --std-section-gap: 50px;
+        --display-text-size: 2.5rem;
+    }
+}
+
+/* Responsive Design - Mobile */
+@media (max-width: 480px) {
+    :root {
+        --std-section-padding: 20px;
+        --std-section-gap: 30px;
+        --display-text-size: 2rem;
+        --std-hz-card-gap: 20px;
+    }
+}

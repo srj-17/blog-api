@@ -37,24 +37,26 @@ export default function BlogHeader({
         <header className={styles.blogHeader}>
             <nav className={styles.navBar}>
                 <SearchBar />
-                <Link to="http://localhost:5000">Admin Mode</Link>
-                <Link to="/users" className="users">
-                    Users
-                </Link>
-                {loggedIn ? (
-                    <Button
-                        styleAsLink={true}
-                        additionalStyles={styles.logOutButton}
-                        onClick={logOutHandler}
-                    >
-                        Log Out
-                    </Button>
-                ) : null}
-                <Avatar
-                    userLoading={userLoading}
-                    userData={userData}
-                    loggedIn={loggedIn}
-                />
+                <div className={styles.links}>
+                    <Link to="http://localhost:5000">Admin Mode</Link>
+                    <Link to="/users" className="users">
+                        Users
+                    </Link>
+                    {loggedIn ? (
+                        <Button
+                            styleAsLink={true}
+                            additionalStyles={styles.logOutButton}
+                            onClick={logOutHandler}
+                        >
+                            Log Out
+                        </Button>
+                    ) : null}
+                    <Avatar
+                        userLoading={userLoading}
+                        userData={userData}
+                        loggedIn={loggedIn}
+                    />
+                </div>
             </nav>
             <div className={styles.headerContent}>
                 <div className={styles.brand}>

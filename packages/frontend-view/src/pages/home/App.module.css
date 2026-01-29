@@ -32,10 +32,21 @@
     line-height: 0.8;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
     .middleSectionBigWords {
         letter-spacing: normal;
         font-weight: normal;
+        font-size: 7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .middleSectionBigWords {
+        font-size: 5rem;
+    }
+    
+    .middleSectionSmallWords {
+        font-size: 1.5rem;
     }
 }
 
@@ -75,4 +86,14 @@
 
 .contactName {
     flex: 1;
+}
+
+@media (max-width: 768px) {
+    .topSection {
+        border-radius: 0 0 20px 20px;
+    }
+
+    .bottomSection {
+        border-radius: 20px 20px 0 0;
+    }
 }

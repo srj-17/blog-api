@@ -52,7 +52,7 @@
     padding: 0 var(--std-section-padding);
 }
 
-@media (max-width: 592px) {
+@media (max-width: 480px) {
     .editBlogPage {
         gap: var(--std-gap);
     }

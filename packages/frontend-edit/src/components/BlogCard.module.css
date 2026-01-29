@@ -19,13 +19,13 @@
     align-items: start;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 768px) {
     .blogCard {
         width: 90%;
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 480px) {
     .blogCard {
         width: 100%;
         flex-direction: column;
@@ -35,15 +35,6 @@
 
     .blogActions {
         align-self: end;
-    }
-}
-
-@media (max-width: 380px) {
-    .blogCard {
-        flex-direction: row;
-    }
-
-    .blogActions {
         flex-direction: column;
     }
 }

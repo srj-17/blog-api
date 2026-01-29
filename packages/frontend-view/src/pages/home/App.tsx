@@ -29,7 +29,13 @@ function App() {
     // is also error, but IDK why, for now, it's not setting it, and our
     // app works as expected
     if (error) {
-        // if error, the payload (data) has the error information
+        // NOTE: I've been seeing error 404 when the remote 
+        // db is slow that prevents users from seeing the page
+        // at all. this console.log is for those situations, so
+        // that I can see the errors
+        console.log(posts)
+
+        // if error, the payload (data, posts) has the error information
         return (
             <ErrorPage
                 statusCode={posts.statusCode || 404}

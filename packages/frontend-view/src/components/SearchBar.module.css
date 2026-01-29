@@ -39,3 +39,24 @@ input[type="search"]::-webkit-search-cancel-button {
     border: 2px solid var(--accent);
     z-index: 1;
 }
+
+@media (max-width: 480px) {
+    .searchBar {
+        flex-direction: column;
+    }
+
+    .magnifyingGlass {
+        position: absolute;
+        transform: translateY(-150%);
+    }
+    
+    .searchInput {
+        width: 100%;
+    }
+    
+    .searchResults {
+        position: relative;
+        transform: none;
+        margin-top: 10px;
+    }
+}

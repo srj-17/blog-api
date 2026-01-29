@@ -36,3 +36,32 @@
 .blogContent > h1 {
     font-size: 2rem;
 }
+
+@media (max-width: 768px) {
+    .blogPage {
+        padding: var(--std-section-padding) 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .blogPage {
+        padding: 20px;
+        gap: var(--std-gap);
+    }
+    
+    .author {
+        font-size: 1.25rem;
+    }
+    
+    .blogTitle {
+        font-size: 2rem;
+    }
+    
+    .blogContent {
+        font-size: 1rem;
+    }
+    
+    .blogContent > h1 {
+        font-size: 1.5rem;
+    }
+}

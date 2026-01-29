@@ -11,6 +11,11 @@
     align-items: center;
 }
 
+.links {
+    display: flex;
+    gap: var(--std-gap);
+}
+
 .headerContent {
     display: flex;
     justify-content: center;
@@ -49,13 +54,14 @@
     align-self: stretch;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
     .blogHeader {
         gap: var(--std-section-gap);
     }
 
     .brand {
         text-align: center;
+        font-size: 7rem;
     }
 
     .navBar {
@@ -65,5 +71,28 @@
     .headerContent {
         flex-direction: column;
         align-items: center;
+    }
+}
+
+/* Tablet Responsive Improvements */
+
+/* Large Tablet: Tighter spacing to prevent overflow */
+@media (max-width: 768px) {
+    .navBar {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .brand {
+        font-size: 5rem;
+    }
+    
+    .topBlog {
+        padding: 40px 0;
+    }
+    
+    .blogCard {
+        padding: 40px 20px;
     }
 }

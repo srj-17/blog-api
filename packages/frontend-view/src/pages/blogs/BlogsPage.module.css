@@ -29,3 +29,23 @@
     flex-direction: column;
     width: 100%;
 }
+
+@media (max-width: 768px) {
+    .blogsPage {
+        padding: 40px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .blogsPage {
+        padding: 20px;
+    }
+    
+    .blogsTitle {
+        font-size: 2rem;
+    }
+    
+    .firstSection {
+        gap: var(--std-gap);
+    }
+}

@@ -23,13 +23,37 @@
     text-wrap: nowrap;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
+    .headerTitle {
+        font-size: 7rem;
+    }
+}
+
+/* for tablets */
+@media (max-width: 768px) and (min-width: 601px) {
+    .navBar {
+        gap: 12px;
+        font-size: 0.95rem;
+        justify-content: center;
+        align-self: center;
+    }
+    
+    .headerTitle {
+        font-size: 6rem;
+    }
+}
+
+@media (max-width: 480px) {
     .blogHeader {
         padding-bottom: 0;
     }
 
     .navBar {
-        flex-direction: column-reverse;
         align-self: center;
+        gap: 10px;
+    }
+    
+    .headerTitle {
+        font-size: 5rem;
     }
 }

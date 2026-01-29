@@ -46,3 +46,15 @@
     flex: 0;
     text-align: right;
 }
+
+@media (max-width: 480px) {
+    .blogCard {
+        flex-direction: column;
+        padding: 20px;
+        min-height: auto;
+    }
+    
+    .title {
+        font-size: 1.5rem;
+    }
+}

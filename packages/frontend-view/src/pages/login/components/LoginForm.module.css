@@ -22,3 +22,14 @@
 .signupLink {
     color: var(--link-color-100);
 }
+
+@media (max-width: 480px) {
+    .loginForm {
+        padding: 20px;
+        width: 100%;
+    }
+    
+    .loginHeader {
+        font-size: 1.5rem;
+    }
+}
